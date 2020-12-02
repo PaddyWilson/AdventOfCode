@@ -12,13 +12,14 @@ namespace AdventOfCode2020
 
 			List<BaseDay> days = new List<BaseDay>() {
 				new Day0(),
-				new Day1()
+				new Day1(),
+				new Day2()
 			};
 
-			//run last
-			Console.WriteLine("Running Last");
-			days[days.Count - 1].RunSolution1();
-			days[days.Count - 1].RunSolution2(); 
+			////run last
+			//Console.WriteLine("Running Last");
+			//days[days.Count - 1].RunSolution1();
+			//days[days.Count - 1].RunSolution2(); 
 
 
 			//run all
