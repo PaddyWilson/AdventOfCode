@@ -11,10 +11,11 @@ namespace AdventOfCode2020
 			BaseDay.InputDir = @"C:\Users\GGGGG\Desktop\AdventOfCode2020\Input\";
 
 			List<BaseDay> days = new List<BaseDay>() {
-				new Day0(),
+				//new Day0(),
 				new Day1(),
 				new Day2(),
-				new Day3()
+				new Day3(),
+				new Day4()
 			};
 
 			////run last
