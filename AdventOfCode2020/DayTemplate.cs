@@ -16,12 +16,12 @@ namespace AdventOfCode2020
 
 		protected override string Solution1(string[] input)
 		{
-			return "-1";
+			return "0";
 		}
 
 		protected override string Solution2(string[] input)
 		{
-			return "-1";
+			return "0";
 		}
 	}
 }
