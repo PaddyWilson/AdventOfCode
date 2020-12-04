@@ -7,6 +7,11 @@ namespace AdventOfCode2020
 {
 	public class Day0 : BaseDay
 	{
+		//private class Passport 
+		//{
+		//	Dictionary<string, string> = new 
+		//}
+
 		public Day0()
 		{
 			Day = "0";
