@@ -21,12 +21,12 @@ namespace AdventOfCode2020
 			//testing
 			int x = 0;
 			int y = 0;
-			SeatRow(seats, 0, 127, "BFFFBBFRRR", 0, ref x, ref y);
-			Console.WriteLine(x + ":" + y + " = " + ((x * 8) + y));
-			SeatRow(seats, 0, 127, "FFFBBBFRRR", 0, ref x, ref y);
-			Console.WriteLine(x + ":" + y + " = " + ((x * 8) + y));
-			SeatRow(seats, 0, 127, "BBFFBBFRLL", 0, ref x, ref y);
-			Console.WriteLine(x + ":" + y + " = " + ((x * 8) + y));
+			//SeatRow(seats, 0, 127, "BFFFBBFRRR", 0, ref x, ref y);
+			//Console.WriteLine(x + ":" + y + " = " + ((x * 8) + y));
+			//SeatRow(seats, 0, 127, "FFFBBBFRRR", 0, ref x, ref y);
+			//Console.WriteLine(x + ":" + y + " = " + ((x * 8) + y));
+			//SeatRow(seats, 0, 127, "BBFFBBFRLL", 0, ref x, ref y);
+			//Console.WriteLine(x + ":" + y + " = " + ((x * 8) + y));
 
 
 			int highest = 0;
