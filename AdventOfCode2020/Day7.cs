@@ -9,19 +9,11 @@ namespace AdventOfCode2020
 	{
 		private class Bag
 		{
-			public string BagColor = "";
-			public Dictionary<string, Bag> SubBagColor = new Dictionary<string, Bag>();
 			public Dictionary<string, int> SubBagCount = new Dictionary<string, int>();
 
-			public Bag(string bagColor)
+			public void AddBag(string color, int count)
 			{
-				BagColor = BagColor;
-			}
-
-			public void AddBag(string subBagColor, int count)
-			{
-				SubBagColor.Add(subBagColor, new Bag(subBagColor));
-				SubBagCount.Add(subBagColor, count);
+				SubBagCount.Add(color, count);
 			}
 		}
 
@@ -38,7 +30,7 @@ namespace AdventOfCode2020
 			foreach (var item in input)
 			{
 				string currentBag = item.Split("contain")[0].Replace("bags", "").Trim();
-				bags.Add(currentBag, new Bag(currentBag));
+				bags.Add(currentBag, new Bag());
 
 				string otherBags = item.Split("contain")[1].Trim();
 
@@ -76,7 +68,7 @@ namespace AdventOfCode2020
 
 		private bool SubBagSearch(Dictionary<string, Bag> bags, string bagBeingLookedFor, string currentBag)
 		{
-			foreach (var item in bags[currentBag].SubBagColor.Keys)
+			foreach (var item in bags[currentBag].SubBagCount.Keys)
 			{
 				if (item == bagBeingLookedFor)
 					return true;
@@ -102,10 +94,10 @@ namespace AdventOfCode2020
 		private int CountSubBags(Dictionary<string, Bag> bags, string currentBag)
 		{
 			int count = 0;
-			foreach (var item in bags[currentBag].SubBagColor)
+			foreach (var item in bags[currentBag].SubBagCount)
 				count += bags[currentBag].SubBagCount[item.Key];
 
-			foreach (var item in bags[currentBag].SubBagColor)
+			foreach (var item in bags[currentBag].SubBagCount)
 				count += CountSubBags(bags, item.Key) * bags[currentBag].SubBagCount[item.Key];
 			return count;
 		}
