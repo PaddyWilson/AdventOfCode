@@ -87,16 +87,18 @@ namespace AdventOfCode2020
 
 		public void RunAllSolution1Tests()
 		{
-			for (int i = 0; i < TestInput.Count; i++)
-				if (TestInputAnswers1[i] != "")//no testing answer. don't run
-					RunTestSolution1(TestInput[i], TestInputAnswers1[i]);
+			if (TestInit)
+				for (int i = 0; i < TestInput.Count; i++)
+					if (TestInputAnswers1[i] != "")//no testing answer. don't run
+						RunTestSolution1(TestInput[i], TestInputAnswers1[i]);
 		}
 
 		public void RunAllSolution2Tests()
 		{
-			for (int i = 0; i < TestInput.Count; i++)
-				if (TestInputAnswers2[i] != "")//no testing answer. don't run
-					RunTestSolution2(TestInput[i], TestInputAnswers2[i]);
+			if (TestInit)
+				for (int i = 0; i < TestInput.Count; i++)
+					if (TestInputAnswers2[i] != "")//no testing answer. don't run
+						RunTestSolution2(TestInput[i], TestInputAnswers2[i]);
 		}
 
 		protected abstract string Solution1(string[] input);// { return "BaseDay1"; }
