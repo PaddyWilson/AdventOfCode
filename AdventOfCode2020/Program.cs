@@ -20,7 +20,8 @@ namespace AdventOfCode2020
 				new Day6(),
 				new Day7(),
 				new Day8(),
-				new Day9()
+				new Day9(),
+				new Day10()
 			};
 
 			string[] day7Test1 = new string[]{
@@ -45,8 +46,17 @@ namespace AdventOfCode2020
 				"dark violet bags contain no other bags."
 			};
 
+
+
 			days[6].AddTestInput(day7Test1, "", "32");
 			days[6].AddTestInput(Day7Test2, "", "126");
+
+			string[] Day10Test1 = new string[] { "16", "10", "15", "5", "1", "11", "7", "19", "6", "12", "4" };
+			string[] Day10Test2 = new string[]{"28","33","18","42","31","14","46","20","48","47","24",
+				"23","49","45","19","38","39","11","1","32","25","35","8",
+				"17","7","9","4","2","34","10","3" };
+			days[9].AddTestInput(Day10Test1, "", "8");
+			days[9].AddTestInput(Day10Test2, "", "19208");
 
 			////run last
 			Console.WriteLine("Running Last");
