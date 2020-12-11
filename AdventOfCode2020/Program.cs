@@ -55,8 +55,18 @@ namespace AdventOfCode2020
 			string[] Day10Test2 = new string[]{"28","33","18","42","31","14","46","20","48","47","24",
 				"23","49","45","19","38","39","11","1","32","25","35","8",
 				"17","7","9","4","2","34","10","3" };
+
+			string[] Day10Test3 = new string[] { "10","6","4","7","1","5" };
+			string[] Day10Test4 = new string[] { "4","11","7","8","1","6","5" };
+			string[] Day10Test5 = new string[] { "3","1","6","2" };
+			string[] Day10Test6 = new string[] {"17","6","10","5","13","7","1","4","12","11","14" };
+			
+			days[9].AddTestInput(Day10Test5, "", "4");
 			days[9].AddTestInput(Day10Test1, "", "8");
 			days[9].AddTestInput(Day10Test2, "", "19208");
+			days[9].AddTestInput(Day10Test3, "", "4");
+			days[9].AddTestInput(Day10Test4, "", "7");
+			days[9].AddTestInput(Day10Test6, "", "28");
 
 			////run last
 			Console.WriteLine("Running Last");

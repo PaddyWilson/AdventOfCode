@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using System.Threading;
 
@@ -23,7 +22,6 @@ namespace AdventOfCode2020
 			numbers.Sort();
 
 			int one = 0;
-			int two = 0;
 			int three = 0;
 
 			int lastNumber = 0;
@@ -33,8 +31,6 @@ namespace AdventOfCode2020
 				lastNumber = item;
 				if (diff == 1)
 					one++;
-				else if (diff == 2)
-					two++;
 				else if (diff == 3)
 					three++;
 			}
@@ -47,42 +43,44 @@ namespace AdventOfCode2020
 		protected override string Solution2(string[] input)
 		{
 			List<int> numbers = new List<int>();
-			numbers.Add(0);
 			foreach (var item in input)
 				numbers.Add(int.Parse(item));
+			numbers.Add(0);
 			numbers.Sort();
 
-			// i took heavy insperation from a git repo
-			long[] counts = new long[numbers.Count];
-			counts[0] = 1;
-			for (int i = 1; i < numbers.Count; i++)
-			{
-				for (int j = 0; j < i; j++)
-				{
-					int diff = numbers[i] - numbers[j];
-					if (diff <= 3)
-						counts[i] += counts[j];
-				}
-			}
-			return counts.Last().ToString();
+			long count = Works(numbers.ToArray(), 0, 1);
+			count += Works(numbers.ToArray(), 0, 2);
+			count += Works(numbers.ToArray(), 0, 3);
+			past.Clear();//remove the past testing info
+			return count.ToString();
 		}
 
-		private int Work2(int i, List<int> numbers, List<int> memo)
+		Dictionary<string, long> past = new Dictionary<string, long>();
+		private long Works(int[] numbers, int lastNum, int index)
 		{
-			if (memo.Contains(i))
-				return memo[i];
-			if (i == numbers.Count - 1)
+			//hit end of numbers array
+			if (index == numbers.Length)
 				return 1;
-			int numWay = 0;
-			for (int j = i + 1; j < numbers.Count; j++)
+
+			if (past.ContainsKey(lastNum + " " + numbers[index]))
+				return past[lastNum + " " + numbers[index]];
+
+			//int n = numbers[index];
+			int diff = numbers[index] - lastNum;
+
+			long count = 0;
+			if (diff <= 3)
 			{
-				if (numbers[j] - numbers[i] > 3)
-					break;
-				int answer = Work2(j, numbers, memo);
-				numWay += answer;
-				memo.Add(j);
+				//if (index + 1 < numbers.Length)
+				count += Works(numbers, numbers[index], index + 1);
+				if (index + 2 < numbers.Length)
+					count += Works(numbers, numbers[index], index + 2);
+				if (index + 3 < numbers.Length)
+					count += Works(numbers, numbers[index], index + 3);
 			}
-			return numWay;
+
+			past.Add(lastNum + " " + numbers[index], count);
+			return count;
 		}
 	}
 }
