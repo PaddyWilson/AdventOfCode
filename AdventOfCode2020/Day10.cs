@@ -51,10 +51,12 @@ namespace AdventOfCode2020
 			long count = Works(numbers.ToArray(), 0, 1);
 			count += Works(numbers.ToArray(), 0, 2);
 			count += Works(numbers.ToArray(), 0, 3);
-			past.Clear();//remove the past testing info
+			past.Clear();//remove the past testing info 
 			return count.ToString();
 		}
 
+		//this dictionary remembers past answers to the works Function
+		//so it does not have to recalculate things
 		Dictionary<string, long> past = new Dictionary<string, long>();
 		private long Works(int[] numbers, int lastNum, int index)
 		{
