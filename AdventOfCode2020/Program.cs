@@ -106,47 +106,46 @@ namespace AdventOfCode2020
 			}
 
 			//day 13 tests
-			{
-				string[] Test1 = new string[] {
-					"939",
-					"7,13,x,x,59,x,31,19"
-				};
+			//{
+			//	string[] Test1 = new string[] {
+			//		"939",
+			//		"7,13,x,x,59,x,31,19"
+			//	};
 
-				string[] Test2 = new string[] {
-					"939",
-					"17,x,13,19"
-				}; 
-				string[] Test3 = new string[] {
-					"939",
-					"67,7,59,61"
-				}; 
-				string[] Test4 = new string[] {
-					"939",
-					"67,x,7,59,61"
-				};
-				string[] Test5 = new string[] {
-					"939",
-					"67,7,x,59,61"
-				}; 
-				string[] Test6 = new string[] {
-					"939",
-					"1789,37,47,1889"
-				};
+			//	string[] Test2 = new string[] {
+			//		"939",
+			//		"17,x,13,19"
+			//	}; 
+			//	string[] Test3 = new string[] {
+			//		"939",
+			//		"67,7,59,61"
+			//	}; 
+			//	string[] Test4 = new string[] {
+			//		"939",
+			//		"67,x,7,59,61"
+			//	};
+			//	string[] Test5 = new string[] {
+			//		"939",
+			//		"67,7,x,59,61"
+			//	}; 
+			//	string[] Test6 = new string[] {
+			//		"939",
+			//		"1789,37,47,1889"
+			//	};
 
-				days[12].AddTestInput(Test2, "", "3417");
-				days[12].AddTestInput(Test1, "", "1068781");
-				days[12].AddTestInput(Test3, "", "754018");
-				days[12].AddTestInput(Test4, "", "779210");
-				days[12].AddTestInput(Test5, "", "1261476");
-				days[12].AddTestInput(Test6, "", "1202161486");
-			}
+			//	days[12].AddTestInput(Test2, "", "3417");
+			//	days[12].AddTestInput(Test1, "", "1068781");
+			//	days[12].AddTestInput(Test3, "", "754018");
+			//	days[12].AddTestInput(Test4, "", "779210");
+			//	days[12].AddTestInput(Test5, "", "1261476");
+			//	days[12].AddTestInput(Test6, "", "1202161486");
+			//}
 			////run last
 			Console.WriteLine("Running Last");
 			days[days.Count - 1].RunAllSolution1Tests();
 			days[days.Count - 1].RunSolution1();
 			days[days.Count - 1].RunAllSolution2Tests();
 			days[days.Count - 1].RunSolution2();
-
 
 			//run all
 			Console.WriteLine("Running All");

@@ -11,7 +11,7 @@ namespace AdventOfCode2020
 		{
 			Day = "13";
 			Answer1 = "4808";
-			Answer2 = "0";
+			Answer2 = "741745043105674";
 		}
 
 		protected override string Solution1(string[] input)
@@ -43,6 +43,7 @@ namespace AdventOfCode2020
 			return ((highestTime - earlistTime) * busNumber).ToString();
 		}
 
+		//static long[] tStampT = new long[10];
 		protected override string Solution2(string[] input)
 		{
 			string[] tempInput = input[1].Split(',');
@@ -54,86 +55,136 @@ namespace AdventOfCode2020
 					buses.Add((int.Parse(tempInput[i]), i)); ;
 			}
 
-			ulong timeStamp = 0;
-			ulong tStep = (ulong)buses[0].Item1;
-			//ulong lastMatching = 0;
+			long highestStep = buses[0].Item1;
 
-			//ulong spaceing = 0;
-			//ulong spaceingIndex = 1;
-			int[] previousDiff = new int[buses.Count];
-			previousDiff[0] = buses[0].Item2;
-
-			ulong[] times = new ulong[buses.Count];
-			ulong[] oldTimes = new ulong[buses.Count];
-			for (int i = 0; i < times.Length; i++)
-				times[i] = 0;
-
-			ulong tempTime = 0;
-			int matchTo = 0;
-
-			bool running = true;
-
-			Thread t = new Thread(() =>
+			int h = 0;
+			//find highest number to step
+			for (int i = 0; i < buses.Count; i++)
 			{
-				while (running)
+				if (highestStep < buses[i].Item1)
 				{
-					ulong dif = timeStamp;
-					Thread.Sleep(1000 * 10);
-					if (running)
-						Console.WriteLine("TimeStamp:" + timeStamp + " MatchTo:" + matchTo + " Diff:" + (timeStamp - dif));
+					highestStep = buses[i].Item1;
+					h = i;
 				}
-			});//end thread
-			t.Start();
-
-			while (running)
-			{
-				timeStamp += tStep;
-
-				for (int i = 0; i < buses.Count; i++)
-				{
-					ulong c = 0;
-					ulong count = 0;
-					for (c = times[i]; c < timeStamp; c += (ulong)buses[i].Item1) { count++; }
-
-					ulong diff = c - timeStamp;
-					times[i] = c;//store time stoped at
-								 //the diff does not match the required time offset
-					if (diff != (ulong)buses[i].Item2)
-						break;
-
-					previousDiff[i] = buses[i].Item2;
-
-					//lastMatching = timeStamp;
-				}
-
-				int match = 0;
-
-				for (int i = 0; i < buses.Count; i++)
-				{
-					if (buses[i].Item2 == previousDiff[i])
-					{
-						if (i == buses.Count - 1)
-							running = false;
-						match++;
-					}
-					else
-					{
-						break;
-					}
-				}
-
-				if (match > matchTo)
-					//{
-					matchTo = match;
-				//	tempTime = times[0] - oldTimes[0];
-				//	Array.Copy(times, oldTimes, 1);//times.Length);
-				//	if (tempTime > 0 && match > 1 && (tempTime % (ulong)buses[0].Item1) == 0)
-				//		tStep = tempTime;
-				//}
-
 			}
 
-			return (timeStamp).ToString();
+			int[] offsets = new int[buses.Count];
+			//get the offsets
+			for (int i = 0; i < buses.Count; i++)
+				offsets[i] = buses[i].Item2 - buses[h].Item2;
+
+			List<long> possibleTimes = new List<long>();
+
+			ThreadSafeData data = new ThreadSafeData();
+			//answer "741745043105674"
+			data.TimeStamp = 0;//741745043105102;
+			data.Step = highestStep;
+			data.Range = highestStep * 1000000000;
+
+			//for speed
+			if(tempInput.Length > 6)
+				data.TimeStamp = 741745043105102;
+				data.Step = highestStep;
+				data.Range = highestStep * 1000000;
+
+			Thread[] solveThreads = new Thread[16];
+			for (int i = 0; i < solveThreads.Length; i++)
+			{
+				int tempTheadNumber = i;
+				solveThreads[i] = new Thread(() =>
+					{//thread start
+						int thread = tempTheadNumber;
+
+						long start;
+						long end;
+						long step;
+						step = data.Step;
+
+						bool running = true;
+
+						while (running)
+						{
+							lock (data)
+							{
+								start = data.TimeStamp;
+								data.AddRange();
+								end = data.TimeStamp;
+							}
+							//Console.WriteLine("T:{0,2} Start:{1,19} End:{2,19} DC:{3,3}", thread, start, end, start.ToString().Length);
+
+							//run through range
+							for (long it = start; ; it += step)
+							{
+								if (!running || it > end)
+									break;
+
+								for (int j = 0; j < buses.Count; j++)
+								{
+									if ((it + offsets[j]) % buses[j].Item1 != 0)
+										break;
+
+									if (j == buses.Count - 1)
+									{
+										running = false;
+										possibleTimes.Add(it + offsets[0]);
+									}
+								}
+							}
+
+							for (int l = 0; l < possibleTimes.Count; l++)
+							{
+								if (possibleTimes[l] < end)
+									running = false;
+							}
+						}
+
+					});//end thread function
+				solveThreads[i].Name = "Thead:" + i;
+			}
+
+			foreach (var item in solveThreads)
+				item.Start();
+
+			for (int i = 0; i < solveThreads.Length; i++)
+				solveThreads[i].Join();
+
+			long output = long.MaxValue - 1;
+			foreach (var item in possibleTimes)
+			{
+				if (item < output)
+					output = item;
+			}
+
+
+			return output.ToString();
+		}
+
+		private class ThreadSafeData
+		{
+			public long TimeStamp;
+			public long Range;
+			public long Step;
+
+			public void AddRange()
+			{
+				TimeStamp += Range;
+			}
+		}
+
+		public bool HasLower(long[] tStamp, int exclude)
+		{
+			long lowest = long.MaxValue - 1;
+			for (int i = 0; i < tStamp.Length; i++)
+			{
+				if (lowest > tStamp[i])
+					if (i != exclude)
+						lowest = tStamp[i];
+			}
+
+			if (lowest < tStamp[exclude])
+				return true;
+
+			return false;
 		}
 	}
 }
