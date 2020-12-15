@@ -26,7 +26,7 @@ namespace AdventOfCode2020
 			timer.Start();
 			string output = Solution1(Input);
 			timer.Stop();
-			Console.WriteLine("Day {0,2} Answer 1:{1,12} | Expected:{4,12} | Correct:{2,6} | Run Time:{3,9}", Day, output, (output == Answer1), timer.Elapsed, Answer1);
+			Console.WriteLine("Day {0,2} Answer 1:{1,16} | Expected:{4,16} | Correct:{2,6} | Run Time:{3,9}", Day, output, (output == Answer1), timer.Elapsed, Answer1);
 		}
 
 		public void RunTestSolution1(string[] input, string answer)
@@ -35,7 +35,7 @@ namespace AdventOfCode2020
 			timer.Start();
 			string output = Solution1(input);
 			timer.Stop();
-			Console.WriteLine("Day {0,2} Answer 1:{1,12} | Expected:{4,12} | Correct:{2,6} | Run Time:{3,9} | Test", Day, output, (output == answer), timer.Elapsed, answer);
+			Console.WriteLine("Day {0,2} Answer 1:{1,16} | Expected:{4,16} | Correct:{2,6} | Run Time:{3,9} | Test", Day, output, (output == answer), timer.Elapsed, answer);
 		}
 
 		public void RunSolution2()
@@ -45,7 +45,7 @@ namespace AdventOfCode2020
 			timer.Start();
 			string output = Solution2(Input);
 			timer.Stop();
-			Console.WriteLine("Day {0,2} Answer 2:{1,12} | Expected:{4,12} | Correct:{2,6} | Run Time:{3,9}", Day, output, (output == Answer2), timer.Elapsed, Answer2);
+			Console.WriteLine("Day {0,2} Answer 2:{1,16} | Expected:{4,16} | Correct:{2,6} | Run Time:{3,9}", Day, output, (output == Answer2), timer.Elapsed, Answer2);
 		}
 
 		public void RunTestSolution2(string[] input, string answer)
@@ -54,7 +54,7 @@ namespace AdventOfCode2020
 			timer.Start();
 			string output = Solution2(input);
 			timer.Stop();
-			Console.WriteLine("Day {0,2} Answer 2:{1,12} | Expected:{4,12} | Correct:{2,6} | Run Time:{3,9} | Test", Day, output, (output == answer), timer.Elapsed, answer);
+			Console.WriteLine("Day {0,2} Answer 2:{1,16} | Expected:{4,16} | Correct:{2,6} | Run Time:{3,9} | Test", Day, output, (output == answer), timer.Elapsed, answer);
 		}
 
 		private string[] ReadInput()

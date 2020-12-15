@@ -25,7 +25,8 @@ namespace AdventOfCode2020
 				new Day11(),
 				new Day12(),
 				new Day13(),
-				new Day14()
+				new Day14(),
+				new Day15()
 			};
 			//day 7 test
 			{
@@ -140,6 +141,15 @@ namespace AdventOfCode2020
 				days[12].AddTestInput(Test4, "", "779210");
 				days[12].AddTestInput(Test5, "", "1261476");
 				days[12].AddTestInput(Test6, "", "1202161486");
+			}
+
+			//day 15 tests
+			{
+				string[] Test1 = new string[] {
+					"0,3,6"
+				};
+
+				days[14].AddTestInput(Test1, "436", "");
 			}
 			////run last
 			Console.WriteLine("Running Last");
