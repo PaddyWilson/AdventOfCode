@@ -82,8 +82,8 @@ namespace AdventOfCode2020
 			data.Range = highestStep * 1000000000;
 
 			//for speed
-			if(tempInput.Length > 6)
-				data.TimeStamp = 741745043105102;
+			if (tempInput.Length > 6) 
+				data.TimeStamp = 741745043105102; // starting at 0 takes about 17 minutes 
 				data.Step = highestStep;
 				data.Range = highestStep * 1000000;
 
