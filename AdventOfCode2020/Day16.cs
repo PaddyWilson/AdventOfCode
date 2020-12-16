@@ -8,7 +8,7 @@ namespace AdventOfCode2020
 		{
 			Day = "16";
 			Answer1 = "21978";
-			Answer2 = "0";
+			Answer2 = "1053686852011";
 		}
 
 		protected override string Solution1(string[] input)
@@ -181,7 +181,6 @@ namespace AdventOfCode2020
 					{
 						foreach (var range in ranges)
 						{
-							int j = otherTickets[t][i];
 							if ((otherTickets[t][i] >= range.Value.Item1 && otherTickets[t][i] <= range.Value.Item2)
 								|| (otherTickets[t][i] >= range.Value.Item3 && otherTickets[t][i] <= range.Value.Item4))
 							{
@@ -201,7 +200,6 @@ namespace AdventOfCode2020
 							key = item.Key;
 							count++;
 						}
-
 					}
 
 					if (count == 1)
@@ -209,17 +207,13 @@ namespace AdventOfCode2020
 						ticketData[key] = i;
 						ranges.Remove(key);
 					}
-				}
-			}
+				}//for (int i = 0; i < otherTickets[0].Length; i++)
+			}//while (ranges.Count > 0)
 
 			long output = 1;
 			foreach (var item in ticketData)
-			{
 				if (item.Key.Contains("departure"))
-				{
 					output *= myTicket[item.Value];
-				}
-			}
 
 			return output.ToString();
 		}
