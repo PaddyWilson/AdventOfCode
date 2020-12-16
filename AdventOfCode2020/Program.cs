@@ -26,7 +26,8 @@ namespace AdventOfCode2020
 				new Day12(),
 				new Day13(),
 				new Day14(),
-				new Day15()
+				new Day15(),
+				new Day16()
 			};
 			//day 7 test
 			{
@@ -151,6 +152,26 @@ namespace AdventOfCode2020
 
 				days[14].AddTestInput(Test1, "436", "");
 			}
+
+			//day 16 tests
+			{
+				string[] Test1 = new string[] {
+					"class: 1-3 or 5-7",
+					"row: 6-11 or 33-44",
+					"seat: 13-40 or 45-50",
+					"",
+					"your ticket:",
+					"7,1,14",
+					"",
+					"nearby tickets:",
+					"7,3,47",
+					"40,4,50",
+					"55,2,20",
+					"38,6,12"
+				};
+
+				days[15].AddTestInput(Test1, "71", "");
+			}
 			////run last
 			Console.WriteLine("Running Last");
 			days[days.Count - 1].RunAllSolution1Tests();
@@ -159,12 +180,12 @@ namespace AdventOfCode2020
 			days[days.Count - 1].RunSolution2();
 
 			//run all
-			Console.WriteLine("Running All");
-			foreach (var item in days)
-			{
-				item.RunSolution1();
-				item.RunSolution2();
-			}
+			//Console.WriteLine("Running All");
+			//foreach (var item in days)
+			//{
+			//	item.RunSolution1();
+			//	item.RunSolution2();
+			//}
 
 			Console.ReadKey();
 		}

@@ -23,7 +23,6 @@ namespace AdventOfCode2020
 		{
 			return DoTurns(input, 30000000);
 		}
-
 		private string DoTurns(string[] input, long maxTurns)
 		{
 			Dictionary<long, (long, long)> numbers = new Dictionary<long, (long, long)>();
@@ -36,10 +35,11 @@ namespace AdventOfCode2020
 				lastTurn = long.Parse(item);
 			}
 
+			long currentNumber;
 			while (turnCount < maxTurns)
 			{
 				turnCount += 1;
-				long currentNumber = 0;
+				currentNumber = 0;
 				if (numbers[lastTurn].Item2 == -1)
 				{
 					currentNumber = 0;
@@ -51,8 +51,7 @@ namespace AdventOfCode2020
 
 				if (numbers.ContainsKey(currentNumber))
 				{
-					long temp = numbers[currentNumber].Item1;
-					numbers[currentNumber] = (turnCount, temp);
+					numbers[currentNumber] = (turnCount, numbers[currentNumber].Item1);
 				}
 				else
 				{
