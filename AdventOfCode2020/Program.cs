@@ -28,7 +28,8 @@ namespace AdventOfCode2020
 				new Day14(),
 				new Day15(),
 				new Day16(),
-				new Day17()
+				new Day17(),
+				new Day18()
 			};
 			//day 7 test
 			{
@@ -184,11 +185,28 @@ namespace AdventOfCode2020
 
 				days[16].AddTestInput(Test1, "112", "848");
 			}
+
+			//day 18 tests
+			{
+				string[] Test1 = new string[] { "1 + 2 * 3 + 4 * 5 + 6" };
+				string[] Test2 = new string[] { "1 + (2 * 3) + (4 * (5 + 6))" };
+				string[] Test3 = new string[] { "2 * 3 + (4 * 5)" };
+				string[] Test4 = new string[] { "5 + (8 * 3 + 9 + 3 * 4 * 3)" };
+				string[] Test5 = new string[] { "5 * 9 * (7 * 3 * 3 + 9 * 3 + (8 + 6 * 4))" };
+				string[] Test6 = new string[] { "((2 + 4 * 9) * (6 + 9 * 8 + 6) + 6) + 2 + 4 * 2" };
+
+				days[17].AddTestInput(Test1, "71", "231");
+				days[17].AddTestInput(Test2, "51", "51");
+				days[17].AddTestInput(Test3, "26", "46");
+				days[17].AddTestInput(Test4, "437", "1445");
+				days[17].AddTestInput(Test5, "12240", "669060");
+				days[17].AddTestInput(Test6, "13632", "23340");
+			}
 			////run last
 			Console.WriteLine("Running Last");
-			days[days.Count - 1].RunAllSolution1Tests();
+			//days[days.Count - 1].RunAllSolution1Tests();
 			days[days.Count - 1].RunSolution1();
-			//days[days.Count - 1].RunAllSolution2Tests();
+			days[days.Count - 1].RunAllSolution2Tests();
 			days[days.Count - 1].RunSolution2();
 
 			//run all
