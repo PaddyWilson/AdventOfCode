@@ -29,7 +29,10 @@ namespace AdventOfCode2020
 				new Day15(),
 				new Day16(),
 				new Day17(),
-				new Day18()
+				new Day18(),
+				new Day19(),
+				new Day20(),
+				new Day21()
 			};
 			//day 7 test
 			{
@@ -202,9 +205,30 @@ namespace AdventOfCode2020
 				days[17].AddTestInput(Test5, "12240", "669060");
 				days[17].AddTestInput(Test6, "13632", "23340");
 			}
+
+			//day 19 tests
+			{
+				string[] Test1 = new string[] {
+					"0: 4 1 5",
+					"1: 2 3 | 3 2",
+					"2: 4 4 | 5 5",
+					"3: 4 5 | 5 4",
+					"4: \"a\"",
+					"5: \"b\"",
+					"",
+					"ababbb",
+					"bababa",
+					"abbbab",
+					"aaabbb",
+					"aaaabbb"
+					};
+
+				days[18].AddTestInput(Test1, "2", "");
+			}
+
 			////run last
 			Console.WriteLine("Running Last");
-			//days[days.Count - 1].RunAllSolution1Tests();
+			days[days.Count - 1].RunAllSolution1Tests();
 			days[days.Count - 1].RunSolution1();
 			days[days.Count - 1].RunAllSolution2Tests();
 			days[days.Count - 1].RunSolution2();
