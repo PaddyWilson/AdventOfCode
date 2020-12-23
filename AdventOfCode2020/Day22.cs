@@ -74,7 +74,7 @@ namespace AdventOfCode2020
 				string hashOneTemp = string.Join(',', player1);
 				string hashTwoTemp = string.Join(',', player2);
 
-				if (hashOne.Contains(hashOneTemp) || hashTwo.Contains(hashTwoTemp))
+				if (hashOne.Contains(hashOneTemp) && hashTwo.Contains(hashTwoTemp))
 				{
 					return 1;
 				}
