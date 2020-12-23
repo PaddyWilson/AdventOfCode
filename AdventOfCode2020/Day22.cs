@@ -66,9 +66,12 @@ namespace AdventOfCode2020
 
 		private int PlayGameRecursive(Queue<int> player1, Queue<int> player2)
 		{
-			List<string> hashOne = new List<string>();
-			List<string> hashTwo = new List<string>();
-			
+			//List<string> hashOne = new List<string>();
+			//List<string> hashTwo = new List<string>();
+
+			HashSet<string> hashOne = new HashSet<string>();
+			HashSet<string> hashTwo = new HashSet<string>();
+
 			while (true)
 			{
 				string hashOneTemp = string.Join(',', player1);
