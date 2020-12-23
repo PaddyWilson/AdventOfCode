@@ -20,26 +20,7 @@ namespace AdventOfCode2020
 			Queue<int> player1 = new Queue<int>();
 			Queue<int> player2 = new Queue<int>();
 
-			bool playerOne = true;
-			foreach (var item in input)
-			{
-				if (item.Length == 0)
-				{
-					playerOne = false;
-					continue;
-				}
-				else if (item.Length > 4)
-				{ continue; }
-
-				if (playerOne)
-				{
-					player1.Enqueue(int.Parse(item));
-				}
-				else
-				{
-					player2.Enqueue(int.Parse(item));
-				}
-			}
+			ProcessInput(player1, player2, input);
 
 			bool running = true;
 			while (running)
@@ -63,9 +44,9 @@ namespace AdventOfCode2020
 			}
 
 			if (player1.Count > 0)
-				return GetHash(player1).ToString();
+				return CountCards(player1).ToString();
 			else
-				return GetHash(player2).ToString();
+				return CountCards(player2).ToString();
 		}
 
 		protected override string Solution2(string[] input)
@@ -73,62 +54,28 @@ namespace AdventOfCode2020
 			Queue<int> player1 = new Queue<int>();
 			Queue<int> player2 = new Queue<int>();
 
-			bool playerOne = true;
-			foreach (var item in input)
-			{
-				if (item.Length == 0)
-				{
-					playerOne = false;
-					continue;
-				}
-				else if (item.Length > 4)
-				{ continue; }
-
-				if (playerOne)
-				{
-					player1.Enqueue(int.Parse(item));
-				}
-				else
-				{
-					player2.Enqueue(int.Parse(item));
-				}
-			}
+			ProcessInput(player1, player2, input);
 
 			int win = PlayGameRecursive(player1, player2);
 
-			//33426 high
-
-			//memory.Clear();
 			if (player1.Count > 0)
-				return GetHash(player1).ToString();
+				return CountCards(player1).ToString();
 			else
-				return GetHash(player2).ToString();
+				return CountCards(player2).ToString();
 		}
 
-		//Dictionary<string, int> memory = new Dictionary<string, int>();
-		int gameAll = 0;//for debugging
 		private int PlayGameRecursive(Queue<int> player1, Queue<int> player2)
 		{
-			//string tempS = GetHash(player1) + ":" + GetHash(player2);
-			//if (memory.ContainsKey(tempS))
-			//	return memory[tempS];
-			gameAll++;
-			int game = gameAll;
-
 			List<string> hashOne = new List<string>();
 			List<string> hashTwo = new List<string>();
-			int round = 0;//for debugging
+			
 			while (true)
 			{
-				round++;
-
 				string hashOneTemp = string.Join(',', player1);
 				string hashTwoTemp = string.Join(',', player2);
 
 				if (hashOne.Contains(hashOneTemp) || hashTwo.Contains(hashTwoTemp))
 				{
-					//memory[tempS] = 1;
-					//Console.WriteLine("G:" + game + " R:" + round + " Hash***");
 					return 1;
 				}
 
@@ -160,13 +107,11 @@ namespace AdventOfCode2020
 
 				if (win == 1)
 				{
-					//Console.WriteLine(" P-1 Win G:" + game + " R:" + round);
 					player1.Enqueue(card1);
 					player1.Enqueue(card2);
 				}
 				else if (win == 2)
 				{
-					//Console.WriteLine(" P-2 Win G:" + game + " R:" + round);
 					player2.Enqueue(card2);
 					player2.Enqueue(card1);
 				}
@@ -185,21 +130,7 @@ namespace AdventOfCode2020
 			}
 		}
 
-		//private string ArrayToString(int[] arr)
-		//{
-		//	string output = "";
-
-		//	for (int i = 0; i < arr.Length; i++)
-		//		if (i != arr.Length - 1)
-		//			output += arr[i] + ", ";
-		//		else if (i == arr.Length - 1)
-		//			output += arr[i];
-
-		//	return output;
-		//}
-
-
-		private long GetHash(Queue<int> deck)
+		private long CountCards(Queue<int> deck)
 		{
 			List<int> winner = new List<int>(deck.ToArray());
 			winner.Reverse();
@@ -209,6 +140,29 @@ namespace AdventOfCode2020
 				output += winner[i - 1] * i;
 
 			return output;
+		}
+		private void ProcessInput(Queue<int> player1, Queue<int> player2, string[] input)
+		{
+			bool playerOne = true;
+			foreach (var item in input)
+			{
+				if (item.Length == 0)
+				{
+					playerOne = false;
+					continue;
+				}
+				else if (item.Length > 4)
+				{ continue; }
+
+				if (playerOne)
+				{
+					player1.Enqueue(int.Parse(item));
+				}
+				else
+				{
+					player2.Enqueue(int.Parse(item));
+				}
+			}
 		}
 	}
 }
