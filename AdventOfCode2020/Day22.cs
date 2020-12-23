@@ -1,0 +1,214 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Security.Cryptography;
+using System.Text;
+using System.Threading;
+
+namespace AdventOfCode2020
+{
+	public class Day22 : BaseDay
+	{
+		public Day22()
+		{
+			Day = "22";
+			Answer1 = "33694";
+			Answer2 = "31835";
+		}
+
+		protected override string Solution1(string[] input)
+		{
+			Queue<int> player1 = new Queue<int>();
+			Queue<int> player2 = new Queue<int>();
+
+			bool playerOne = true;
+			foreach (var item in input)
+			{
+				if (item.Length == 0)
+				{
+					playerOne = false;
+					continue;
+				}
+				else if (item.Length > 4)
+				{ continue; }
+
+				if (playerOne)
+				{
+					player1.Enqueue(int.Parse(item));
+				}
+				else
+				{
+					player2.Enqueue(int.Parse(item));
+				}
+			}
+
+			bool running = true;
+			while (running)
+			{
+				int one = player1.Dequeue();
+				int two = player2.Dequeue();
+
+				if (one > two)
+				{
+					player1.Enqueue(one);
+					player1.Enqueue(two);
+				}
+				else if (one < two)
+				{
+					player2.Enqueue(two);
+					player2.Enqueue(one);
+				}
+
+				if (player1.Count == 0 || player2.Count == 0)
+					running = false;
+			}
+
+			if (player1.Count > 0)
+				return GetHash(player1).ToString();
+			else
+				return GetHash(player2).ToString();
+		}
+
+		protected override string Solution2(string[] input)
+		{
+			Queue<int> player1 = new Queue<int>();
+			Queue<int> player2 = new Queue<int>();
+
+			bool playerOne = true;
+			foreach (var item in input)
+			{
+				if (item.Length == 0)
+				{
+					playerOne = false;
+					continue;
+				}
+				else if (item.Length > 4)
+				{ continue; }
+
+				if (playerOne)
+				{
+					player1.Enqueue(int.Parse(item));
+				}
+				else
+				{
+					player2.Enqueue(int.Parse(item));
+				}
+			}
+
+			int win = PlayGameRecursive(player1, player2);
+
+			//33426 high
+
+			//memory.Clear();
+			if (player1.Count > 0)
+				return GetHash(player1).ToString();
+			else
+				return GetHash(player2).ToString();
+		}
+
+		//Dictionary<string, int> memory = new Dictionary<string, int>();
+		int gameAll = 0;//for debugging
+		private int PlayGameRecursive(Queue<int> player1, Queue<int> player2)
+		{
+			//string tempS = GetHash(player1) + ":" + GetHash(player2);
+			//if (memory.ContainsKey(tempS))
+			//	return memory[tempS];
+			gameAll++;
+			int game = gameAll;
+
+			List<string> hashOne = new List<string>();
+			List<string> hashTwo = new List<string>();
+			int round = 0;//for debugging
+			while (true)
+			{
+				round++;
+
+				string hashOneTemp = string.Join(',', player1);
+				string hashTwoTemp = string.Join(',', player2);
+
+				if (hashOne.Contains(hashOneTemp) || hashTwo.Contains(hashTwoTemp))
+				{
+					//memory[tempS] = 1;
+					//Console.WriteLine("G:" + game + " R:" + round + " Hash***");
+					return 1;
+				}
+
+				hashOne.Add(hashOneTemp);
+				hashTwo.Add(hashTwoTemp);
+
+				int card1 = player1.Dequeue();
+				int card2 = player2.Dequeue();
+
+				int win = 0;
+
+				if (card1 <= player1.Count && card2 <= player2.Count)
+				{
+					var newHand1 = new int[card1];
+					var newHand2 = new int[card2];
+					Array.Copy(player1.ToArray(), newHand1, card1);
+					Array.Copy(player2.ToArray(), newHand2, card2);
+
+					win = PlayGameRecursive(new Queue<int>(newHand1), new Queue<int>(newHand2));
+				}
+				else if (card1 > card2)
+				{
+					win = 1;
+				}
+				else if (card1 < card2)
+				{
+					win = 2;
+				}
+
+				if (win == 1)
+				{
+					//Console.WriteLine(" P-1 Win G:" + game + " R:" + round);
+					player1.Enqueue(card1);
+					player1.Enqueue(card2);
+				}
+				else if (win == 2)
+				{
+					//Console.WriteLine(" P-2 Win G:" + game + " R:" + round);
+					player2.Enqueue(card2);
+					player2.Enqueue(card1);
+				}
+
+				if (player1.Count == 0 || player2.Count == 0)
+				{
+					if (win == 1)
+					{
+						return 1;
+					}
+					else if (win == 2)
+					{
+						return 2;
+					}
+				}
+			}
+		}
+
+		//private string ArrayToString(int[] arr)
+		//{
+		//	string output = "";
+
+		//	for (int i = 0; i < arr.Length; i++)
+		//		if (i != arr.Length - 1)
+		//			output += arr[i] + ", ";
+		//		else if (i == arr.Length - 1)
+		//			output += arr[i];
+
+		//	return output;
+		//}
+
+
+		private long GetHash(Queue<int> deck)
+		{
+			List<int> winner = new List<int>(deck.ToArray());
+			winner.Reverse();
+
+			long output = 0;
+			for (int i = 1; i <= winner.Count; i++)
+				output += winner[i - 1] * i;
+
+			return output;
+		}
+	}
+}

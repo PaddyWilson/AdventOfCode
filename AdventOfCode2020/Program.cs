@@ -32,7 +32,8 @@ namespace AdventOfCode2020
 				new Day18(),
 				new Day19(),
 				new Day20(),
-				new Day21()
+				new Day21(),
+				new Day22()
 			};
 			//day 7 test
 			{
@@ -224,6 +225,39 @@ namespace AdventOfCode2020
 					};
 
 				days[18].AddTestInput(Test1, "2", "");
+			}
+
+			//day 21 tests
+			{
+				string[] Test1 = new string[] {
+					"mxmxvkd kfcds sqjhc nhms (contains dairy, fish)",
+					"trh fvjkl sbzzf mxmxvkd (contains dairy)",
+					"sqjhc fvjkl (contains soy)",
+					"sqjhc mxmxvkd sbzzf (contains fish)",
+					};
+
+				days[20].AddTestInput(Test1, "5", "");
+			}
+
+			//day 22 tests
+			{
+				string[] Test1 = new string[] {
+					"Player 1:",
+					"9",
+					"2",
+					"6",
+					"3",
+					"1",
+					"",
+					"Player 2:",
+					"5",
+					"8",
+					"4",
+					"7",
+					"10"
+					};
+
+				days[21].AddTestInput(Test1, "306", "291");
 			}
 
 			////run last
