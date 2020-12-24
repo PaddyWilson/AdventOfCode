@@ -65,7 +65,7 @@ namespace AdventOfCode2020
 		{
 			List<List<GridDir>> instructions = ParseInput(input);
 
-			int size = 10000;
+			int size = 100;
 			int offset = size / 2;
 
 			bool[,] grid = new bool[size, size];
@@ -105,7 +105,7 @@ namespace AdventOfCode2020
 		{
 			List<List<GridDir>> instructions = ParseInput(input);
 
-			int size = 1000;
+			int size = 150;
 			int offset = size / 2;
 
 			bool[,] grid = new bool[size, size];
