@@ -34,7 +34,8 @@ namespace AdventOfCode2020
 				new Day20(),
 				new Day21(),
 				new Day22(),
-				new Day23()
+				new Day23(),
+				new Day24()
 			};
 			//day 7 test
 			{
@@ -318,6 +319,34 @@ namespace AdventOfCode2020
 			}
 
 			//day 23 tests
+			{
+				string[] Test1 = new string[] {
+					"sesenwnenenewseeswwswswwnenewsewsw",
+					"neeenesenwnwwswnenewnwwsewnenwseswesw",
+					"seswneswswsenwwnwse",
+					"nwnwneseeswswnenewneswwnewseswneseene",
+					"swweswneswnenwsewnwneneseenw",
+					"eesenwseswswnenwswnwnwsewwnwsene",
+					"sewnenenenesenwsewnenwwwse",
+					"wenwwweseeeweswwwnwwe",
+					"wsweesenenewnwwnwsenewsenwwsesesenwne",
+					"neeswseenwwswnwswswnw",
+					"nenwswwsewswnenenewsenwsenwnesesenew ",
+					"enewnwewneswsewnwswenweswnenwsenwsw",
+					"sweneswneswneneenwnewenewwneswswnese",
+					"swwesenesewenwneswnwwneseswwne",
+					"enesenwswwswneneswsenwnewswseenwsese",
+					"wnwnesenesenenwwnenwsewesewsesesew",
+					"nenewswnwewswnenesenwnesewesw",
+					"eneswnwswnwsenenwnwnwwseeswneewsenese",
+					"neswnwewnwnwseenwseesewsenwsweewe",
+					"wseweeenwnesenwwwswnew"
+					};
+
+				days[23].AddTestInput(Test1, "10", "2208");
+			}
+			
+			//day 24 tests
 			{
 				string[] Test1 = new string[] {
 					"389125467"
