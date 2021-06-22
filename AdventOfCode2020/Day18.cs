@@ -11,7 +11,7 @@ namespace AdventOfCode2020
 		{
 			Day = "18";
 			Answer1 = "11004703763391";
-			Answer2 = "0";
+			Answer2 = "290726428573651";
 		}
 
 		protected override string Solution1(string[] input)
