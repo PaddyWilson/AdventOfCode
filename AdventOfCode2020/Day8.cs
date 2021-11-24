@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using AOC;
 
 namespace AdventOfCode2020
 {

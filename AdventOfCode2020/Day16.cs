@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
 
+using AOC;
+
 namespace AdventOfCode2020
 {
 	public class Day16 : BaseDay

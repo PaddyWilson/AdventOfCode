@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading;
 
-namespace AdventOfCode2020
+namespace AOC
 {
+	//the basic layout of for a new Day
 	public class Day0 : BaseDay
 	{
 		public Day0()
