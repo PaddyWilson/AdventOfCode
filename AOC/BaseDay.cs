@@ -97,6 +97,23 @@ namespace AOC
 			TestInputAnswers2.Add(answer2);
 		}
 
+		public void AddTestInputFromFile(string input, string answer1, string answer2)
+		{
+			if (!TestInit)
+			{
+				TestInit = true;
+				TestInput = new List<string[]>();
+				TestInputAnswers1 = new List<string>();
+				TestInputAnswers2 = new List<string>();
+			}
+
+			string[] temp = File.ReadAllLines(InputDir + input);
+
+			TestInput.Add(temp);
+			TestInputAnswers1.Add(answer1);
+			TestInputAnswers2.Add(answer2);
+		}
+
 		public void RunAllTests()
 		{
 			RunAllSolution1Tests();

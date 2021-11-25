@@ -221,7 +221,7 @@ namespace AdventOfCode2019
 
 				Visual(bestX, bestY, currentX, currentY, data, width, height);
 
-				int i = 0;
+				//int i = 0;
 			}
 
 			return ((currentY * 100) + currentX).ToString();
