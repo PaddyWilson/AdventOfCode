@@ -21,12 +21,12 @@ namespace AdventOfCode2019
             string[] wire1 = input[0].Split(',');
             string[] wire2 = input[1].Split(',');
 
-            //Dictionary<string, long> w1 = PlaceWires(wire1);
-            //Dictionary<string, long> w2 = PlaceWires(wire2);
+            //Dictionary<string, int> w1 = PlaceWires(wire1);
+            //Dictionary<string, int> w2 = PlaceWires(wire2);
 
             int gridSize = 20000;
-            long[,] w1 = PlaceWires(wire1, gridSize);
-            long[,] w2 = PlaceWires(wire2, gridSize);
+            int[,] w1 = PlaceWires(wire1, gridSize);
+            int[,] w2 = PlaceWires(wire2, gridSize);
 
             //find intersections of wires add to list
             List<string> intersects = new List<string>();
@@ -42,6 +42,10 @@ namespace AdventOfCode2019
                 }
             }
 
+            //to free up some ram, should not be needed
+            w1 = new int[1, 1];
+            w2 = new int[1, 1];
+
             //foreach (var item1 in w1)
             //{
             //    foreach (var item2 in w2)
@@ -55,13 +59,13 @@ namespace AdventOfCode2019
             //    }
             //}
 
-            long lowest = long.MaxValue - 1;
+            int lowest = int.MaxValue - 1;
             foreach (var item in intersects)
             {
-                long x = long.Parse(item.Split(',')[0]) - (gridSize / 2);
-                long y = long.Parse(item.Split(',')[1]) - (gridSize / 2);
+                int x = int.Parse(item.Split(',')[0]) - (gridSize / 2);
+                int y = int.Parse(item.Split(',')[1]) - (gridSize / 2);
 
-                long temp = Math.Abs(x - 0) + Math.Abs(y - 0);
+                int temp = Math.Abs(x - 0) + Math.Abs(y - 0);
                 if (temp < lowest)
                     lowest = temp;
             }
@@ -74,17 +78,17 @@ namespace AdventOfCode2019
             string[] wire1 = input[0].Split(',');
             string[] wire2 = input[1].Split(',');
 
-            //Dictionary<string, long> w1 = PlaceWires(wire1);
-            //Dictionary<string, long> w2 = PlaceWires(wire2);
+            //Dictionary<string, int> w1 = PlaceWires(wire1);
+            //Dictionary<string, int> w2 = PlaceWires(wire2);
 
             int gridSize = 20000;
-            long[,] w1 = PlaceWires(wire1, gridSize);
-            long[,] w2 = PlaceWires(wire2, gridSize);
+            int[,] w1 = PlaceWires(wire1, gridSize);
+            int[,] w2 = PlaceWires(wire2, gridSize);
 
-            long lowest = long.MaxValue - 1;
+            int lowest = int.MaxValue - 1;
 
             //find intersections of wires add to list
-            List<long> intersects = new List<long>();
+            List<int> intersects = new List<int>();
             for (int y = 0; y < gridSize - 1; y++)
             {
                 for (int x = 0; x < gridSize - 1; x++)
@@ -96,6 +100,10 @@ namespace AdventOfCode2019
                         intersects.Add(w1[x, y] + w2[x, y]);
                 }
             }
+
+            //to free up some ram, should not be needed
+            w1 = new int[1, 1];
+            w2 = new int[1, 1];
 
             intersects.Sort();
 
@@ -111,12 +119,12 @@ namespace AdventOfCode2019
 
             //        if (item1.Key == item2.Key)
             //        {
-            //            //long x = long.Parse(item.Split(',')[0]);
-            //            //long y = long.Parse(item.Split(',')[1]);
+            //            //int x = int.Parse(item.Split(',')[0]);
+            //            //int y = int.Parse(item.Split(',')[1]);
 
             //            //vis[offSetX + x, offSetY + y] = item;
 
-            //            long temp = item1.Value + item2.Value;
+            //            int temp = item1.Value + item2.Value;
             //            if (temp < lowest)
             //                lowest = temp;
             //        }
@@ -126,15 +134,15 @@ namespace AdventOfCode2019
             //return lowest.ToString();
         }
 
-        static long[,] PlaceWires(string[] wire, int gridSize)
+        private int[,] PlaceWires(string[] wire, int gridSize)
         {
             //starting position
-            long x = gridSize / 2;
-            long y = gridSize / 2;
+            int x = gridSize / 2;
+            int y = gridSize / 2;
 
-            //Dictionary<string, long> wireView = new Dictionary<string, long>();
+            //Dictionary<string, int> wireView = new Dictionary<string, int>();
 
-            long[,] wireView = new long[gridSize, gridSize];
+            int[,] wireView = new int[gridSize, gridSize];
 
             for (int x1 = 0; x1 < gridSize; x1++)
                 for (int y1 = 0; y1 < gridSize; y1++)
@@ -142,13 +150,13 @@ namespace AdventOfCode2019
 
             //wireView.Add(PosString(x, y));
 
-            long length = 0;
+            int length = 0;
             foreach (var item in wire)
             {
                 char direction = item[0];
-                long amount = long.Parse(item.Substring(1, item.Length - 1));
-                long tempX = x;
-                long tempY = y;
+                int amount = int.Parse(item.Substring(1, item.Length - 1));
+                int tempX = x;
+                int tempY = y;
 
                 while (amount != 0)
                 {
@@ -176,8 +184,7 @@ namespace AdventOfCode2019
             return wireView;
         }
 
-
-        static string PosString(long x, long y)
+        private string PosString(int x, int y)
         {
             return x + "," + y;
         }
