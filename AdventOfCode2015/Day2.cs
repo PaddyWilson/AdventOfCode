@@ -11,7 +11,7 @@ namespace AdventOfCode2015
 		{
 			Day = "2";
 			Answer1 = "1588178";
-			Answer2 = "1795";
+			Answer2 = "3783758";
 		}
 
 		protected override string Solution1(string[] input)
@@ -47,11 +47,33 @@ namespace AdventOfCode2015
 		protected override string Solution2(string[] input)
 		{
 			int count = 0;
-			int index = 0;
-			
 
+			List<int> area = new List<int>();
+			area.Add(0);
+			area.Add(0);
+			area.Add(0);
 
-			return index.ToString();
+			foreach (var item in input)
+			{
+				string[] numbers = item.Split('x');
+
+				int l = int.Parse(numbers[0]);
+				int w = int.Parse(numbers[1]);
+				int h = int.Parse(numbers[2]);
+
+				area[0] = (l);
+				area[1] = (w);
+				area[2] = (h);
+
+				area.Sort();
+
+				count += area[0] + area[0] + area[1] + area[1];
+
+				//ribbon length
+				count += l * w * h;
+			}
+
+			return count.ToString();
 		}
 	}
 }
