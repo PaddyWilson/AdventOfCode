@@ -70,15 +70,16 @@ namespace AdventOfCode2019
             //days[days.Count - 1].RunSolution2();
 
             //////run all
-            //Console.WriteLine("Running All");
-            //foreach (var item in days)
-            //{
-            //    item.RunSolution1();
-            //    item.RunAllSolution1Tests();
-            //    item.RunSolution2();
-            //    item.RunAllSolution2Tests();
-            //}
+            Console.WriteLine("Running All");
+            foreach (var item in days)
+            {
+                item.RunSolution1();
+                item.RunAllSolution1Tests();
+                item.RunSolution2();
+                item.RunAllSolution2Tests();
+            }
 
+            Console.WriteLine("Press Key");
             Console.ReadKey();
         }
     }
