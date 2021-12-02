@@ -13,7 +13,8 @@ namespace AdventOfCode2021
 
             List<BaseDay> days = new List<BaseDay>() {
                 new Day0(),
-                new Day1()
+                new Day1(),
+                new Day2()
             };
 
             //tests
