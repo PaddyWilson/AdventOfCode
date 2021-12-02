@@ -1,6 +1,7 @@
 ﻿using AOC;
 using System;
 using System.Collections.Generic;
+using System.IO;
 
 namespace AdventOfCode2015
 {
@@ -15,15 +16,19 @@ namespace AdventOfCode2015
                 new Day0(),
                 new Day1(),
                 new Day2(),
-                new Day3()
+                new Day3(),
+                new Day4(),
+                new Day5(),
+                new Day6(),
+                new Day7(),
+                new Day8()
             };
 
             //tests
             {
-                //day 6
+                //day 8
                 {
-                    //days[6].AddTestInput(File.ReadAllLines(BaseDay.InputDir + "day6-1 test.txt"), "42", "");
-                    //days[6].AddTestInput(File.ReadAllLines(BaseDay.InputDir + "day6-2 test.txt"), "", "4");
+                    days[8].AddTestInput(File.ReadAllLines(BaseDay.InputDir + "day8test.txt"), "12", "19");
                 }
             }
 
