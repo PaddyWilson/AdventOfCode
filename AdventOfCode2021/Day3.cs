@@ -21,18 +21,18 @@ namespace AdventOfCode2021
 
 			for (int i = 0; i < input[0].Length; i++)
 			{
-				int zero = 0;
-				int one = 0;
+				int zeroCount = 0;
+				int oneCount = 0;
 
 				for (int j = 0; j < input.Length; j++)
 				{
 					if (input[j][i] == '1')
-						one++;
+						oneCount++;
 					else
-						zero++;
+						zeroCount++;
 				}
 
-				if (one > zero)
+				if (oneCount > zeroCount)
 				{
 					gammaRate += "1";
 					epsilonRate += "0";
@@ -54,52 +54,40 @@ namespace AdventOfCode2021
 			List<string> oxygenList = new List<string>(input);
 			List<string> co2List = new List<string>(input);
 
-			int i = 0;
-			while (oxygenList.Count > 1)
+			int bitIndex = 0;
+			while (oxygenList.Count > 1 || co2List.Count > 1)
 			{
-				int zero = 0;
-				int one = 0;
+				int zeroCount = 0;
+				int oneCount = 0;
 				for (int j = 0; j < oxygenList.Count; j++)
 				{
-					if (oxygenList[j][i] == '1')
-						one++;
+					if (oxygenList[j][bitIndex] == '1')
+						oneCount++;
 					else
-						zero++;
+						zeroCount++;
 				}
 
-				if (one > zero || one == zero)
-				{
-					RemoveItems(oxygenList, i, '0');
-				}
+				if (oneCount > zeroCount || oneCount == zeroCount)
+					RemoveItems(oxygenList, bitIndex, '0');
 				else
-				{
-					RemoveItems(oxygenList, i, '1');
-				}
-				i++;
-			}
+					RemoveItems(oxygenList, bitIndex, '1');
 
-			i = 0;
-			while (co2List.Count > 1)
-			{
-				int zero = 0;
-				int one = 0;
+				zeroCount = 0;
+				oneCount = 0;
 				for (int j = 0; j < co2List.Count; j++)
 				{
-					if (co2List[j][i] == '1')
-						one++;
+					if (co2List[j][bitIndex] == '1')
+						oneCount++;
 					else
-						zero++;
+						zeroCount++;
 				}
 
-				if (zero < one || one == zero)
-				{
-					RemoveItems(co2List, i, '1');
-				}
+				if (zeroCount < oneCount || oneCount == zeroCount)
+					RemoveItems(co2List, bitIndex, '1');
 				else
-				{
-					RemoveItems(co2List, i, '0');
-				}
-				i++;
+					RemoveItems(co2List, bitIndex, '0');
+
+				bitIndex++;
 			}
 
 			int output = Convert.ToInt32(oxygenList[0], 2) * Convert.ToInt32(co2List[0], 2);
@@ -109,11 +97,12 @@ namespace AdventOfCode2021
 
 		private void RemoveItems(List<string> input, int binaryIndex, char number)
 		{
-			for (int j = input.Count - 1; j >= 0; j--)
-			{
-				if (input[j][binaryIndex] == number)
-					input.RemoveAt(j);
-			}
+			if (input.Count > 1)
+				for (int j = input.Count - 1; j >= 0; j--)
+				{
+					if (input[j][binaryIndex] == number)
+						input.RemoveAt(j);
+				}
 		}
 	}
 }
