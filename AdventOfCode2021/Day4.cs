@@ -111,15 +111,12 @@ namespace AdventOfCode2021
 				//look for winning board
 				for (int i = boards.Count - 1; i >= 0; i--)
 				{
-					bool removeBoard = false;
+					bool win = checkWin(called[i]);
 
-					if (checkWin(called[i]))
-						removeBoard = true;
-
-					if (boards.Count == 1 && removeBoard)
+					if (boards.Count == 1 && win)
 						return (sumUnmarked(boards[i], called[i]) * calledNumber).ToString();
 
-					if (removeBoard && boards.Count > 1)
+					if (win && boards.Count > 1)
 					{
 						boards.RemoveAt(i);
 						called.RemoveAt(i);
@@ -130,33 +127,33 @@ namespace AdventOfCode2021
 			return "error";
 		}
 
-		private void searchBoard(int[,] boardNumbers, bool[,] boardedCalled, int calledNumber)
+		private void searchBoard(int[,] boardNumbers, bool[,] boardCalled, int calledNumber)
 		{
 			for (int y = 0; y < 5; y++)
 			{
 				for (int x = 0; x < 5; x++)
 				{
 					if (boardNumbers[x, y] == calledNumber)
-						boardedCalled[x, y] = true;
+						boardCalled[x, y] = true;
 				}
 			}
 		}
 
-		private int sumUnmarked(int[,] boardNumbers, bool[,] boardedCalled)
+		private int sumUnmarked(int[,] boardNumbers, bool[,] boardCalled)
 		{
 			int sum = 0;
 			for (int y = 0; y < 5; y++)
 			{
 				for (int x = 0; x < 5; x++)
 				{
-					if (!boardedCalled[x, y])
+					if (!boardCalled[x, y])
 						sum += boardNumbers[x, y];
 				}
 			}
 			return sum;
 		}
 
-		private bool checkWin(bool[,] boardedCalled)
+		private bool checkWin(bool[,] boardCalled)
 		{
 			//check rows
 			for (int y = 0; y < 5; y++)
@@ -164,7 +161,7 @@ namespace AdventOfCode2021
 				int trueCount = 0;
 				for (int x = 0; x < 5; x++)
 				{
-					if (boardedCalled[x, y])
+					if (boardCalled[x, y])
 						trueCount++;
 					else
 						break;
@@ -180,7 +177,7 @@ namespace AdventOfCode2021
 				int trueCount = 0;
 				for (int y = 0; y < 5; y++)
 				{
-					if (boardedCalled[x, y])
+					if (boardCalled[x, y])
 						trueCount++;
 					else
 						break;
