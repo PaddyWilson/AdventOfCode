@@ -54,13 +54,13 @@ namespace AdventOfCode2021
 			{
 				//pay a round
 				for (int i = 0; i < boards.Count; i++)
-					searchBoard(boards[i], called[i], calledNumber);
+					SearchBoard(boards[i], called[i], calledNumber);
 
 				//look for winning board
 				for (int i = 0; i < boards.Count; i++)
 				{
-					if (checkWin(called[i]))
-						return (sumUnmarked(boards[i], called[i]) * calledNumber).ToString();
+					if (CheckWin(called[i]))
+						return (SumUnmarked(boards[i], called[i]) * calledNumber).ToString();
 				}
 			}
 
@@ -106,15 +106,15 @@ namespace AdventOfCode2021
 			{
 				//pay a round
 				for (int i = 0; i < boards.Count; i++)
-					searchBoard(boards[i], called[i], calledNumber);
+					SearchBoard(boards[i], called[i], calledNumber);
 
 				//look for winning board
 				for (int i = boards.Count - 1; i >= 0; i--)
 				{
-					bool win = checkWin(called[i]);
+					bool win = CheckWin(called[i]);
 
 					if (boards.Count == 1 && win)
-						return (sumUnmarked(boards[i], called[i]) * calledNumber).ToString();
+						return (SumUnmarked(boards[i], called[i]) * calledNumber).ToString();
 
 					if (win && boards.Count > 1)
 					{
@@ -127,7 +127,7 @@ namespace AdventOfCode2021
 			return "error";
 		}
 
-		private void searchBoard(int[,] boardNumbers, bool[,] boardCalled, int calledNumber)
+		private void SearchBoard(int[,] boardNumbers, bool[,] boardCalled, int calledNumber)
 		{
 			for (int y = 0; y < 5; y++)
 			{
@@ -139,7 +139,7 @@ namespace AdventOfCode2021
 			}
 		}
 
-		private int sumUnmarked(int[,] boardNumbers, bool[,] boardCalled)
+		private int SumUnmarked(int[,] boardNumbers, bool[,] boardCalled)
 		{
 			int sum = 0;
 			for (int y = 0; y < 5; y++)
@@ -153,7 +153,7 @@ namespace AdventOfCode2021
 			return sum;
 		}
 
-		private bool checkWin(bool[,] boardCalled)
+		private bool CheckWin(bool[,] boardCalled)
 		{
 			//check rows
 			for (int y = 0; y < 5; y++)
