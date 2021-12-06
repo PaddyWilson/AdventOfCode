@@ -16,28 +16,18 @@ namespace AdventOfCode2021
 
 		protected override string Solution1(string[] input)
 		{
-			string[] tempNum = input[0].Split(',');
-			int[] numbers = new int[tempNum.Length];
-			for (int i = 0; i < tempNum.Length; i++)
-				numbers[i] = int.Parse(tempNum[i]);
-
 			long[] fish = new long[9];
-			foreach (var item in numbers)
-				fish[item]++;
+			foreach (var item in input[0].Split(','))
+				fish[int.Parse(item)]++;
 
 			return CalculateFish(fish, 80).ToString();
 		}
 
 		protected override string Solution2(string[] input)
 		{
-			string[] tempNum = input[0].Split(',');
-			int[] numbers = new int[tempNum.Length];
-			for (int i = 0; i < tempNum.Length; i++)
-				numbers[i] = int.Parse(tempNum[i]);
-
 			long[] fish = new long[9];
-			foreach (var item in numbers)
-				fish[item]++;
+			foreach (var item in input[0].Split(','))
+				fish[int.Parse(item)]++;
 
 			return CalculateFish(fish, 256).ToString();
 		}
