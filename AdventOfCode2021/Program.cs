@@ -18,7 +18,8 @@ namespace AdventOfCode2021
 				new Day2(),
 				new Day3(),
 				new Day4(),
-				new Day5()
+				new Day5(),
+				new Day6()
 			};
 
 			//tests
@@ -27,6 +28,7 @@ namespace AdventOfCode2021
 					days[3].AddTestInput(File.ReadAllLines(BaseDay.InputDir + "day3test.txt"), "198", "230");
 					days[4].AddTestInput(File.ReadAllLines(BaseDay.InputDir + "day4test.txt"), "4512", "1924");
 					days[5].AddTestInput(File.ReadAllLines(BaseDay.InputDir + "day5test.txt"), "5", "12");
+					days[6].AddTestInput(new string[] { "3,4,3,1,2" }, "5934", "26984457539");
 				}
 			}
 
