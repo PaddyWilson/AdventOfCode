@@ -39,10 +39,14 @@ namespace AdventOfCode2021
 					int left = int.MaxValue;
 					int right = int.MaxValue;
 
-					try { top = grid[x, y - 1]; } catch (Exception) { }
-					try { bottom = grid[x, y + 1]; } catch (Exception) { }
-					try { left = grid[x - 1, y]; } catch (Exception) { }
-					try { right = grid[x + 1, y]; } catch (Exception) { }
+					if ((y - 1) >= 0)
+						top = grid[x, y - 1];
+					if ((y + 1) < input.Length)
+						bottom = grid[x, y + 1];
+					if ((x - 1) >= 0)
+						left = grid[x - 1, y];
+					if ((x + 1) < input[0].Length)
+						right = grid[x + 1, y];
 
 					if (top > center && bottom > center && right > center && left > center)
 						count += center + 1;
