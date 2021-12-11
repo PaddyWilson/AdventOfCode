@@ -17,22 +17,19 @@ namespace AdventOfCode2021
 
 		protected override string Solution1(string[] input)
 		{
-			Dictionary<char, int> tally = new Dictionary<char, int>();
-			tally.Add('(', 0);
-			tally.Add(')', 0);
-			tally.Add('[', 0);
-			tally.Add(']', 0);
-			tally.Add('{', 0);
-			tally.Add('}', 0);
-			tally.Add('<', 0);
-			tally.Add('>', 0);
+			Dictionary<char, int> tally = new Dictionary<char, int>(){
+				{ ')', 0},
+				{ ']', 0},
+				{ '}', 0},
+				{ '>', 0}
+			};
 
-			List<char> open = new List<char>() { '(', '[', '{', '<', };
-			List<char> close = new List<char>() { ')', ']', '}', '>', };
+			List<char> open = new List<char>() { '(', '[', '{', '<' };
+			List<char> close = new List<char>(tally.Keys.ToArray());
 
 			foreach (var item in input)
 			{
-				List<char> characters = new List<char>(item.ToArray());
+				List<char> characters = item.ToArray().ToList();
 				for (int i = characters.Count - 2; i >= 0; i--)
 				{
 					for (int j = 0; j < open.Count; j++)
@@ -48,14 +45,14 @@ namespace AdventOfCode2021
 				for (int i = 0; i < characters.Count; i++)
 				{
 					for (int j = 0; j < close.Count; j++)
-					{
-						if (characters[i] == close[j])
 						{
-							tally[characters[i]]++;
-							i = int.MaxValue - 10;
-							j = int.MaxValue - 10;
+							if (characters[i] == close[j])
+							{
+								tally[characters[i]]++;
+								i = int.MaxValue - 10;
+								j = int.MaxValue - 10;
+							}
 						}
-					}
 				}
 			}
 
@@ -69,26 +66,14 @@ namespace AdventOfCode2021
 
 		protected override string Solution2(string[] input)
 		{
-			Dictionary<char, int> tally = new Dictionary<char, int>();
-			tally.Add('(', 0);
-			tally.Add(')', 0);
-			tally.Add('[', 0);
-			tally.Add(']', 0);
-			tally.Add('{', 0);
-			tally.Add('}', 0);
-			tally.Add('<', 0);
-			tally.Add('>', 0);
-
 			List<char> open = new List<char>() { '(', '[', '{', '<', };
 			List<char> close = new List<char>() { ')', ']', '}', '>', };
 
-			List<string> incompleteStrings = new List<string>();
+			List<string> incompleteLines = new List<string>();
 
 			foreach (var item in input)
 			{
-				List<char> characters = new List<char>(item.ToArray());
-				//string temp = new string(characters.ToArray());
-				//Console.WriteLine(temp);
+				List<char> characters = item.ToArray().ToList();
 				for (int i = characters.Count - 2; i >= 0; i--)
 				{
 					for (int j = 0; j < open.Count; j++)
@@ -115,53 +100,31 @@ namespace AdventOfCode2021
 				}
 				if (!corrupted)
 				{
-					incompleteStrings.Add(new string(characters.ToArray()));
+					incompleteLines.Add(new string(characters.ToArray()));
 				}
 			}
 
 			List<long> scores = new List<long>();
-
-			foreach (var item in incompleteStrings)
+			foreach (var item in incompleteLines)
 			{
-				string closedString = "";
+				long totalScore = 0;
 				for (int i = item.Length - 1; i >= 0; i--)
 				{
-					if (item[i] == '(')
-						closedString += ')';
-					else if (item[i] == '[')
-						closedString += ']';
-					else if (item[i] == '{')
-						closedString += '}';
-					else if (item[i] == '<')
-						closedString += '>';
-				}
-
-				long totalScore = 0;
-				for (int i = 0; i < closedString.Length; i++)
-				{
 					totalScore *= 5;
-					if (closedString[i] == ')')
+					if (item[i] == '(')
 						totalScore += 1;
-					else if (closedString[i] == ']')
+					else if (item[i] == '[')
 						totalScore += 2;
-					else if (closedString[i] == '}')
+					else if (item[i] == '{')
 						totalScore += 3;
-					else if (closedString[i] == '>')
+					else if (item[i] == '<')
 						totalScore += 4;
 				}
 				scores.Add(totalScore);
 			}
+
 			scores.Sort();
 			return scores[scores.Count / 2].ToString();
 		}
-
-		private char FindCorrupted(List<char> characters)
-		{
-
-
-
-			return 'c';
-		}
-
 	}
 }
