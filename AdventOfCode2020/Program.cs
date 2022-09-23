@@ -126,7 +126,7 @@ namespace AdventOfCode2020
 				item.RunSolution2();
 			}
 
-			//Console.ReadKey();
+			Helpers.ConsoleReadKeyWindows();
 		}
 	}
 }

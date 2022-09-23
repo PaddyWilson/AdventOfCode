@@ -79,8 +79,7 @@ namespace AdventOfCode2019
                 item.RunAllSolution2Tests();
             }
 
-            Console.WriteLine("Press Key");
-            //Console.ReadKey();
-        }
+			Helpers.ConsoleReadKeyWindows();
+		}
     }
 }
