@@ -32,8 +32,9 @@ namespace AOC
 			else
 				Console.BackgroundColor = ConsoleColor.Red;
 
-			Console.WriteLine("{5} Day {0,2} Answer 1:{1,16} | Expected:{4,16} | Correct:{2,6} | Run Time:{3,9}", Day, output, (output == Answer1), timer.Elapsed, Answer1, Year);
+			Console.Write("{5} Day {0,2} Answer 1:{1,16} | Expected:{4,16} | Correct:{2,6} | Run Time:{3,9}", Day, output, (output == Answer1), timer.Elapsed, Answer1, Year);
 			Console.BackgroundColor = ConsoleColor.Black;
+			Console.WriteLine();
 		}
 
 		public void RunTestSolution1(string[] input, string answer)
@@ -42,9 +43,15 @@ namespace AOC
 			timer.Start();
 			string output = Solution1(input);
 			timer.Stop();
-			Console.BackgroundColor = ConsoleColor.DarkBlue;
-			Console.WriteLine("{5} Day {0,2} Answer 1:{1,16} | Expected:{4,16} | Correct:{2,6} | Run Time:{3,9} | Test", Day, output, (output == answer), timer.Elapsed, answer, Year);
+
+			if ((output == answer))
+				Console.BackgroundColor =  ConsoleColor.DarkBlue;
+			else
+				Console.BackgroundColor = ConsoleColor.DarkRed;
+
+			Console.Write("{5} Day {0,2} Answer 1:{1,16} | Expected:{4,16} | Correct:{2,6} | Run Time:{3,9} | Test", Day, output, (output == answer), timer.Elapsed, answer, Year);
 			Console.BackgroundColor = ConsoleColor.Black;
+			Console.WriteLine();
 		}
 
 		public void RunSolution2()
@@ -60,8 +67,9 @@ namespace AOC
 			else
 				Console.BackgroundColor = ConsoleColor.Red;
 
-			Console.WriteLine("{5} Day {0,2} Answer 2:{1,16} | Expected:{4,16} | Correct:{2,6} | Run Time:{3,9}", Day, output, (output == Answer2), timer.Elapsed, Answer2, Year);
+			Console.Write("{5} Day {0,2} Answer 2:{1,16} | Expected:{4,16} | Correct:{2,6} | Run Time:{3,9}", Day, output, (output == Answer2), timer.Elapsed, Answer2, Year);
 			Console.BackgroundColor = ConsoleColor.Black;
+			Console.WriteLine();
 		}
 
 		public void RunTestSolution2(string[] input, string answer)
@@ -69,10 +77,16 @@ namespace AOC
 			Stopwatch timer = new Stopwatch();
 			timer.Start();
 			string output = Solution2(input);
-			timer.Stop();
-			Console.BackgroundColor = ConsoleColor.DarkBlue;
-			Console.WriteLine("{5} Day {0,2} Answer 2:{1,16} | Expected:{4,16} | Correct:{2,6} | Run Time:{3,9} | Test", Day, output, (output == answer), timer.Elapsed, answer, Year);
+			timer.Stop(); 
+
+			if ((output == answer))
+				Console.BackgroundColor = ConsoleColor.DarkBlue;
+			else
+				Console.BackgroundColor = ConsoleColor.DarkRed;
+
+			Console.Write("{5} Day {0,2} Answer 2:{1,16} | Expected:{4,16} | Correct:{2,6} | Run Time:{3,9} | Test", Day, output, (output == answer), timer.Elapsed, answer, Year);
 			Console.BackgroundColor = ConsoleColor.Black;
+			Console.WriteLine();
 		}
 
 		private string[] ReadInput()
