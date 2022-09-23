@@ -42,8 +42,11 @@ namespace AdventOfCode2019
                 }
             }
 
-            //to free up some ram, should not be needed
-            w1 = new int[1, 1];
+			//long total = GC.GetTotalMemory(true);
+            //Console.WriteLine(total + " ram");
+
+			//to free up some ram, should not be needed
+			w1 = new int[1, 1];
             w2 = new int[1, 1];
 
             //foreach (var item1 in w1)

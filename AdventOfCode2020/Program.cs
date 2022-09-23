@@ -10,8 +10,8 @@ namespace AdventOfCode2020
 	{
 		static void Main(string[] args)
 		{
-			BaseDay.InputDir = @"C:\Users\GGGGG\Desktop\Code\AdventOfCode\Input\2020\";
 			BaseDay.Year = "2020";
+			BaseDay.InputDir = Path.Combine(Directory.GetCurrentDirectory(), "Input", BaseDay.Year + Path.DirectorySeparatorChar.ToString());
 
 			List<BaseDay> days = new List<BaseDay>() {
 				new Day0(),
@@ -44,8 +44,8 @@ namespace AdventOfCode2020
 			//tests
 			{
 				{
-					days[7].AddTestInput(File.ReadAllLines(BaseDay.InputDir + "day7test1.txt"), "", "32");
-					days[7].AddTestInput(File.ReadAllLines(BaseDay.InputDir + "day7test2.txt"), "", "126");
+					days[7].AddTestInputFromFile("Day7test1.txt", "", "32");
+					days[7].AddTestInputFromFile("Day7test2.txt", "", "126");
 
 					days[10].AddTestInput(new string[] { "16", "10", "15", "5", "1", "11", "7", "19", "6", "12", "4" }, "", "8");
 					days[10].AddTestInput(new string[] { "28","33","18","42","31","14","46","20","48","47","24",
@@ -56,7 +56,7 @@ namespace AdventOfCode2020
 					days[10].AddTestInput(new string[] { "3", "1", "6", "2" }, "", "4");
 					days[10].AddTestInput(new string[] { "17", "6", "10", "5", "13", "7", "1", "4", "12", "11", "14" }, "", "28");
 
-					days[11].AddTestInput(File.ReadAllLines(BaseDay.InputDir + "day11test.txt"), "37", "26");
+					days[11].AddTestInputFromFile("Day11test.txt", "37", "26");
 
 					days[12].AddTestInput(new string[] { "F10", "N3", "F7", "R90", "F11" }, "25", "286");
 
@@ -69,7 +69,7 @@ namespace AdventOfCode2020
 
 					days[15].AddTestInput(new string[] { "0,3,6" }, "436", "");
 
-					days[16].AddTestInput(File.ReadAllLines(BaseDay.InputDir + "day16test.txt"), "71", "");
+					days[16].AddTestInputFromFile("Day16test.txt", "71", "");
 
 					days[17].AddTestInput(new string[] { ".#.", "..#", "###" }, "112", "848");
 
@@ -80,18 +80,18 @@ namespace AdventOfCode2020
 					days[18].AddTestInput(new string[] { "5 * 9 * (7 * 3 * 3 + 9 * 3 + (8 + 6 * 4))" }, "12240", "669060");
 					days[18].AddTestInput(new string[] { "((2 + 4 * 9) * (6 + 9 * 8 + 6) + 6) + 2 + 4 * 2" }, "13632", "23340");
 
-					days[19].AddTestInput(File.ReadAllLines(BaseDay.InputDir + "day19test.txt"), "2", "");
+					days[19].AddTestInputFromFile("Day19test.txt", "2", "");
 
-					days[20].AddTestInput(File.ReadAllLines(BaseDay.InputDir + "day20test.txt"), "20899048083289", "");
+					days[20].AddTestInputFromFile("Day20test.txt", "20899048083289", "");
 
-					days[21].AddTestInput(File.ReadAllLines(BaseDay.InputDir + "day21test.txt"), "5", "");
+					days[21].AddTestInputFromFile("Day21test.txt", "5", "");
 
-					days[22].AddTestInput(File.ReadAllLines(BaseDay.InputDir + "day22test1.txt"), "306", "291");
-					days[22].AddTestInput(File.ReadAllLines(BaseDay.InputDir + "day22test2.txt"), "", "34173");
+					days[22].AddTestInputFromFile("Day22test1.txt", "306", "291");
+					days[22].AddTestInputFromFile("Day22test2.txt", "", "34173");
 
 					days[23].AddTestInput(new string[] { "389125467" }, "67384529", "149245887792");
 
-					days[24].AddTestInput(File.ReadAllLines(BaseDay.InputDir + "day24test.txt"), "10", "2208");
+					days[24].AddTestInputFromFile("Day24test.txt", "10", "2208");
 				}
 			}
 

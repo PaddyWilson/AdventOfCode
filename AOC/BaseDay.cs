@@ -23,39 +23,44 @@ namespace AOC
 		{
 			Stopwatch timer = new Stopwatch();
 			ReadInput();
+
+			Console.Write("{1} Day {0,2} ", Day, Year);
+
 			timer.Start();
 			string output = Solution1(Input);
 			timer.Stop();
 
-			if((output == Answer1))
+			if ((output == Answer1))
 				Console.BackgroundColor = ConsoleColor.DarkGreen;
 			else
 				Console.BackgroundColor = ConsoleColor.Red;
 
-			Console.Write("{5} Day {0,2} Answer 1:{1,16} | Expected:{4,16} | Correct:{2,6} | Run Time:{3,9}", Day, output, (output == Answer1), timer.Elapsed, Answer1, Year);
-			Console.BackgroundColor = ConsoleColor.Black;
+			Console.Write("Answer 1:{1,16} | Expected:{4,16} | Correct:{2,6} | Run Time:{3,9}", Day, output, (output == Answer1), timer.Elapsed, Answer1, Year);
+			Console.ResetColor();
 			Console.WriteLine();
 		}
 
 		public void RunTestSolution1(string[] input, string answer)
 		{
+			Console.Write("{1} Day {0,2} ", Day, Year);
 			Stopwatch timer = new Stopwatch();
 			timer.Start();
 			string output = Solution1(input);
 			timer.Stop();
 
 			if ((output == answer))
-				Console.BackgroundColor =  ConsoleColor.DarkBlue;
+				Console.BackgroundColor = ConsoleColor.DarkBlue;
 			else
 				Console.BackgroundColor = ConsoleColor.DarkRed;
 
-			Console.Write("{5} Day {0,2} Answer 1:{1,16} | Expected:{4,16} | Correct:{2,6} | Run Time:{3,9} | Test", Day, output, (output == answer), timer.Elapsed, answer, Year);
-			Console.BackgroundColor = ConsoleColor.Black;
+			Console.Write("Answer 1:{1,16} | Expected:{4,16} | Correct:{2,6} | Run Time:{3,9} | Test", Day, output, (output == answer), timer.Elapsed, answer, Year);
+			Console.ResetColor();
 			Console.WriteLine();
 		}
 
 		public void RunSolution2()
 		{
+			Console.Write("{1} Day {0,2} ", Day, Year);
 			Stopwatch timer = new Stopwatch();
 			ReadInput();
 			timer.Start();
@@ -67,31 +72,45 @@ namespace AOC
 			else
 				Console.BackgroundColor = ConsoleColor.Red;
 
-			Console.Write("{5} Day {0,2} Answer 2:{1,16} | Expected:{4,16} | Correct:{2,6} | Run Time:{3,9}", Day, output, (output == Answer2), timer.Elapsed, Answer2, Year);
-			Console.BackgroundColor = ConsoleColor.Black;
+			Console.Write("Answer 2:{1,16} | Expected:{4,16} | Correct:{2,6} | Run Time:{3,9}", Day, output, (output == Answer2), timer.Elapsed, Answer2, Year);
+			Console.ResetColor();
 			Console.WriteLine();
 		}
 
 		public void RunTestSolution2(string[] input, string answer)
 		{
+			Console.Write("{1} Day {0,2} ", Day, Year);
 			Stopwatch timer = new Stopwatch();
 			timer.Start();
 			string output = Solution2(input);
-			timer.Stop(); 
+			timer.Stop();
 
 			if ((output == answer))
 				Console.BackgroundColor = ConsoleColor.DarkBlue;
 			else
 				Console.BackgroundColor = ConsoleColor.DarkRed;
 
-			Console.Write("{5} Day {0,2} Answer 2:{1,16} | Expected:{4,16} | Correct:{2,6} | Run Time:{3,9} | Test", Day, output, (output == answer), timer.Elapsed, answer, Year);
-			Console.BackgroundColor = ConsoleColor.Black;
+			Console.Write("Answer 2:{1,16} | Expected:{4,16} | Correct:{2,6} | Run Time:{3,9} | Test", Day, output, (output == answer), timer.Elapsed, answer, Year);
+			Console.ResetColor();
 			Console.WriteLine();
 		}
 
 		private string[] ReadInput()
 		{
-			string[] output = File.ReadAllLines(InputDir + "Day" + Day + ".txt");
+			string[] output = null;
+			//windows does not care about caps but linux does
+			if (File.Exists(InputDir + "Day" + Day + ".txt"))
+			{
+				output = File.ReadAllLines(InputDir + "Day" + Day + ".txt");
+			}
+			else if (File.Exists(InputDir + "day" + Day + ".txt"))
+			{
+				output = File.ReadAllLines(InputDir + "day" + Day + ".txt");
+			}
+			else
+			{
+				throw new InvalidDataException("Cant find file \"" + InputDir + "Day" + Day + ".txt" + "\"");
+			}
 			Input = output;
 			return output;
 		}
@@ -121,7 +140,20 @@ namespace AOC
 				TestInputAnswers2 = new List<string>();
 			}
 
-			string[] temp = File.ReadAllLines(InputDir + input);
+			string[] temp = null;
+
+			if (File.Exists(InputDir + input))
+			{
+				temp = File.ReadAllLines(InputDir + input);
+			}
+			else if (File.Exists(InputDir + input.ToLower()))
+			{
+				temp = File.ReadAllLines(InputDir + input.ToLower());
+			}
+			else
+			{
+				throw new InvalidDataException("Cant find file \"" + InputDir + input +"\"");
+			}
 
 			TestInput.Add(temp);
 			TestInputAnswers1.Add(answer1);
