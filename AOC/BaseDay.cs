@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.Text;
 
 namespace AOC
 {
@@ -14,17 +15,16 @@ namespace AOC
 		protected virtual string Answer2 { get; set; }
 		protected virtual string[] Input { get; set; }
 
-		private bool TestInit = false;
 		protected virtual List<string[]> TestInput { get; private set; }
 		protected virtual List<string> TestInputAnswers1 { get; private set; }
 		protected virtual List<string> TestInputAnswers2 { get; private set; }
 
 		public void RunSolution1()
 		{
+			Console.Write("{1} Day {0,2} ", Day, Year);
+
 			Stopwatch timer = new Stopwatch();
 			ReadInput();
-
-			Console.Write("{1} Day {0,2} ", Day, Year);
 
 			timer.Start();
 			string output = Solution1(Input);
@@ -43,6 +43,7 @@ namespace AOC
 		public void RunTestSolution1(string[] input, string answer)
 		{
 			Console.Write("{1} Day {0,2} ", Day, Year);
+
 			Stopwatch timer = new Stopwatch();
 			timer.Start();
 			string output = Solution1(input);
@@ -61,6 +62,7 @@ namespace AOC
 		public void RunSolution2()
 		{
 			Console.Write("{1} Day {0,2} ", Day, Year);
+
 			Stopwatch timer = new Stopwatch();
 			ReadInput();
 			timer.Start();
@@ -80,6 +82,7 @@ namespace AOC
 		public void RunTestSolution2(string[] input, string answer)
 		{
 			Console.Write("{1} Day {0,2} ", Day, Year);
+
 			Stopwatch timer = new Stopwatch();
 			timer.Start();
 			string output = Solution2(input);
@@ -117,9 +120,8 @@ namespace AOC
 
 		public void AddTestInput(string[] input, string answer1, string answer2)
 		{
-			if (!TestInit)
+			if (TestInput == null)
 			{
-				TestInit = true;
 				TestInput = new List<string[]>();
 				TestInputAnswers1 = new List<string>();
 				TestInputAnswers2 = new List<string>();
@@ -132,9 +134,8 @@ namespace AOC
 
 		public void AddTestInputFromFile(string input, string answer1, string answer2)
 		{
-			if (!TestInit)
+			if (TestInput == null)
 			{
-				TestInit = true;
 				TestInput = new List<string[]>();
 				TestInputAnswers1 = new List<string>();
 				TestInputAnswers2 = new List<string>();
@@ -152,7 +153,7 @@ namespace AOC
 			}
 			else
 			{
-				throw new InvalidDataException("Cant find file \"" + InputDir + input +"\"");
+				throw new InvalidDataException("Cant find file \"" + InputDir + input + "\"");
 			}
 
 			TestInput.Add(temp);
@@ -168,7 +169,7 @@ namespace AOC
 
 		public void RunAllSolution1Tests()
 		{
-			if (TestInit)
+			if (TestInput != null)
 				for (int i = 0; i < TestInput.Count; i++)
 					if (TestInputAnswers1[i] != "")//no testing answer. don't run
 						RunTestSolution1(TestInput[i], TestInputAnswers1[i]);
@@ -176,7 +177,7 @@ namespace AOC
 
 		public void RunAllSolution2Tests()
 		{
-			if (TestInit)
+			if (TestInput != null)
 				for (int i = 0; i < TestInput.Count; i++)
 					if (TestInputAnswers2[i] != "")//no testing answer. don't run
 						RunTestSolution2(TestInput[i], TestInputAnswers2[i]);

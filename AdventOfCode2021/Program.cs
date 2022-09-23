@@ -71,7 +71,7 @@ namespace AdventOfCode2021
 				item.RunSolution2();
 			}
 
-			//Console.ReadKey();
+			Helpers.ConsoleReadKeyWindows();
 		}
 	}
 }

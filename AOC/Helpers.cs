@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
 using System.Text;
 
 namespace AOC
@@ -22,6 +23,19 @@ namespace AOC
 				}
 				return sb.ToString();
 			}
+		}
+
+		public static string ConsoleReadKeyWindows()
+		{
+			//windows closes the console window, linux does not
+			//keep open on windows
+			if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+			{
+				Console.WriteLine("Press any key ...");
+				return Console.ReadKey().ToString();
+			}
+
+			return "Your on linux. Why do you want input?";
 		}
 	}
 }

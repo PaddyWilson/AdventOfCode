@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Runtime.InteropServices;
 
 namespace AdventOfCode2015
 {
@@ -57,7 +58,9 @@ namespace AdventOfCode2015
 				item.RunAllSolution2Tests();
 			}
 
-			//Console.ReadKey();
+			//windows closes the console window, linux does not
+			//keep open on windows
+			Helpers.ConsoleReadKeyWindows();
 		}
 	}
 }
