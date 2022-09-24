@@ -24,6 +24,7 @@ namespace AdventOfCode2015
 				new Day7(),
 				new Day8(),
 				new Day9(),
+				new Day10(),
 			};
 
 			//tests
@@ -37,6 +38,7 @@ namespace AdventOfCode2015
 					"London to Dublin = 464",
 					"London to Belfast = 518",
 					"Dublin to Belfast = 141"}, "605", "982");
+				//days[10].AddTestInputFromFile("day10test.txt", "312211", "");
 			}
 
 			////run selected
