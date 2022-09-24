@@ -25,6 +25,7 @@ namespace AdventOfCode2015
 				new Day8(),
 				new Day9(),
 				new Day10(),
+				new Day11(),
 			};
 
 			//tests
@@ -39,6 +40,9 @@ namespace AdventOfCode2015
 					"London to Belfast = 518",
 					"Dublin to Belfast = 141"}, "605", "982");
 				//days[10].AddTestInputFromFile("day10test.txt", "312211", "");
+
+				days[11].AddTestInput(new string[] { "abcdefgh" }, "abcdffaa", "");
+				days[11].AddTestInput(new string[] { "ghijklmn" }, "ghjaabcc", "");
 			}
 
 			////run selected
@@ -60,10 +64,10 @@ namespace AdventOfCode2015
 			Console.WriteLine("Running All");
 			foreach (var item in days)
 			{
-				item.RunSolution1();
 				item.RunAllSolution1Tests();
-				item.RunSolution2();
+				item.RunSolution1();
 				item.RunAllSolution2Tests();
+				item.RunSolution2();
 			}
 
 			//windows closes the console window, linux does not
