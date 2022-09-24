@@ -22,7 +22,8 @@ namespace AdventOfCode2015
 				new Day5(),
 				new Day6(),
 				new Day7(),
-				new Day8()
+				new Day8(),
+				new Day9(),
 			};
 
 			//tests
@@ -31,6 +32,11 @@ namespace AdventOfCode2015
 				{
 					days[8].AddTestInputFromFile("Day8test.txt", "12", "19");
 				}
+
+				days[9].AddTestInput(new string[] {
+					"London to Dublin = 464",
+					"London to Belfast = 518",
+					"Dublin to Belfast = 141"}, "605", "982");
 			}
 
 			////run selected
