@@ -154,38 +154,5 @@ namespace AOC
 
 			return password;
 		}
-
-
-		//Much faster than Solve()
-		//Using arrays and StringBuilder not just strings
-		private string SolveFaster(string input)
-		{
-			char[] look = input.ToCharArray();
-			StringBuilder say = new StringBuilder();
-
-			for (int i = 0; i < 60; i++)
-			{
-				for (int x = 0; x < look.Length;)
-				{
-					int count = 0;
-					int y;
-
-					for (y = x; y < look.Length; y++)
-					{
-						if (look[x] != look[y])
-							break;
-						count++;
-					}
-
-					say.Append(count.ToString() + look[x]);
-					x += count;
-				}
-
-				look = say.ToString().ToCharArray();
-				say = new StringBuilder();
-			}
-
-			return look.Length.ToString();
-		}
 	}
 }
