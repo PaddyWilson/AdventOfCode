@@ -37,12 +37,12 @@ namespace AOC
 
 			return "Your on linux. Why do you want input?";
 		}
-		public static void PrintMatrix<T>(T[,] arr, int size)
+		public static void PrintMatrix<T>(T[,] arr, int size, string delimiter = " ")
 		{
 			for (int i = 0; i < size; i++)
 			{
 				for (int j = 0; j < size; j++)
-					Console.Write(arr[i, j].ToString() + " ");
+					Console.Write(arr[i, j].ToString() + delimiter);
 				Console.Write("\n");
 			}
 			Console.Write("\n");
