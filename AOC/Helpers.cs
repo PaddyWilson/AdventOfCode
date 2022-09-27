@@ -37,5 +37,49 @@ namespace AOC
 
 			return "Your on linux. Why do you want input?";
 		}
+		public static void PrintMatrix<T>(T[,] arr, int size)
+		{
+			for (int i = 0; i < size; i++)
+			{
+				for (int j = 0; j < size; j++)
+					Console.Write(arr[i, j].ToString() + " ");
+				Console.Write("\n");
+			}
+			Console.Write("\n");
+		}
+
+		public static T[,] Rotate<T>(T[,] tile, int size)
+		{
+			T[,] output = new T[size, size];
+
+			for (int i = 0; i < size / 2; i++)
+			{
+				for (int j = 0; j < size - i - 1; j++)
+				{
+					T temp = tile[i, j];
+					output[i, j] = tile[size - 1 - j, i];
+					output[size - 1 - j, i] = tile[size - 1 - i, size - 1 - j];
+					output[size - 1 - i, size - 1 - j] = tile[j, size - 1 - i];
+					output[j, size - 1 - i] = temp;
+				}
+			}
+
+			return output;
+		}
+
+		public static T[,] FlipX<T>(T[,] tile, int size)
+		{
+			T[,] output = new T[size, size];
+
+			for (int y = 0; y < size; y++)
+			{
+				for (int x = 0; x < size; x++)
+				{
+					output[(size-1) - x, y] = tile[x, y];
+				}
+			}
+
+			return output;
+		}
 	}
 }

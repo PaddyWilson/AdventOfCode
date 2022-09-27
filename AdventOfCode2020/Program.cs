@@ -83,7 +83,7 @@ namespace AdventOfCode2020
 					days[19].AddTestInputFromFile("Day19test.txt", "2", "");
 					days[19].AddTestInputFromFile("Day19test2.txt", "3", "12");
 
-					days[20].AddTestInputFromFile("Day20test.txt", "20899048083289", "");
+					days[20].AddTestInputFromFile("Day20test.txt", "20899048083289", "273");
 
 					days[21].AddTestInputFromFile("Day21test.txt", "5", "");
 
@@ -97,7 +97,7 @@ namespace AdventOfCode2020
 			}
 
 			////run selected
-			int day = 19;
+			int day = 20;
 			Console.WriteLine("Running ");
 			days[day].RunAllSolution1Tests();
 			days[day].RunSolution1();
