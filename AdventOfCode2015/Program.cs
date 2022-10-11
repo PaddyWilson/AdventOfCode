@@ -2,6 +2,8 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
+using System.Reflection;
 using System.Runtime.InteropServices;
 
 namespace AdventOfCode2015
@@ -27,6 +29,8 @@ namespace AdventOfCode2015
 				new Day10(),
 				new Day11(),
 				new Day12(),
+				new Day13(),
+				new Day14(),
 			};
 
 			//tests
@@ -44,6 +48,8 @@ namespace AdventOfCode2015
 
 				days[11].AddTestInput(new string[] { "abcdefgh" }, "abcdffaa", "");
 				days[11].AddTestInput(new string[] { "ghijklmn" }, "ghjaabcc", "");
+
+				days[14].AddTestInputFromFile("Day14test.txt", "1120", "689");
 			}
 
 			////run selected
