@@ -31,6 +31,7 @@ namespace AdventOfCode2015
 				new Day12(),
 				new Day13(),
 				new Day14(),
+				new Day15(),
 			};
 
 			//tests
@@ -50,6 +51,7 @@ namespace AdventOfCode2015
 				days[11].AddTestInput(new string[] { "ghijklmn" }, "ghjaabcc", "");
 
 				days[14].AddTestInputFromFile("Day14test.txt", "1120", "689");
+				days[15].AddTestInputFromFile("Day15test.txt", "62842880", "57600000");
 			}
 
 			////run selected
