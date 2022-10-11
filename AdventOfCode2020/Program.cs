@@ -97,7 +97,7 @@ namespace AdventOfCode2020
 			}
 
 			////run selected
-			int day = 20;
+			int day = 21;
 			Console.WriteLine("Running ");
 			days[day].RunAllSolution1Tests();
 			days[day].RunSolution1();

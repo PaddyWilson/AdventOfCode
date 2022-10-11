@@ -6,6 +6,7 @@ using AOC;
 
 namespace AdventOfCode2020
 {
+
 	public class Day21 : BaseDay
 	{
 		public Day21()
@@ -17,59 +18,44 @@ namespace AdventOfCode2020
 
 		protected override string Solution1(string[] input)
 		{
-			Dictionary<string, Dictionary<string, int>> food = new Dictionary<string, Dictionary<string, int>>();
-			Dictionary<string, int> foodCount = new Dictionary<string, int>();
+			List<List<string>> ingredients = new List<List<string>>();
+			List<List<string>> allergens = new List<List<string>>();
+
+			Dictionary<string, List<string>> possibleAllergens = new Dictionary<string, List<string>>();
 
 			foreach (var item in input)
 			{
-				string[] data = item.Split("(contains");
+				string[] data = item.Split(" (contains ");
 
-				string[] ingredients = data[0].Split(" ");
-				string[] allergy = data[1].Split(" ");
+				string[] tempIngredients = data[0].Split(" ");
+				string[] tempAllergen = data[1].Split(" ");
 
-				foreach (var fo in ingredients)
-				{
-					if (fo.Length > 0)
-					{
-						if (!food.ContainsKey(fo))
-						{
-							food.Add(fo, new Dictionary<string, int>());
-							foodCount.Add(fo, 0);
-						}
+				ingredients.Add(new List<string>(tempIngredients));
 
-						foodCount[fo] += 1;
+				for (int i = 0; i < tempAllergen.Length; i++)
+					tempAllergen[i] = tempAllergen[i].Replace(",", "").Replace(")", "");
 
-						foreach (var al in allergy)
-						{
-							string tempAl = al.Replace(",", "").Replace(")", "");
+				allergens.Add(new List<string>(tempAllergen));
 
-							if (tempAl.Length > 0)
-							{
-								if (!food[fo].ContainsKey(tempAl))
-									food[fo].Add(tempAl, 0);
 
-								food[fo][tempAl] += 1;
-							}
-						}
-					}
-				}
 			}
 
-			int count = 0;
-
-			foreach (var item in food)
+			//add all ingredients
+			foreach (var foodList in ingredients)
 			{
-				int c = 0;
-				foreach (var al in item.Value)
+				foreach (var food in foodList)
 				{
-					if (al.Value != 1)
-					{
-						count += foodCount[item.Key];
-					}
+					if (!possibleAllergens.ContainsKey(food))
+						possibleAllergens.Add(food, new List<string>());
 				}
 			}
 
-			return count.ToString();
+			for (int i = 0; i < ingredients.Count; i++)
+			{
+
+			}
+
+			return 0.ToString();
 		}
 
 		protected override string Solution2(string[] input)
