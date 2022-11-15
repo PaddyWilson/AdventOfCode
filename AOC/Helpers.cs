@@ -81,8 +81,54 @@ namespace AOC
 
 			return output;
 		}
+
+		public static List<List<T>> GetPermutations<T>(List<T> items)
+		{
+			List<List<T>> output = new List<List<T>>();
+			List<T> itemsLeft = new List<T>(items);
+			List<T> current = new List<T>();
+
+			for (int i = itemsLeft.Count - 1; i > -1; i--)
+			{
+				T temp = itemsLeft[0];
+				current.Add(temp);
+				itemsLeft.Remove(temp);
+
+				GetPermutations(current, itemsLeft, ref output);
+
+				itemsLeft.Add(temp);
+				current.Remove(temp);
+			}
+
+			return output;
+		}
+
+		private static void GetPermutations<T>(List<T> current, List<T> itemsLeft, ref List<List<T>> output)
+		{
+			if (itemsLeft.Count == 0)
+			{
+				output.Add(new List<T>(current));
+				return;
+			}
+
+			for (int i = itemsLeft.Count - 1; i > -1; i--)
+			{
+				T temp = itemsLeft[0];
+				current.Add(temp);
+				itemsLeft.Remove(temp);
+
+				GetPermutations(current, itemsLeft, ref output);
+
+				itemsLeft.Add(temp);
+				current.Remove(temp);
+			}
+		}
+
 	}
 
+	//for using an array as dictionary key
+	// example
+	// Dictionary<int[], int> dicName = new Dictionary<int[], int>(new MyEqualityComparer());
 	public class MyEqualityComparer : IEqualityComparer<int[]>
 	{
 		public bool Equals(int[] x, int[] y)

@@ -50,17 +50,18 @@ namespace AdventOfCode2015
 				days[11].AddTestInput(new string[] { "abcdefgh" }, "abcdffaa", "");
 				days[11].AddTestInput(new string[] { "ghijklmn" }, "ghjaabcc", "");
 
+				days[13].AddTestInputFromFile("Day13test.txt", "330", "");
 				days[14].AddTestInputFromFile("Day14test.txt", "1120", "689");
 				days[15].AddTestInputFromFile("Day15test.txt", "62842880", "57600000");
 			}
 
 			////run selected
-			//int day = 0;
-			//Console.WriteLine("Running");
-			//days[day].RunAllSolution1Tests();
-			//days[day].RunSolution1();
-			//days[day].RunAllSolution2Tests();
-			//days[day].RunSolution2();
+			int day = 13;
+			Console.WriteLine("Running");
+			days[day].RunAllSolution1Tests();
+			days[day].RunSolution1();
+			days[day].RunAllSolution2Tests();
+			days[day].RunSolution2();
 
 			////run last
 			Console.WriteLine("Running Last");

@@ -62,7 +62,7 @@ namespace AdventOfCode2015
 		{
 			Day = "14";
 			Answer1 = "2640";
-			Answer2 = "-1";
+			Answer2 = "1102";
 		}
 
 		protected override string Solution1(string[] input)
