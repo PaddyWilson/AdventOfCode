@@ -48,6 +48,23 @@ namespace AOC
 			Console.Write("\n");
 		}
 
+		public static void PrintMatrix(bool[,] arr, int size, string delimiter = " ")
+		{
+			for (int i = 0; i < size; i++)
+			{
+				for (int j = 0; j < size; j++)
+				{
+					if(arr[i, j])
+						Console.Write('#'.ToString() + delimiter);
+					else
+						Console.Write('.'.ToString() + delimiter);
+
+				}
+				Console.Write("\n");
+			}
+			Console.Write("\n");
+		}
+
 		public static T[,] Rotate<T>(T[,] tile, int size)
 		{
 			T[,] output = new T[size, size];
