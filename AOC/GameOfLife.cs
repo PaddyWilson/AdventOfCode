@@ -32,11 +32,53 @@ namespace AOC
 			boardTemp = new bool[xSize, ySize];
 		}
 
+		public delegate void ProcessStepCoord((int, int) onOff, int x, int y, GameOfLife gameOfLife);
+		public event ProcessStepCoord ProcessCoord;
+		protected void OnProcessCoord((int, int) onOff, int x, int y, GameOfLife gameOfLife)
+		{
+			if (ProcessCoord != null)
+				ProcessCoord(onOff, x, y, gameOfLife);
+		}
+
+		public delegate void ProcessAfterStep(GameOfLife gameOfLife);
+		public event ProcessAfterStep ProcessStepAfter;
+		protected void OnProcessStepAfter(GameOfLife gameOfLife)
+		{
+			if (ProcessStepAfter != null)
+				ProcessStepAfter(gameOfLife);
+		}
+
 		public void Step()
 		{
-			//depends on defind rules
-			//different for each puzzle
+			for (int x = 0; x < xSize; x++)
+			{
+				for (int y = 0; y < ySize; y++)
+				{
+					(int, int) onOff = CountSurrounded(x, y);
+
+					//make a delegate for events
+					OnProcessCoord(onOff, x, y, this);
+				}
+			}
+
+			//make a delegate for callbacks
+			OnProcessStepAfter(this);
+			SwapBuffer();
 		}
+
+		public void Step(int steps, bool print = false)
+		{
+			for (int step = 0; step < steps; step++)
+			{
+				Step();
+
+				if (print)
+				{
+					Print();
+				}
+			}
+		}
+
 
 		/// <summary>
 		/// Counts surrrounding true's and false's 

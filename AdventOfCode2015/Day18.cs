@@ -31,31 +31,9 @@ namespace AOC
 			GameOfLife gameOfLife = new GameOfLife(gridSize);
 			gameOfLife.ParseInput(input);
 
-			for (int step = 0; step < stepCount; step++)
-			{
-				for (int x = 0; x < gridSize; x++)
-				{
-					for (int y = 0; y < gridSize; y++)
-					{
-						bool light = gameOfLife.board[x, y];
-						(int, int) onOff = gameOfLife.CountSurrounded(x, y);
+			gameOfLife.ProcessCoord += OnStep;
 
-						if (light)
-						{
-							if (onOff.Item1 == 2 || onOff.Item1 == 3)
-								gameOfLife.boardTemp[x, y] = true;//stay on
-							else
-								gameOfLife.boardTemp[x, y] = false; // turn off
-						}
-						else if (!light && onOff.Item1 == 3)
-						{
-							gameOfLife.boardTemp[x, y] = true;
-						}
-					}
-				}
-
-				gameOfLife.SwapBuffer();
-			}
+			gameOfLife.Step(stepCount);
 
 			//count on lights
 			return gameOfLife.CountTrue().ToString();
@@ -74,44 +52,66 @@ namespace AOC
 				stepCount = 5;
 			}
 
-			GameOfLife gameOfLife = new GameOfLife(gridSize);
-			gameOfLife.ParseInput(input);
+			GameOfLife game = new GameOfLife(gridSize);
+			game.ParseInput(input);
 
-			SetCornerLights(gameOfLife.board, gridSize);
+			game.ProcessCoord += OnStep;
+			game.ProcessStepAfter += SetCornerLights;
 
-			for (int step = 0; step < stepCount; step++)
-			{
-				for (int x = 0; x < gridSize; x++)
-				{
-					for (int y = 0; y < gridSize; y++)
-					{
-						bool light = gameOfLife.board[x, y];
-						(int, int) onOff = gameOfLife.CountSurrounded(x, y);
+			//set initial board state
+			game.board[0, 0] = true;
+			game.board[0, game.ySize - 1] = true;
+			game.board[game.xSize - 1, 0] = true;
+			game.board[game.xSize - 1, game.ySize - 1] = true;
 
-						if (light && onOff.Item1 == 2)
-							gameOfLife.boardTemp[x, y] = true;//stay on = on
-						else if (light && onOff.Item1 == 3)
-							gameOfLife.boardTemp[x, y] = true;//stay on = on
-						else if (!light && onOff.Item1 == 3)
-							gameOfLife.boardTemp[x, y] = true;//off = on
-						else
-							gameOfLife.boardTemp[x, y] = false;
-					}
-				}
-				SetCornerLights(gameOfLife.boardTemp, gridSize);
-				gameOfLife.SwapBuffer();
-			}
+			game.Step(stepCount);
+
+			//for (int step = 0; step < stepCount; step++)
+			//{
+			//	for (int x = 0; x < gridSize; x++)
+			//	{
+			//		for (int y = 0; y < gridSize; y++)
+			//		{
+			//			bool light = gameOfLife.board[x, y];
+			//			(int, int) onOff = gameOfLife.CountSurrounded(x, y);
+
+			//			if (light && onOff.Item1 == 2)
+			//				gameOfLife.boardTemp[x, y] = true;//stay on = on
+			//			else if (light && onOff.Item1 == 3)
+			//				gameOfLife.boardTemp[x, y] = true;//stay on = on
+			//			else if (!light && onOff.Item1 == 3)
+			//				gameOfLife.boardTemp[x, y] = true;//off = on
+			//			else
+			//				gameOfLife.boardTemp[x, y] = false;
+			//		}
+			//	}
+			//	SetCornerLights(gameOfLife.boardTemp, gridSize);
+			//	gameOfLife.SwapBuffer();
+			//}
 
 			//count on lights
-			return gameOfLife.CountTrue().ToString();
+			return game.CountTrue().ToString();
 		}
 
-		private void SetCornerLights(bool[,] lights, int gridsize)
+		private void OnStep((int, int) onOff, int x, int y, GameOfLife gameOfLife)
 		{
-			lights[0, 0] = true;
-			lights[0, gridsize - 1] = true;
-			lights[gridsize - 1, 0] = true;
-			lights[gridsize - 1, gridsize - 1] = true;
+			bool light = gameOfLife.board[x, y];
+			if (light && onOff.Item1 == 2)
+				gameOfLife.boardTemp[x, y] = true;//stay on = on
+			else if (light && onOff.Item1 == 3)
+				gameOfLife.boardTemp[x, y] = true;//stay on = on
+			else if (!light && onOff.Item1 == 3)
+				gameOfLife.boardTemp[x, y] = true;//off = on
+			else
+				gameOfLife.boardTemp[x, y] = false;
+		}
+
+		private void SetCornerLights(GameOfLife game)
+		{
+			game.boardTemp[0, 0] = true;
+			game.boardTemp[0, game.ySize - 1] = true;
+			game.boardTemp[game.xSize - 1, 0] = true;
+			game.boardTemp[game.xSize - 1, game.ySize - 1] = true;
 		}
 	}
 }
