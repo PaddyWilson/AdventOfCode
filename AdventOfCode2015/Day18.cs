@@ -19,197 +19,99 @@ namespace AOC
 		protected override string Solution1(string[] input)
 		{
 			//over size array by 1 radius so out of bounds are easy to handle
-			int gridSize = 100 + 2;
+			int gridSize = 100;
 			int stepCount = 100;
 
 			//TESTNG
 			if (input.Length < gridSize - 20)
 			{
-				gridSize = input.Length + 2;
+				gridSize = input.Length;
 				stepCount = 4;
 			}
-
-			bool[,] lights = new bool[gridSize, gridSize];
-			bool[,] lightsTemp = new bool[gridSize, gridSize];
-
-			int x = 1;
-			int y = 1;
-			foreach (var item in input)
-			{
-				foreach (var c in item)
-				{
-					if (c == '#')
-						lights[x, y] = true;
-					else
-						lights[x, y] = false;
-					y++;
-				}
-				x++;
-				y = 1;
-			}
-
+			GameOfLife gameOfLife = new GameOfLife(gridSize);
+			gameOfLife.ParseInput(input);
 
 			for (int step = 0; step < stepCount; step++)
 			{
-				for (x = 1; x < gridSize - 1; x++)
+				for (int x = 0; x < gridSize; x++)
 				{
-					for (y = 1; y < gridSize - 1; y++)
+					for (int y = 0; y < gridSize; y++)
 					{
-						int on = 0;
+						bool light = gameOfLife.board[x, y];
+						(int, int) onOff = gameOfLife.CountSurrounded(x, y);
 
-						//top
-						for (int i = -1; i < 2; i++)
+						if (light)
 						{
-							if (lights[x + i, y - 1])
-								on++;
-						}
-
-						//center
-						for (int i = -1; i < 2; i++)
-						{
-							if (x + i == x) continue;
-							if (lights[x + i, y])
-								on++;
-						}
-
-						//bottom
-						for (int i = -1; i < 2; i++)
-						{
-							if (lights[x + i, y + 1])
-								on++;
-						}
-
-						if (lights[x, y])
-						{
-							if (on == 2 || on == 3)
-								lightsTemp[x, y] = true;//stay on
+							if (onOff.Item1 == 2 || onOff.Item1 == 3)
+								gameOfLife.boardTemp[x, y] = true;//stay on
 							else
-								lightsTemp[x, y] = false; // turn off
+								gameOfLife.boardTemp[x, y] = false; // turn off
 						}
-						else if (!lights[x, y] && on == 3)
+						else if (!light && onOff.Item1 == 3)
 						{
-							lightsTemp[x, y] = true;
+							gameOfLife.boardTemp[x, y] = true;
 						}
 					}
 				}
 
-				Array.Copy(lightsTemp, lights, gridSize * gridSize);
+				gameOfLife.SwapBuffer();
 			}
 
 			//count on lights
-			int count = 0;
-			for (x = 1; x < gridSize - 1; x++)
-			{
-				for (y = 1; y < gridSize - 1; y++)
-				{
-					if (lights[x, y])
-						count++;
-				}
-			}
-
-			return count.ToString();
+			return gameOfLife.CountTrue().ToString();
 		}
 
 		protected override string Solution2(string[] input)
 		{
 			//over size array by 1 radius so out of bounds are easy to handle
-			int gridSize = 100 + 2;
+			int gridSize = 100;
 			int stepCount = 100;
 
 			//TESTNG
 			if (input.Length < gridSize - 20)
 			{
-				gridSize = input.Length + 2;
+				gridSize = input.Length;
 				stepCount = 5;
 			}
 
-			bool[,] lights = new bool[gridSize, gridSize];
-			bool[,] lightsTemp = new bool[gridSize, gridSize];
+			GameOfLife gameOfLife = new GameOfLife(gridSize);
+			gameOfLife.ParseInput(input);
 
-			int x = 1;
-			int y = 1;
-			foreach (var item in input)
-			{
-				foreach (var c in item)
-				{
-					if (c == '#')
-						lights[x, y] = true;
-					else
-						lights[x, y] = false;
-					y++;
-				}
-				x++;
-				y = 1;
-			}
-
-			SetCornerLights(ref lights, gridSize);
+			SetCornerLights(gameOfLife.board, gridSize);
 
 			for (int step = 0; step < stepCount; step++)
 			{
-				for (x = 1; x < gridSize - 1; x++)
+				for (int x = 0; x < gridSize; x++)
 				{
-					for (y = 1; y < gridSize - 1; y++)
+					for (int y = 0; y < gridSize; y++)
 					{
-						int on = 0;
+						bool light = gameOfLife.board[x, y];
+						(int, int) onOff = gameOfLife.CountSurrounded(x, y);
 
-						//top
-						for (int i = -1; i < 2; i++)
-						{
-							if (lights[x + i, y - 1])
-								on++;
-						}
-
-						//center
-						for (int i = -1; i < 2; i++)
-						{
-							if (x + i == x) continue;
-							if (lights[x + i, y])
-								on++;
-						}
-
-						//bottom
-						for (int i = -1; i < 2; i++)
-						{
-							if (lights[x + i, y + 1])
-								on++;
-						}
-
-						if (lights[x, y] && on == 2)
-							lightsTemp[x, y] = true;//stay on = on
-						else if (lights[x, y] && on == 3)
-							lightsTemp[x, y] = true;//stay on = on
-						else if (!lights[x, y] && on == 3)
-							lightsTemp[x, y] = true;//off = on
+						if (light && onOff.Item1 == 2)
+							gameOfLife.boardTemp[x, y] = true;//stay on = on
+						else if (light && onOff.Item1 == 3)
+							gameOfLife.boardTemp[x, y] = true;//stay on = on
+						else if (!light && onOff.Item1 == 3)
+							gameOfLife.boardTemp[x, y] = true;//off = on
 						else
-							lightsTemp[x, y] = false;
+							gameOfLife.boardTemp[x, y] = false;
 					}
 				}
-				SetCornerLights(ref lightsTemp, gridSize);
-				Array.Copy(lightsTemp, lights, gridSize * gridSize);
-
-				int l = 0;
+				SetCornerLights(gameOfLife.boardTemp, gridSize);
+				gameOfLife.SwapBuffer();
 			}
 
 			//count on lights
-			int count = 0;
-			for (x = 1; x < gridSize - 1; x++)
-			{
-				for (y = 1; y < gridSize - 1; y++)
-				{
-					if (lights[x, y])
-						count++;
-				}
-			}
-
-			return count.ToString();
+			return gameOfLife.CountTrue().ToString();
 		}
 
-		private void SetCornerLights(ref bool[,] lights, int gridsize)
+		private void SetCornerLights(bool[,] lights, int gridsize)
 		{
-			lights[1, 1] = true;
-			lights[1, gridsize - 2] = true;
-			lights[gridsize - 2, 1] = true;
-			lights[gridsize - 2, gridsize - 2] = true;
+			lights[0, 0] = true;
+			lights[0, gridsize - 1] = true;
+			lights[gridsize - 1, 0] = true;
+			lights[gridsize - 1, gridsize - 1] = true;
 		}
 	}
 }
