@@ -32,6 +32,7 @@ namespace AdventOfCode2015
 				new Day13(),
 				new Day14(),
 				new Day15(),
+				new Day16(),
 			};
 
 			//tests
@@ -45,7 +46,7 @@ namespace AdventOfCode2015
 					"London to Dublin = 464",
 					"London to Belfast = 518",
 					"Dublin to Belfast = 141"}, "605", "982");
-				//days[10].AddTestInputFromFile("day10test.txt", "312211", "");
+				days[10].AddTestInputFromFile("day10test.txt", "312211", "");
 
 				days[11].AddTestInput(new string[] { "abcdefgh" }, "abcdffaa", "");
 				days[11].AddTestInput(new string[] { "ghijklmn" }, "ghjaabcc", "");
@@ -55,20 +56,13 @@ namespace AdventOfCode2015
 				days[15].AddTestInputFromFile("Day15test.txt", "62842880", "57600000");
 			}
 
-			////run selected
-			int day = 13;
+			////run
+			int day = days.Count - 1;
 			Console.WriteLine("Running");
 			days[day].RunAllSolution1Tests();
 			days[day].RunSolution1();
 			days[day].RunAllSolution2Tests();
 			days[day].RunSolution2();
-
-			////run last
-			Console.WriteLine("Running Last");
-			days[days.Count - 1].RunAllSolution1Tests();
-			days[days.Count - 1].RunSolution1();
-			days[days.Count - 1].RunAllSolution2Tests();
-			days[days.Count - 1].RunSolution2();
 
 			////run all
 			Console.WriteLine("Running All");
