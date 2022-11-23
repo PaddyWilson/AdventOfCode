@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using System.Text;
@@ -54,7 +55,7 @@ namespace AOC
 			{
 				for (int j = 0; j < size; j++)
 				{
-					if(arr[i, j])
+					if (arr[i, j])
 						Console.Write('#'.ToString() + delimiter);
 					else
 						Console.Write('.'.ToString() + delimiter);
@@ -92,7 +93,7 @@ namespace AOC
 			{
 				for (int x = 0; x < size; x++)
 				{
-					output[(size-1) - x, y] = tile[x, y];
+					output[(size - 1) - x, y] = tile[x, y];
 				}
 			}
 
@@ -139,6 +140,45 @@ namespace AOC
 				itemsLeft.Add(temp);
 				current.Remove(temp);
 			}
+		}
+		public static bool ArrayMatch<T>(T[] array1, T[] array2)
+		{
+			int matchCount = 0;
+			int count = 0;
+
+			//cant be same different sizes
+			if (array1.Length != array2.Length) 
+				return false;
+
+			EqualityComparer<T> comparer = EqualityComparer<T>.Default;
+			for (int i = 0; i < array1.Length; i++)
+			{
+				if (comparer.Equals(array1[i], array2[i]))
+					matchCount++;
+				count++;
+			}
+
+			if (matchCount == count)
+				return true;
+			return false;
+		}
+
+		public static bool ArrayMatch<T>(T[,] array1, T[,] array2, int width, int height)
+		{
+			int matchCount = 0;
+			int count = 0;
+			EqualityComparer<T> comparer = EqualityComparer<T>.Default;
+			for (int x = 0; x < width; x++)
+				for (int y = 0; y < height; y++)
+				{
+					if (comparer.Equals(array1[x, y], array2[x, y]))
+						matchCount++;
+					count++;
+				}
+
+			if (matchCount == count)
+				return true;
+			return false;
 		}
 
 	}

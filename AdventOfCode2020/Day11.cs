@@ -1,6 +1,7 @@
 ﻿using AOC;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Text;
 using System.Threading;
 
@@ -17,304 +18,199 @@ namespace AdventOfCode2020
 
 		protected override string Solution1(string[] input)
 		{
-			char[,] seats = new char[input.Length + 2, input[0].Length + 2];
+			CellularAutomaton<char> seats = new CellularAutomaton<char>(input.Length, input[0].Length);
 
-			for (int x = 1; x <= input.Length; x++)
-				for (int y = 1; y <= input[x - 1].Length; y++)
-					seats[x, y] = input[x - 1][y - 1];
+			//parse input
+			for (int x = 0; x < seats.xSize; x++)
+				for (int y = 0; y < seats.ySize; y++)
+					seats.board[x, y] = input[x][y];
+
+			seats.possibleItems = new List<char> { 'L', '.', '#' };
+			seats.ProcessCoord += Seats_ProcessCoord;
 
 			while (true)
 			{
-				char[,] seatsTemp = new char[input.Length + 2, input[0].Length + 2];
-				Array.Copy(seats, seatsTemp, seats.Length);
+				char[,] matchingTest = new char[seats.xSize, seats.ySize];
+				//copy seats for later matching
+				Array.Copy(seats.board, matchingTest, seats.board.Length);
 
-				SearchSeats1(seats, ref seatsTemp, input.Length, input[0].Length);
+				seats.Step();
+
 				//check it the arrays match
-				if (CheckIfSeatsSame(seats, seatsTemp, input.Length, input[0].Length))
-				{
-					Array.Copy(seatsTemp, seats, seats.Length);
+				if (Helpers.ArrayMatch(seats.board, matchingTest, seats.xSize, seats.ySize))
 					break;
-				}
-
-				Array.Copy(seatsTemp, seats, seats.Length);
-				//PrintSeats(seats, input.Length + 2, input[0].Length + 2);
 			}
 
 			//count occupied seats
-			int output = 0;
-			for (int x = 1; x <= input.Length; x++)
-				for (int y = 1; y <= input[x - 1].Length; y++)
-					if (seats[x, y] == '#')
-						output++;
-
-			return output.ToString();
+			return seats.CountItems()['#'].ToString();
 		}
 
-		private bool CheckIfSeatsSame(char[,] seatsInput, char[,] seatsOutput, int width, int height)
+		private void Seats_ProcessCoord(Dictionary<char, int> surrounded, int x, int y, CellularAutomaton<char> ca)
 		{
-			int seatCount = 0;
-			int c = 0;
-			for (int x = 1; x <= width; x++)
-				for (int y = 1; y <= height; y++)
-				{
-					if (seatsInput[x, y] == seatsOutput[x, y])
-						seatCount++;
-					c++;
-				}
-
-			if (seatCount == c)
-				return true;
-			return false;
-		}
-
-		private void SearchSeats1(char[,] seatsInput, ref char[,] seatsOutput, int width, int height)
-		{
-			for (int x = 1; x <= width; x++)
-			{
-				for (int y = 1; y <= height; y++)
-				{
-					int taken = 0;
-					int empty = 0;
-
-					for (int i = -1; i < 2; i++)
-					{
-						if (seatsInput[x + i, y - 1] == 'L')
-							empty++;
-						if (seatsInput[x + i, y - 1] == '#')
-							taken++;
-					}
-
-					for (int i = -1; i < 2; i++)
-					{
-						if (x + i == x) continue;
-						if (seatsInput[x + i, y] == 'L')
-							empty++;
-						if (seatsInput[x + i, y] == '#')
-							taken++;
-					}
-
-					for (int i = -1; i < 2; i++)
-					{
-						if (seatsInput[x + i, y + 1] == 'L')
-							empty++;
-						if (seatsInput[x + i, y + 1] == '#')
-							taken++;
-					}
-
-					if (seatsInput[x, y] == 'L' && taken == 0)
-						seatsOutput[x, y] = '#';
-
-					else if (seatsInput[x, y] == '#' && taken >= 4)
-						seatsOutput[x, y] = 'L';
-
-				}
-			}
-		}
-
-		private void PrintSeats(char[,] seats, int xV, int yV)
-		{
-			for (int x = 0; x < xV; x++)
-			{
-				for (int y = 0; y < yV; y++)
-				{
-					Console.Write(seats[x, y]);
-				}
-				Console.WriteLine();
-			}
-			Console.WriteLine();
+			if (ca.board[x, y] == 'L' && surrounded['#'] == 0)
+				ca.boardTemp[x, y] = '#';
+			else if (ca.board[x, y] == '#' && surrounded['#'] >= 4)
+				ca.boardTemp[x, y] = 'L';
+			else
+				ca.boardTemp[x, y] = ca.board[x, y];
 		}
 
 		protected override string Solution2(string[] input)
 		{
-			char[,] seats = new char[input.Length + 2, input[0].Length + 2];
+			CellularAutomaton<char> seats = new CellularAutomaton<char>(input.Length, input[0].Length);
 
-			for (int x = 1; x <= input.Length; x++)
-				for (int y = 1; y <= input[x - 1].Length; y++)
-					seats[x, y] = input[x - 1][y - 1];
+			////parse input
+			for (int x = 0; x < seats.xSize; x++)
+				for (int y = 0; y < seats.ySize; y++)
+					seats.board[x, y] = input[x][y];
+
+			seats.possibleItems = new List<char> { 'L', '.', '#' };
+			seats.ProcessCoord += Seats_ProcessCoord2;
 
 			while (true)
 			{
-				char[,] seatsTemp = new char[input.Length + 2, input[0].Length + 2];
-				Array.Copy(seats, seatsTemp, seats.Length);
+				char[,] matchingTest = new char[seats.xSize, seats.ySize];
+				//copy seats for later matching
+				Array.Copy(seats.board, matchingTest, seats.board.Length);
 
-				SearchSeats2(seats, ref seatsTemp, input.Length, input[0].Length);
+				seats.Step();
 				//check it the arrays match
-				if (CheckIfSeatsSame(seats, seatsTemp, input.Length, input[0].Length))
-				{
-					Array.Copy(seatsTemp, seats, seats.Length);
+				if (Helpers.ArrayMatch(seats.board, matchingTest, seats.xSize, seats.ySize))
 					break;
-				}
-
-				Array.Copy(seatsTemp, seats, seats.Length);
-				//PrintSeats(seats, input.Length + 2, input[0].Length + 2);
 			}
 
 			//count occupied seats
-			int output = 0;
-			for (int x = 1; x <= input.Length; x++)
-				for (int y = 1; y <= input[x - 1].Length; y++)
-					if (seats[x, y] == '#')
-						output++;
-
-			return output.ToString();
+			return seats.CountItems()['#'].ToString();
 		}
 
-		private void SearchSeats2(char[,] seatsInput, ref char[,] seatsOutput, int width, int height)
+		private void Seats_ProcessCoord2(Dictionary<char, int> surrounded, int x, int y, CellularAutomaton<char> ca)
 		{
-			for (int x = 1; x <= width; x++)
+			int taken = 0;
+			int empty = 0;
+
+			//up
+			for (int i = y - 1; i >= 0; i--)
 			{
-				for (int y = 1; y <= height; y++)
+				if (ca.board[x, i] == 'L')
 				{
-					int taken = 0;
-					int empty = 0;
-
-					//up
-					int count = 1;
-					while (true)
-					{
-						if (y - count == 0) break;
-						if (seatsInput[x, y - count] == 'L')
-						{
-							empty++;
-							break;
-						}
-						if (seatsInput[x, y - count] == '#')
-						{
-							taken++;
-							break;
-						}
-						count++;
-					}
-					//down
-					count = 1;
-					while (true)
-					{
-						if (y + count == height + 1) break;
-						if (seatsInput[x, y + count] == 'L')
-						{
-							empty++;
-							break;
-						}
-						if (seatsInput[x, y + count] == '#')
-						{
-							taken++;
-							break;
-						}
-						count++;
-					}
-
-					//left
-					count = 1;
-					while (true)
-					{
-						if (x - count == 0) break;
-						if (seatsInput[x - count, y] == 'L')
-						{
-							empty++;
-							break;
-						}
-						if (seatsInput[x - count, y] == '#')
-						{
-							taken++;
-							break;
-						}
-						count++;
-					}
-					//right
-					count = 1;
-					while (true)
-					{
-						if (x + count == width + 1) break;
-						if (seatsInput[x + count, y] == 'L')
-						{
-							empty++;
-							break;
-						}
-						if (seatsInput[x + count, y] == '#')
-						{
-							taken++;
-							break;
-						}
-						count++;
-					}
-
-					//left up
-					count = 1;
-					while (true)
-					{
-						if (x - count == 0 || y - count == 0) break;
-						if (seatsInput[x - count, y - count] == 'L')
-						{
-							empty++;
-							break;
-						}
-						if (seatsInput[x - count, y - count] == '#')
-						{
-							taken++;
-							break;
-						}
-						count++;
-					}
-					//right up
-					count = 1;
-					while (true)
-					{
-						if (x - count == 0 || y + count == height + 1) break;
-						if (seatsInput[x - count, y + count] == 'L')
-						{
-							empty++;
-							break;
-						}
-						if (seatsInput[x - count, y + count] == '#')
-						{
-							taken++;
-							break;
-						}
-						count++;
-					}
-
-					//right down
-					count = 1;
-					while (true)
-					{
-						if (x + count == width + 1 || y + count == height + 1) break;
-						if (seatsInput[x + count, y + count] == 'L')
-						{
-							empty++;
-							break;
-						}
-						if (seatsInput[x + count, y + count] == '#')
-						{
-							taken++;
-							break;
-						}
-						count++;
-					}
-					//left down
-					count = 1;
-					while (true)
-					{
-						if (x + count == width + 1 || y - count == 0) break;
-						if (seatsInput[x + count, y - count] == 'L')
-						{
-							empty++;
-							break;
-						}
-						if (seatsInput[x + count, y - count] == '#')
-						{
-							taken++;
-							break;
-						}
-						count++;
-					}
-
-					if (seatsInput[x, y] == 'L' && taken == 0)
-						seatsOutput[x, y] = '#';
-					else if (seatsInput[x, y] == '#' && taken >= 5)
-						seatsOutput[x, y] = 'L';
-
+					empty++;
+					break;
+				}
+				if (ca.board[x, i] == '#')
+				{
+					taken++;
+					break;
 				}
 			}
+			//down
+			for (int i = y + 1; i < ca.ySize; i++)
+			{
+				if (ca.board[x, i] == 'L')
+				{
+					empty++;
+					break;
+				}
+				if (ca.board[x, i] == '#')
+				{
+					taken++;
+					break;
+				}
+			}
+			//left
+			for (int i = x-1; i >= 0; i--)
+			{
+				if (ca.board[i, y] == 'L')
+				{
+					empty++;
+					break;
+				}
+				if (ca.board[i, y] == '#')
+				{
+					taken++;
+					break;
+				}
+			}
+			//right
+			for (int i = x + 1; i < ca.xSize; i++)
+			{
+				if (ca.board[i, y] == 'L')
+				{
+					empty++;
+					break;
+				}
+				if (ca.board[i, y] == '#')
+				{
+					taken++;
+					break;
+				}
+			}			
+			//left up
+			for (int i = 1; i < ca.xSize + ca.ySize; i++)
+			{
+				if (!ca.Inbounds(x - i, y - i)) break;
+				if (ca.board[x - i, y - i] == 'L')
+				{
+					empty++;
+					break;
+				}
+				if (ca.board[x - i, y - i] == '#')
+				{
+					taken++;
+					break;
+				}
+			}
+			//right up
+			for (int i = 1; i < ca.xSize + ca.ySize; i++)
+			{
+				if (!ca.Inbounds(x - i, y + i)) break;
+				if (ca.board[x - i, y + i] == 'L')
+				{
+					empty++;
+					break;
+				}
+				if (ca.board[x - i, y + i] == '#')
+				{
+					taken++;
+					break;
+				}
+			}
+			//right down
+			for (int i = 1; i < ca.xSize + ca.ySize; i++)
+			{
+				if (!ca.Inbounds(x + i, y + i)) break;
+				if (ca.board[x + i, y + i] == 'L')
+				{
+					empty++;
+					break;
+				}
+				if (ca.board[x + i, y + i] == '#')
+				{
+					taken++;
+					break;
+				}
+			}
+			//left down
+			for (int i = 1; i < ca.xSize + ca.ySize; i++)
+			{
+				if (!ca.Inbounds(x + i, y - i)) break;
+				if (ca.board[x + i, y - i] == 'L')
+				{
+					empty++;
+					break;
+				}
+				if (ca.board[x + i, y - i] == '#')
+				{
+					taken++;
+					break;
+				}
+			}
+
+			if (ca.board[x, y] == 'L' && taken == 0)
+				ca.boardTemp[x, y] = '#';
+			else if (ca.board[x, y] == '#' && taken >= 5)
+				ca.boardTemp[x, y] = 'L';
+			else
+				ca.boardTemp[x, y] = ca.board[x, y];
 		}
 	}
 }
