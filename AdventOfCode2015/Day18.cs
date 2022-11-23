@@ -18,7 +18,6 @@ namespace AOC
 
 		protected override string Solution1(string[] input)
 		{
-			//over size array by 1 radius so out of bounds are easy to handle
 			int gridSize = 100;
 			int stepCount = 100;
 
@@ -28,20 +27,23 @@ namespace AOC
 				gridSize = input.Length;
 				stepCount = 4;
 			}
-			GameOfLife gameOfLife = new GameOfLife(gridSize);
-			gameOfLife.ParseInput(input);
 
-			gameOfLife.ProcessCoord += OnStep;
+			CellularAutomaton<bool> game = new CellularAutomaton<bool>(gridSize);
+			//gameOfLife.ParseInput(input);
+			Parse(input, game);
+			
+			game.possibleItems = new List<bool> { true, false };
 
-			gameOfLife.Step(stepCount);
+			game.ProcessCoord += OnStep;
+
+			game.Step(stepCount);
 
 			//count on lights
-			return gameOfLife.CountTrue().ToString();
+			return game.CountItems()[true].ToString();
 		}
 
 		protected override string Solution2(string[] input)
 		{
-			//over size array by 1 radius so out of bounds are easy to handle
 			int gridSize = 100;
 			int stepCount = 100;
 
@@ -52,10 +54,14 @@ namespace AOC
 				stepCount = 5;
 			}
 
-			GameOfLife game = new GameOfLife(gridSize);
-			game.ParseInput(input);
+			CellularAutomaton<bool> game = new CellularAutomaton<bool>(gridSize);
+			//game.ParseInput(input);
 
-			game.ProcessCoord += OnStep;
+			Parse(input, game);
+
+			game.possibleItems = new List<bool> { true, false };
+
+			game.ProcessCoord += OnStep;			
 			game.ProcessStepAfter += SetCornerLights;
 
 			//set initial board state
@@ -66,52 +72,48 @@ namespace AOC
 
 			game.Step(stepCount);
 
-			//for (int step = 0; step < stepCount; step++)
-			//{
-			//	for (int x = 0; x < gridSize; x++)
-			//	{
-			//		for (int y = 0; y < gridSize; y++)
-			//		{
-			//			bool light = gameOfLife.board[x, y];
-			//			(int, int) onOff = gameOfLife.CountSurrounded(x, y);
-
-			//			if (light && onOff.Item1 == 2)
-			//				gameOfLife.boardTemp[x, y] = true;//stay on = on
-			//			else if (light && onOff.Item1 == 3)
-			//				gameOfLife.boardTemp[x, y] = true;//stay on = on
-			//			else if (!light && onOff.Item1 == 3)
-			//				gameOfLife.boardTemp[x, y] = true;//off = on
-			//			else
-			//				gameOfLife.boardTemp[x, y] = false;
-			//		}
-			//	}
-			//	SetCornerLights(gameOfLife.boardTemp, gridSize);
-			//	gameOfLife.SwapBuffer();
-			//}
-
 			//count on lights
-			return game.CountTrue().ToString();
+			return game.CountItems()[true].ToString();
 		}
 
-		private void OnStep((int, int) onOff, int x, int y, GameOfLife gameOfLife)
+		private void OnStep(Dictionary<bool, int> surrounded, int x, int y, CellularAutomaton<bool> game)
 		{
-			bool light = gameOfLife.board[x, y];
-			if (light && onOff.Item1 == 2)
-				gameOfLife.boardTemp[x, y] = true;//stay on = on
-			else if (light && onOff.Item1 == 3)
-				gameOfLife.boardTemp[x, y] = true;//stay on = on
-			else if (!light && onOff.Item1 == 3)
-				gameOfLife.boardTemp[x, y] = true;//off = on
+			bool light = game.board[x, y];
+			if (light && surrounded[true] == 2)
+				game.boardTemp[x, y] = true;//stay on = on
+			else if (light && surrounded[true] == 3)
+				game.boardTemp[x, y] = true;//stay on = on
+			else if (!light && surrounded[true] == 3)
+				game.boardTemp[x, y] = true;//off = on
 			else
-				gameOfLife.boardTemp[x, y] = false;
+				game.boardTemp[x, y] = false;
 		}
 
-		private void SetCornerLights(GameOfLife game)
+		private void SetCornerLights(CellularAutomaton<bool> game)
 		{
 			game.boardTemp[0, 0] = true;
 			game.boardTemp[0, game.ySize - 1] = true;
 			game.boardTemp[game.xSize - 1, 0] = true;
 			game.boardTemp[game.xSize - 1, game.ySize - 1] = true;
+		}
+
+		private void Parse(string[] input, CellularAutomaton<bool> game)
+		{
+			int x = 0;
+			int y = 0;
+			foreach (var item in input)
+			{
+				foreach (var c in item)
+				{
+					if (c == '#')
+						game.board[x, y] = true;
+					else
+						game.board[x, y] = false;
+					y++;
+				}
+				x++;
+				y = 0;
+			}
 		}
 	}
 }
