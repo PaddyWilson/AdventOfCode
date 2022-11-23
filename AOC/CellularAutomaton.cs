@@ -35,28 +35,28 @@ namespace AOC
 			boardTemp = new T[xSize, ySize];
 		}
 
-		public delegate void ProcessStepCoord(Dictionary<T, int> surrounded, int x, int y, CellularAutomaton<T> gameOfLife);
+		public delegate void ProcessStepCoord(Dictionary<T, int> surrounded, int x, int y, CellularAutomaton<T> ca);
 		public event ProcessStepCoord ProcessCoord;
-		protected void OnProcessCoord(Dictionary<T, int> surrounded, int x, int y, CellularAutomaton<T> gameOfLife)
+		protected void OnProcessCoord(Dictionary<T, int> surrounded, int x, int y, CellularAutomaton<T> ca)
 		{
 			if (ProcessCoord != null)
-				ProcessCoord(surrounded, x, y, gameOfLife);
+				ProcessCoord(surrounded, x, y, ca);
 		}
 
-		public delegate void ProcessAfterStep(CellularAutomaton<T> gameOfLife);
+		public delegate void ProcessAfterStep(CellularAutomaton<T> ca);
 		public event ProcessAfterStep ProcessStepAfter;
-		protected void OnProcessStepAfter(CellularAutomaton<T> gameOfLife)
+		protected void OnProcessStepAfter(CellularAutomaton<T> ca)
 		{
 			if (ProcessStepAfter != null)
-				ProcessStepAfter(gameOfLife);
+				ProcessStepAfter(ca);
 		}
 
-		public delegate void ProcessBeforeStep(CellularAutomaton<T> gameOfLife);
+		public delegate void ProcessBeforeStep(CellularAutomaton<T> ca);
 		public event ProcessBeforeStep ProcessStepBefore;
-		protected void OnProcessStepBefore(CellularAutomaton<T> gameOfLife)
+		protected void OnProcessStepBefore(CellularAutomaton<T> ca)
 		{
 			if (ProcessStepBefore != null)
-				ProcessStepBefore(gameOfLife);
+				ProcessStepBefore(ca);
 		}
 
 		public void Step()
