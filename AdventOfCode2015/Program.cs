@@ -37,6 +37,7 @@ namespace AdventOfCode2015
 				new Day18(),
 				new Day19(),
 				new Day20(),
+				new Day21(),
 			};
 
 			//tests
@@ -104,7 +105,7 @@ namespace AdventOfCode2015
 			int day = days.Count - 1;
 			Console.WriteLine("Running");
 			days[day].RunAllSolution1Tests();
-			//days[day].RunSolution1();
+			days[day].RunSolution1();
 			days[day].RunAllSolution2Tests();
 			days[day].RunSolution2();
 
