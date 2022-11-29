@@ -69,8 +69,8 @@ namespace AOC
 					if (ints[i].Item1 == houseNumber && ints[i].Item2 <= 50)
 						pres += i * 11;
 				}
-				if (houseNumber % 1000 == 0)
-					Console.WriteLine(houseNumber + ":" + pres);// + "=" + string.Join(',', ints));
+				//if (houseNumber % 1000 == 0)
+				//	Console.WriteLine(houseNumber + ":" + pres);// + "=" + string.Join(',', ints));
 
 				if (pres >= highest)
 					return houseNumber.ToString();

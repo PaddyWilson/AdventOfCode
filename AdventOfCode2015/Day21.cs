@@ -20,9 +20,9 @@ namespace AOC
 			int bDamage = int.Parse(input[1].Split(' ')[1]);
 			int bArmor = int.Parse(input[2].Split(' ')[1]);
 
-			List<Item> weapons = Item.GetWeapons();
-			List<Item> armor = Item.GetArmor();
-			List<Item> rings = Item.GetRings();
+			List<RPGItem> weapons = RPGItem.GetWeapons();
+			List<RPGItem> armor = RPGItem.GetArmor();
+			List<RPGItem> rings = RPGItem.GetRings();
 
 			int lowestCost = int.MaxValue;
 
@@ -34,9 +34,9 @@ namespace AOC
 					{
 						foreach (var lring in rings)
 						{
-							Attacker boss = new Attacker(bHP, bDamage, bArmor);
+							RPGAttacker boss = new RPGAttacker(bHP, bDamage, bArmor);
 
-							Attacker player = new Attacker(100, 0, 0);
+							RPGAttacker player = new RPGAttacker(100, 0, 0);
 							player.IWeapon = weapon;
 							player.IArmor = arm;
 							player.RRing = rring;
@@ -77,9 +77,9 @@ namespace AOC
 			int bDamage = int.Parse(input[1].Split(' ')[1]);
 			int bArmor = int.Parse(input[2].Split(' ')[1]);
 
-			List<Item> weapons = Item.GetWeapons();
-			List<Item> armor = Item.GetArmor();
-			List<Item> rings = Item.GetRings();
+			List<RPGItem> weapons = RPGItem.GetWeapons();
+			List<RPGItem> armor = RPGItem.GetArmor();
+			List<RPGItem> rings = RPGItem.GetRings();
 
 			int highestCost = int.MinValue;
 
@@ -91,9 +91,9 @@ namespace AOC
 					{
 						foreach (var lring in rings)
 						{
-							Attacker boss = new Attacker(bHP, bDamage, bArmor);
+							RPGAttacker boss = new RPGAttacker(bHP, bDamage, bArmor);
 
-							Attacker player = new Attacker(100, 0, 0);
+							RPGAttacker player = new RPGAttacker(100, 0, 0);
 							player.IWeapon = weapon;
 							player.IArmor = arm;
 							player.RRing = rring;
@@ -129,7 +129,7 @@ namespace AOC
 		}
 	}
 
-	public class Attacker
+	public class RPGAttacker
 	{
 		public int HP { get; set; }
 		public int Damage { get; set; }
@@ -137,12 +137,12 @@ namespace AOC
 
 		public int MinimumDamage { get; private set; }
 
-		public Item IWeapon { get; set; }
-		public Item IArmor { get; set; }
-		public Item RRing { get; set; }
-		public Item LRing { get; set; }
+		public RPGItem IWeapon { get; set; }
+		public RPGItem IArmor { get; set; }
+		public RPGItem RRing { get; set; }
+		public RPGItem LRing { get; set; }
 
-		public Attacker(int hp, int damage, int armor)
+		public RPGAttacker(int hp, int damage, int armor)
 		{
 			this.HP = hp;
 			this.Damage = damage;
@@ -150,13 +150,13 @@ namespace AOC
 
 			MinimumDamage = 1;// minDamage;
 
-			IWeapon = new Item();
-			IArmor = new Item();
-			RRing = new Item();
-			LRing = new Item();
+			IWeapon = new RPGItem();
+			IArmor = new RPGItem();
+			RRing = new RPGItem();
+			LRing = new RPGItem();
 		}
 
-		public int Attack(Attacker attack)
+		public int Attack(RPGAttacker attack)
 		{
 			int damage = GetTotalDamage() - attack.GetTotalArmor();
 
@@ -189,20 +189,20 @@ namespace AOC
 		}
 	}
 
-	public enum ItemTypes
+	public enum RPGItemTypes
 	{
 		NoItem, Weapon, Armor, Ring
 	}
-	public class Item
+	public class RPGItem
 	{
 		//ItemTypes are not really needed
-		public ItemTypes Type { get; set; }
+		public RPGItemTypes Type { get; set; }
 		public string Name { get; set; }
 		public int Cost { get; set; }
 		public int Damage { get; set; }
 		public int Armor { get; set; }
 
-		public Item(ItemTypes type, string name, int cost, int damage, int armor)
+		public RPGItem(RPGItemTypes type, string name, int cost, int damage, int armor)
 		{
 			Type = type;
 			Name = name;
@@ -211,48 +211,48 @@ namespace AOC
 			Armor = armor;
 		}
 
-		public Item()
+		public RPGItem()
 		{
-			Type = ItemTypes.NoItem;
+			Type = RPGItemTypes.NoItem;
 			Name = "NO";
 			Cost = 0;
 			Damage = 0;
 			Armor = 0;
 		}
 
-		public static List<Item> GetWeapons()
+		public static List<RPGItem> GetWeapons()
 		{
-			List<Item> weapons = new List<Item> {
-				new Item(ItemTypes.Weapon, "Dagger"     , 8, 4, 0),
-				new Item(ItemTypes.Weapon, "Shortsword" , 10, 5, 0),
-				new Item(ItemTypes.Weapon, "Warhammer"  , 25, 6, 0),
-				new Item(ItemTypes.Weapon, "Longsword"  , 40, 7, 0),
-				new Item(ItemTypes.Weapon, "Greataxe"   , 74, 8, 0),
+			List<RPGItem> weapons = new List<RPGItem> {
+				new RPGItem(RPGItemTypes.Weapon, "Dagger"     , 8, 4, 0),
+				new RPGItem(RPGItemTypes.Weapon, "Shortsword" , 10, 5, 0),
+				new RPGItem(RPGItemTypes.Weapon, "Warhammer"  , 25, 6, 0),
+				new RPGItem(RPGItemTypes.Weapon, "Longsword"  , 40, 7, 0),
+				new RPGItem(RPGItemTypes.Weapon, "Greataxe"   , 74, 8, 0),
 			};
 			return weapons;
 		}
-		public static List<Item> GetArmor()
+		public static List<RPGItem> GetArmor()
 		{
-			List<Item> armor = new List<Item> {
-				new Item(),
-				new Item(ItemTypes.Armor, "Leather"     , 13, 0, 1),
-				new Item(ItemTypes.Armor, "Chainmail"   , 31, 0, 2),
-				new Item(ItemTypes.Armor, "Splintmail"  , 53, 0, 3),
-				new Item(ItemTypes.Armor, "Bradedmail"  , 75, 0, 4),
-				new Item(ItemTypes.Armor, "Platemail"   , 102, 0, 5),
+			List<RPGItem> armor = new List<RPGItem> {
+				new RPGItem(),
+				new RPGItem(RPGItemTypes.Armor, "Leather"     , 13, 0, 1),
+				new RPGItem(RPGItemTypes.Armor, "Chainmail"   , 31, 0, 2),
+				new RPGItem(RPGItemTypes.Armor, "Splintmail"  , 53, 0, 3),
+				new RPGItem(RPGItemTypes.Armor, "Bradedmail"  , 75, 0, 4),
+				new RPGItem(RPGItemTypes.Armor, "Platemail"   , 102, 0, 5),
 			};
 			return armor;
 		}
-		public static List<Item> GetRings()
+		public static List<RPGItem> GetRings()
 		{
-			List<Item> rings = new List<Item> {
-				new Item(ItemTypes.Ring, "no"    ,0, 0, 0),
-				new Item(ItemTypes.Ring, "Damage +1"    , 25, 1, 0),
-				new Item(ItemTypes.Ring, "Damage +2"    , 50, 2, 0),
-				new Item(ItemTypes.Ring, "Damage +3"    , 100, 3, 0),
-				new Item(ItemTypes.Ring, "Defense +1"   , 20, 0, 1),
-				new Item(ItemTypes.Ring, "Defense +2"   , 40, 0, 2),
-				new Item(ItemTypes.Ring, "Defense +3"   , 80, 0, 3),
+			List<RPGItem> rings = new List<RPGItem> {
+				new RPGItem(RPGItemTypes.Ring, "no"    ,0, 0, 0),
+				new RPGItem(RPGItemTypes.Ring, "Damage +1"    , 25, 1, 0),
+				new RPGItem(RPGItemTypes.Ring, "Damage +2"    , 50, 2, 0),
+				new RPGItem(RPGItemTypes.Ring, "Damage +3"    , 100, 3, 0),
+				new RPGItem(RPGItemTypes.Ring, "Defense +1"   , 20, 0, 1),
+				new RPGItem(RPGItemTypes.Ring, "Defense +2"   , 40, 0, 2),
+				new RPGItem(RPGItemTypes.Ring, "Defense +3"   , 80, 0, 3),
 			};
 			return rings;
 		}
