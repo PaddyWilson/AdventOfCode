@@ -13,7 +13,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AdventOfCode2021", "AdventO
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AdventOfCode2015", "AdventOfCode2015\AdventOfCode2015.csproj", "{F83E332A-9268-4EB0-8F33-F0E2E9D49E38}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "Tests\Tests.csproj", "{688283BB-6C93-4371-99B6-42F93D623EE1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tests", "Tests\Tests.csproj", "{688283BB-6C93-4371-99B6-42F93D623EE1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdventOfCode2022", "AdventOfCode2022\AdventOfCode2022.csproj", "{64DAE5C9-F979-4149-8B53-1CEE297DA584}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -71,6 +73,14 @@ Global
 		{688283BB-6C93-4371-99B6-42F93D623EE1}.Release|Any CPU.Build.0 = Release|Any CPU
 		{688283BB-6C93-4371-99B6-42F93D623EE1}.Release|x64.ActiveCfg = Release|Any CPU
 		{688283BB-6C93-4371-99B6-42F93D623EE1}.Release|x64.Build.0 = Release|Any CPU
+		{64DAE5C9-F979-4149-8B53-1CEE297DA584}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{64DAE5C9-F979-4149-8B53-1CEE297DA584}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{64DAE5C9-F979-4149-8B53-1CEE297DA584}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{64DAE5C9-F979-4149-8B53-1CEE297DA584}.Debug|x64.Build.0 = Debug|Any CPU
+		{64DAE5C9-F979-4149-8B53-1CEE297DA584}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{64DAE5C9-F979-4149-8B53-1CEE297DA584}.Release|Any CPU.Build.0 = Release|Any CPU
+		{64DAE5C9-F979-4149-8B53-1CEE297DA584}.Release|x64.ActiveCfg = Release|Any CPU
+		{64DAE5C9-F979-4149-8B53-1CEE297DA584}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
