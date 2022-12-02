@@ -7,7 +7,7 @@ BaseDay.InputDir = Path.Combine(Directory.GetCurrentDirectory(), "Input", BaseDa
 List<BaseDay> days = new List<BaseDay>() {
 	new Day0(),
 	new Day1(),
-	//new Day2(),
+	new Day2(),
 	//new Day3(),
 	//new Day4(),
 	//new Day5(),
@@ -35,7 +35,7 @@ List<BaseDay> days = new List<BaseDay>() {
 
 //tests
 {
-	//days[1].AddTestInputFromFile("Day8test.txt", "12", "19");
+	days[2].AddTestInput(new string[] { "A Y", "B X", "C Z" }, "15", "12");
 }
 
 ////run
