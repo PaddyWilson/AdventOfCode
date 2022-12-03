@@ -12,7 +12,7 @@ namespace AdventOfCode2020
 		public Day21()
 		{
 			Day = "21";
-			Answer1 = "0";
+			Answer1 = "-1";
 			Answer2 = "0";
 		}
 
