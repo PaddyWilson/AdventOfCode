@@ -1,5 +1,4 @@
-﻿// See https://aka.ms/new-console-template for more information
-using AOC;
+﻿using AOC;
 
 BaseDay.Year = "2022";
 BaseDay.InputDir = Path.Combine(Directory.GetCurrentDirectory(), "Input", BaseDay.Year + Path.DirectorySeparatorChar.ToString());
@@ -38,6 +37,11 @@ List<BaseDay> days = new List<BaseDay>() {
 	days[2].AddTestInput(new string[] { "A Y", "B X", "C Z" }, "15", "12");
 	days[3].AddTestInputFromFile("Day3test.txt", "157", "70");
 	days[4].AddTestInputFromFile("Day4test.txt", "2", "4");
+
+	//test very large community made input files for day 5
+	days[5].AddTestInputFromFile("aoc_2022_day05_message.txt", "CHRISTMAS", "GREETINGS");
+	days[5].AddTestInputFromFile("aoc_2022_day05_large_input.txt", "GATHERING", "DEVSCHUUR");
+	//days[5].AddTestInputFromFile("aoc_2022_day05_large_input-2.txt", "KERSTBOOM", "HENKLEEFT");
 }
 
 ////run
