@@ -4,13 +4,13 @@ BaseDay.Year = "2022";
 BaseDay.InputDir = Path.Combine(Directory.GetCurrentDirectory(), "Input", BaseDay.Year + Path.DirectorySeparatorChar.ToString());
 
 List<BaseDay> days = new List<BaseDay>() {
-	new Day0(),
+	new Day6(),
 	new Day1(),
 	new Day2(),
 	new Day3(),
 	new Day4(),
 	new Day5(),
-	//new Day6(),
+	new Day6(),
 	//new Day7(),
 	//new Day8(),
 	//new Day9(),
