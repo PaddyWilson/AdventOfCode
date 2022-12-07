@@ -11,7 +11,7 @@ List<BaseDay> days = new List<BaseDay>() {
 	new Day4(),
 	new Day5(),
 	new Day6(),
-	//new Day7(),
+	new Day7(),
 	//new Day8(),
 	//new Day9(),
 	//new Day10(),
@@ -42,6 +42,8 @@ List<BaseDay> days = new List<BaseDay>() {
 	days[5].AddTestInputFromFile("aoc_2022_day05_message.txt", "CHRISTMAS", "GREETINGS");
 	days[5].AddTestInputFromFile("aoc_2022_day05_large_input.txt", "GATHERING", "DEVSCHUUR");
 	//days[5].AddTestInputFromFile("aoc_2022_day05_large_input-2.txt", "KERSTBOOM", "HENKLEEFT");
+
+	days[7].AddTestInputFromFile("day7test.txt", "95437", "24933642");
 }
 
 ////run
