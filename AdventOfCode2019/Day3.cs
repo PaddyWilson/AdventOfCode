@@ -88,7 +88,7 @@ namespace AdventOfCode2019
             int[,] w1 = PlaceWires(wire1, gridSize);
             int[,] w2 = PlaceWires(wire2, gridSize);
 
-            int lowest = int.MaxValue - 1;
+            //int lowest = int.MaxValue - 1;
 
             //find intersections of wires add to list
             List<int> intersects = new List<int>();

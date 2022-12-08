@@ -33,11 +33,11 @@ namespace AdventOfCode2020
 			int highest = 0;
 			foreach (var ticket in input)
 			{
-				int rowL = 0;
-				int rowH = 127;
+				//int rowL = 0;
+				//int rowH = 127;
 
-				int colL = 0;
-				int colH = 7;
+				//int colL = 0;
+				//int colH = 7;
 				SeatRow(seats, 0, 127, ticket, 0, ref x, ref y);
 			}
 

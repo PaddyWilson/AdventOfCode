@@ -8,24 +8,24 @@ namespace AOC
 {
 	public class ElfDirectory
 	{
-		public string name { get; set; }
-		public ElfDirectory parentDir { get; set; }
-		public Dictionary<string, ElfDirectory> subDir { get; set; }
-		public Dictionary<string, int> files { get; set; }
+		public string Name { get; set; }
+		public ElfDirectory ParentDir { get; set; }
+		public Dictionary<string, ElfDirectory> SubDir { get; set; }
+		public Dictionary<string, int> Files { get; set; }
 
 		public ElfDirectory(string name)
 		{
-			this.name = name;
-			subDir = new Dictionary<string, ElfDirectory>();
-			files = new Dictionary<string, int>();
-			parentDir = this;//parent dir is its self
+			this.Name = name;
+			SubDir = new Dictionary<string, ElfDirectory>();
+			Files = new Dictionary<string, int>();
+			ParentDir = this;//parent dir is its self
 		}
 		public ElfDirectory(string name, ElfDirectory parent)
 		{
-			this.name = name;
-			subDir = new Dictionary<string, ElfDirectory>();
-			files = new Dictionary<string, int>();
-			parentDir = parent;
+			this.Name = name;
+			SubDir = new Dictionary<string, ElfDirectory>();
+			Files = new Dictionary<string, int>();
+			ParentDir = parent;
 		}
 
 		public int GetDirSize()
@@ -40,9 +40,9 @@ namespace AOC
 		{
 			int size = 0;
 
-			foreach (var item in dir.files)
+			foreach (var item in dir.Files)
 				size += item.Value;
-			foreach (var item in dir.subDir)
+			foreach (var item in dir.SubDir)
 				size += GetDirSize(item.Value);
 
 			return size;
@@ -51,22 +51,22 @@ namespace AOC
 		public ElfDirectory AddDirectory(string name)
 		{
 			if (name == "..")
-				return parentDir;
+				return ParentDir;
 
-			if (!subDir.ContainsKey(name))
-				subDir.Add(name, new ElfDirectory(name, this));
+			if (!SubDir.ContainsKey(name))
+				SubDir.Add(name, new ElfDirectory(name, this));
 
-			return subDir[name];
+			return SubDir[name];
 		}
 
 		internal void AddFile(string name, int size)
 		{
-			files.Add(name, size);
+			Files.Add(name, size);
 		}
 
 		public bool IsEmpty()
 		{
-			return (files.Count == 0 && subDir.Count == 0);
+			return (Files.Count == 0 && SubDir.Count == 0);
 		}
 
 	}
@@ -97,7 +97,7 @@ namespace AOC
 
 			int freeSpace = availableSpace - usedSpace;
 
-			List<int> dirSizes = new List<int>();
+			List<int> dirSizes = new();
 			GetSizeOfAllDirs(root, dirSizes, freeSpace);
 
 			dirSizes.Sort();
@@ -120,7 +120,7 @@ namespace AOC
 			if (sizeT <= 100000)
 				size += sizeT;
 
-			foreach (var item in dir.subDir)
+			foreach (var item in dir.SubDir)
 				size += GetDirSizeSub100000(item.Value);
 
 			return size;
@@ -130,13 +130,13 @@ namespace AOC
 		{
 			sizeList.Add(dir.GetDirSize());
 
-			foreach (var item in dir.subDir)
+			foreach (var item in dir.SubDir)
 				GetSizeOfAllDirs(item.Value, sizeList, minimunSpace);
 		}
 
 		private ElfDirectory Parse(string[] input)
 		{
-			ElfDirectory root = new ElfDirectory("root");
+			ElfDirectory root = new("root");
 
 			ElfDirectory currentDir = root;
 
