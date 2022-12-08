@@ -46,6 +46,9 @@ List<BaseDay> days = new List<BaseDay>() {
 	days[7].AddTestInputFromFile("day7test.txt", "95437", "24933642");
 	//large test file , errors with a stack overflow 
 	//days[7].AddTestInputFromFile("aoc_2022_day07_deep.txt", "0", "0");
+
+
+	days[8].AddTestInputFromFile("day8test.txt", "21", "8");
 }
 
 ////run
