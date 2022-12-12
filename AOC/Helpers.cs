@@ -48,6 +48,16 @@ namespace AOC
 			}
 			Console.Write("\n");
 		}
+		public static void PrintMatrix<T>(T[,] arr, int x, int y, string delimiter = " ")
+		{
+			for (int i = 0; i < x; i++)
+			{
+				for (int j = 0; j < y; j++)
+					Console.Write(arr[i, j].ToString() + delimiter);
+				Console.Write("\n");
+			}
+			Console.Write("\n");
+		}
 
 		public static void PrintMatrix(bool[,] arr, int size, string delimiter = " ")
 		{
@@ -147,7 +157,7 @@ namespace AOC
 			int count = 0;
 
 			//cant be same different sizes
-			if (array1.Length != array2.Length) 
+			if (array1.Length != array2.Length)
 				return false;
 
 			EqualityComparer<T> comparer = EqualityComparer<T>.Default;
