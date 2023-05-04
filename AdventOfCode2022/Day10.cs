@@ -78,7 +78,7 @@ namespace AOC
 			}
 			//prints out the answer
 			Console.WriteLine();
-			Helpers.PrintMatrix(grid, 6, 40);
+			Helpers.PrintMatrix(grid, 6, 40, 0);
 
 			return signalStrength.ToString();
 		}

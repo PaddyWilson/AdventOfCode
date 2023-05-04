@@ -12,7 +12,7 @@ namespace AOC
 		{
 			Day = "9";
 			Answer1 = "5960";
-			Answer2 = "0";
+			Answer2 = "2327";
 		}
 
 		protected override string Solution1(string[] input)
@@ -43,12 +43,10 @@ namespace AOC
 
 				for (int i = 0; i < amount; i++)
 				{
-					var headTemp = head;//pos tail will move it not in range
+					//var headTemp = head;//pos tail will move it not in range
 					head = (head.Item1 + moveWay.Item1, head.Item2 + moveWay.Item2);
 
-					//tail out of range
-					if (!IsTouching(head, tail))
-						tail = headTemp;
+					tail = MoveTail(head, tail);
 
 					tailTouched.TryAdd(tail, true);
 				}
@@ -86,19 +84,11 @@ namespace AOC
 
 				for (int i = 0; i < amount; i++)
 				{
-					var headTemp = positions[0];//pos tail will move it not in range
+					//var headTemp = head;//pos tail will move it not in range
 					positions[0] = (positions[0].Item1 + moveWay.Item1, positions[0].Item2 + moveWay.Item2);
 
-					//check other rope positions
 					for (int j = 1; j < positions.Count; j++)
-					{
-						var t = positions[j];
-						//var
-
-						//tail out of range
-						//if (!IsTouching(positions[j - 1], positions[j]))
-							//tail = headTemp;
-					}
+						positions[j] = MoveTail(positions[j - 1], positions[j]);
 
 					tailTouched.TryAdd(positions[^1], true);
 				}
@@ -107,19 +97,27 @@ namespace AOC
 			return tailTouched.Count.ToString();
 		}
 
-		private bool IsTouching((int, int) head, (int, int) tail)
+		private (int, int) MoveTail((int, int) head, (int, int) tail)
 		{
 			if (head == tail)
-				return true;
+				return tail;
 
 			var x = head.Item1 - tail.Item1;
 			var y = head.Item2 - tail.Item2;
 
-			if (x > 1 || x < -1)
-				return false;
-			if (y > 1 || y < -1)
-				return false;
-			return true;
+			if (x <= 1 && x >= -1 && y <= 1 && y >= -1)
+				return tail;
+
+			x = tail.Item1;
+			y = tail.Item2;
+
+			if (head.Item1 > tail.Item1) x++;
+			if (head.Item1 < tail.Item1) x--;
+
+			if (head.Item2 > tail.Item2) y++;
+			if (head.Item2 < tail.Item2) y--;
+
+			return (x, y);
 		}
 
 	}

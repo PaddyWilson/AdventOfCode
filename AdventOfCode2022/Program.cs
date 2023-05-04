@@ -16,7 +16,7 @@ List<BaseDay> days = new List<BaseDay>() {
 	new Day9(),
 	new Day10(),
 	new Day11(),
-	//new Day12(),
+	new Day12(),
 	//new Day13(),
 	//new Day14(),
 	//new Day15(),
@@ -50,6 +50,7 @@ List<BaseDay> days = new List<BaseDay>() {
 	days[8].AddTestInputFromFile("day8test.txt", "21", "8");
 	days[10].AddTestInputFromFile("day10test.txt", "13140", "");
 	days[11].AddTestInputFromFile("day11test.txt", "10605", "2713310158");
+	days[12].AddTestInputFromFile("day12test.txt", "31", "29");
 }
 
 ////run

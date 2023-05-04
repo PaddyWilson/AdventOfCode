@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using System.Runtime.InteropServices;
 using System.Text;
 
@@ -57,6 +58,40 @@ namespace AOC
 				Console.Write("\n");
 			}
 			Console.Write("\n");
+		}
+
+		public static void PrintMatrix<T>(T[,] arr, int x, int y, int padding = 0)
+		{
+			for (int i = 0; i < x; i++)
+			{
+				for (int j = 0; j < y; j++)
+				{
+					string output = string.Format(arr[i, j].ToString() + " ");
+					Console.Write(output.PadLeft(padding));
+				}
+				Console.Write("\n");
+			}
+			Console.Write("\n");
+		}
+
+		public static void PrintMatrixToFile<T>(string filename, T[,] arr, int x, int y, int padding = 0)
+		{
+			if (!File.Exists(filename))
+				File.Create(filename);
+
+			string outputToFile = "";
+			for (int i = 0; i < x; i++)
+			{
+				for (int j = 0; j < y; j++)
+				{
+					string output = string.Format(arr[i, j].ToString() + " ");
+					outputToFile += output.PadLeft(padding);
+				}
+				outputToFile += "\n";
+			}
+			//outputToFile += "\n\r";
+
+			File.WriteAllText(filename, outputToFile);
 		}
 
 		public static void PrintMatrix(bool[,] arr, int size, string delimiter = " ")
