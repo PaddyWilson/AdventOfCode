@@ -61,7 +61,7 @@ namespace AOC
 			MapDistance(map, ref distance, size, start);
 
 			//Helpers.PrintMatrix(CombineArrays(map, distance, (size.X, size.Y)), size.X, size.Y, 4);
-		Helpers.PrintMatrixToFile("day12test map dump.txt", CombineArrays(map, distance, (size.X, size.Y)), size.X, size.Y, 4);
+		//Helpers.PrintMatrixToFile("day12test map dump.txt", CombineArrays(map, distance, (size.X, size.Y)), size.X, size.Y, 4);
 			return distance[end.X, end.Y].ToString();
 		}
 		protected override string Solution2(string[] input)
