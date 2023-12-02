@@ -72,31 +72,11 @@ namespace AdventOfCode2023
                     if (first == 0)
                     {
                         first = FindNumber(s, i);
-
-                        //for (int j = '1'; j < '9' + 1; j++)
-                        //{
-                        //    if (s[i] == j)
-                        //    {
-                        //        first = j - 48;
-                        //    }
-                        //    else 
-                        //    {
-
-                        //    }
-                        //}
                     }
 
                     if (last == 0)
                     {
                         last = FindNumber(s, s.Length - 1 - i);
-
-                        //for (int j = '1'; j < '9' + 1; j++)
-                        //{
-                        //    if (s[s.Length - 1 - i] == j)
-                        //    {
-                        //        last = j - 48;
-                        //    }
-                        //}
                     }
                 }
 
