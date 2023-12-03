@@ -52,6 +52,19 @@ List<BaseDay> days = new List<BaseDay>() {
         "Game 5: 6 red, 1 blue, 3 green; 2 blue, 1 red, 2 green",
          }, "8", "2286");
 
+    days[2].AddTestInput(new string[] {
+        "467..114..",
+        "...*......",
+        "..35..633.",
+        "......#...",
+        "617*......",
+        ".....+.58.",
+        "..592.....",
+        "......755.",
+        "...$.*....",
+        ".664.598.."
+         }, "4361", "467835");
+
     //days[2].AddTestInput(new string[] { "A Y", "B X", "C Z" }, "15", "12");
     //days[3].AddTestInputFromFile("Day3test.txt", "157", "70");
     //days[4].AddTestInputFromFile("Day4test.txt", "2", "4");
