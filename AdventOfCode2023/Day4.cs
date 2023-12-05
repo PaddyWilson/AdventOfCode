@@ -36,6 +36,7 @@ namespace AdventOfCode2023
             private void Calculate()
             {
                 int score = 0;
+                matching = 0;
                 foreach (int i in winningNumber)
                 {
                     if (yourNumbers.Contains(i))
@@ -48,7 +49,6 @@ namespace AdventOfCode2023
                     }
                 }
                 this.score = score;
-                matching++;
             }
         }
 
