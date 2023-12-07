@@ -11,7 +11,7 @@ List<BaseDay> days = new List<BaseDay>() {
     new Day4(),
     new Day5(),
     new Day6(),
-    //new Day7(),
+    new Day7(),
     //new Day8(),
     //new Day9(),
     //new Day10(),
@@ -80,6 +80,35 @@ List<BaseDay> days = new List<BaseDay>() {
         "Time:      7  15   30",
         "Distance:  9  40  200",
          }, "288", "71503");
+
+    days[6].AddTestInput(new string[] {
+        "32T3K 765",
+        "T55J5 684",
+        "KK677 28",
+        "KTJJT 220",
+        "QQQJA 483",
+         }, "6440", "5905"); 
+    days[6].AddTestInput(new string[] {
+        "2345A 1",
+        "Q2KJJ 13",
+        "Q2Q2Q 19",
+        "T3T3J 17",
+        "T3Q33 11",
+        "2345J 3",
+        "J345A 2",
+        "32T3K 5",
+        "T55J5 29",
+        "KK677 7",
+        "KTJJT 34",
+        "QQQJA 31",
+        "JJJJJ 37",
+        "JAAAA 43",
+        "AAAAJ 59",
+        "AAAAA 61",
+        "2AAAA 23",
+        "2JJJJ 53",
+        "JJJJ2 41",
+         }, "6592", "6839");
 
     //days[2].AddTestInput(new string[] { "A Y", "B X", "C Z" }, "15", "12");
     //days[3].AddTestInputFromFile("Day3test.txt", "157", "70");
