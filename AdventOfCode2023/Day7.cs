@@ -1,7 +1,9 @@
 ﻿using AOC;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.Metrics;
 using System.Linq;
+using System.Reflection.Metadata;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -19,10 +21,8 @@ namespace AdventOfCode2023
 
         static Dictionary<char, int> cardStrength = new Dictionary<char, int>()
         {
-            {'A', 13}, {'K', 12}, {'Q', 11}, {'J', 10},
-            {'T', 9}, {'9', 8}, {'8', 7}, {'7', 6},
-            {'6', 5}, {'5', 4}, {'4', 3}, {'3', 2},
-            {'2', 1},
+            {'A', 13}, {'K', 12}, {'Q', 11}, {'J', 10}, {'T', 9}, {'9', 8}, {'8', 7},
+            {'7', 6}, {'6', 5}, {'5', 4}, {'4', 3}, {'3', 2}, {'2', 1}
         };
 
         enum HandType { Five, Four, FullHouse, Three, TwoPair, OnePair, HighCard }
@@ -31,9 +31,7 @@ namespace AdventOfCode2023
         {
             public string cards = "";
             public int bet;
-
             public HandType type;
-            public int value;
 
             public bool IsHigher(Hand hand2)
             {
@@ -41,7 +39,6 @@ namespace AdventOfCode2023
                 {
                     if (cards[i] == hand2.cards[i])
                         continue;
-
                     return cardStrength[cards[i]] > cardStrength[hand2.cards[i]];
                 }
                 return false;
@@ -52,8 +49,6 @@ namespace AdventOfCode2023
         {
             cardStrength['J'] = 10;
             Dictionary<HandType, List<Hand>> hands = new();
-            //List<Hand> cards = new();
-
             foreach (string card in input)
             {
                 var t = card.Split(' ');
@@ -68,43 +63,14 @@ namespace AdventOfCode2023
                 hands[hand.type].Add(hand);
             }
 
-            List<Hand> ordered = new();
-            if (hands.ContainsKey(HandType.HighCard))
-                ordered.AddRange(Sort(hands[HandType.HighCard]));
-
-            if (hands.ContainsKey(HandType.OnePair))
-                ordered.AddRange(Sort(hands[HandType.OnePair]));
-
-            if (hands.ContainsKey(HandType.TwoPair))
-                ordered.AddRange(Sort(hands[HandType.TwoPair]));
-
-            if (hands.ContainsKey(HandType.Three))
-                ordered.AddRange(Sort(hands[HandType.Three]));
-
-            if (hands.ContainsKey(HandType.FullHouse))
-                ordered.AddRange(Sort(hands[HandType.FullHouse]));
-
-            if (hands.ContainsKey(HandType.Four))
-                ordered.AddRange(Sort(hands[HandType.Four]));
-
-            if (hands.ContainsKey(HandType.Five))
-                ordered.AddRange(Sort(hands[HandType.Five]));
-
-            int output = 0;
-
-            for (int i = 0; i < ordered.Count; i++)
-                output += (i + 1) * ordered[i].bet;
-
-            return output.ToString();
+            return CalculateOutout(hands).ToString();
         }
 
         protected override string Solution2(string[] input)
         {
             //Jacks are now the lowest strength card
             cardStrength['J'] = 0;
-
             Dictionary<HandType, List<Hand>> hands = new();
-
             foreach (string card in input)
             {
                 var t = card.Split(' ');
@@ -119,33 +85,78 @@ namespace AdventOfCode2023
                 hands[hand.type].Add(hand);
             }
 
+            return CalculateOutout(hands).ToString();
+        }
+
+        HandType GetHandType(string hand)
+        {
+            Dictionary<char, int> matchingCardCounts = new();
+            foreach (var item in hand)
+            {
+                if (!matchingCardCounts.ContainsKey(item))
+                    matchingCardCounts.Add(item, 0);
+                matchingCardCounts[item]++;
+            }
+
+            List<int> count = matchingCardCounts.Values.ToList();
+            count.Sort();
+            count.Reverse();
+
+            if (count[0] == 5)
+                return HandType.Five;
+            if (count[0] == 4)
+                return HandType.Four;
+            if (count[0] == 3 && count[1] == 2)
+                return HandType.FullHouse;
+            if (count[0] == 3 && count[1] == 1)
+                return HandType.Three;
+            if (count[0] == 2 && count[1] == 2)
+                return HandType.TwoPair;
+            if (count[0] == 2 && count[1] == 1)
+                return HandType.OnePair;
+            return HandType.HighCard;
+        }
+
+        HandType GetHandTypePart2(string hand)
+        {
+            Dictionary<char, int> matchingCardCounts = new();
+            foreach (var item in hand)
+            {
+                if (!matchingCardCounts.ContainsKey(item))
+                    matchingCardCounts.Add(item, 0);
+                matchingCardCounts[item]++;
+            }
+
+            //Jacks are wild cards
+            matchingCardCounts.Remove('J');
+            var count = matchingCardCounts.ToList();
+
+            if (count.Count == 0)
+                return HandType.Five;
+
+            //get char to raplace 'J' with. the one with the most counted char
+            var replacementChar = matchingCardCounts.ToList().OrderByDescending(t => t.Value).First().Key;
+            hand = hand.Replace('J', replacementChar);
+
+            return GetHandType(hand);
+        }
+
+        int CalculateOutout(Dictionary<HandType, List<Hand>> hands)
+        {
+            var handTypes = Enum.GetValues(typeof(HandType)).Cast<HandType>().ToList(); ;
+            handTypes.Reverse();
+
             List<Hand> ordered = new();
-            if (hands.ContainsKey(HandType.HighCard))
-                ordered.AddRange(Sort(hands[HandType.HighCard]));
-
-            if (hands.ContainsKey(HandType.OnePair))
-                ordered.AddRange(Sort(hands[HandType.OnePair]));
-
-            if (hands.ContainsKey(HandType.TwoPair))
-                ordered.AddRange(Sort(hands[HandType.TwoPair]));
-
-            if (hands.ContainsKey(HandType.Three))
-                ordered.AddRange(Sort(hands[HandType.Three]));
-
-            if (hands.ContainsKey(HandType.FullHouse))
-                ordered.AddRange(Sort(hands[HandType.FullHouse]));
-
-            if (hands.ContainsKey(HandType.Four))
-                ordered.AddRange(Sort(hands[HandType.Four]));
-
-            if (hands.ContainsKey(HandType.Five))
-                ordered.AddRange(Sort(hands[HandType.Five]));
+            foreach (var handType in handTypes)
+            {
+                if (hands.ContainsKey(handType))
+                    ordered.AddRange(Sort(hands[handType]));
+            }
 
             int output = 0;
             for (int i = 0; i < ordered.Count; i++)
                 output += (i + 1) * ordered[i].bet;
-
-            return output.ToString();
+            return output;
         }
 
         List<Hand> Sort(List<Hand> hands)
@@ -157,9 +168,7 @@ namespace AdventOfCode2023
                 for (int i = 1; i < hands.Count; i++)
                 {
                     if (lowest.IsHigher(hands[i]))
-                    {
                         lowest = hands[i];
-                    }
                 }
                 hands.Remove(lowest);
                 ordered.Add(lowest);
@@ -167,220 +176,223 @@ namespace AdventOfCode2023
             return ordered;
         }
 
-        HandType GetHandType(string hand)
-        {
-            Dictionary<char, int> counts = new();
+        //Old Way
 
-            foreach (var item in hand)
-            {
-                if (!counts.ContainsKey(item))
-                    counts.Add(item, 0);
-                counts[item]++;
-            }
+        //HandType GetHandType(string hand)
+        //{
+        //    Dictionary<char, int> counts = new();
 
-            List<int> count = new List<int>();
-            foreach (var item in counts)
-                count.Add(item.Value);
+        //    foreach (var item in hand)
+        //    {
+        //        if (!counts.ContainsKey(item))
+        //            counts.Add(item, 0);
+        //        counts[item]++;
+        //    }
 
-            // 5 or 4 of kind
-            foreach (var item in count)
-            {
-                if (item == 5)
-                    return HandType.Five;
-                if (item == 4)
-                    return HandType.Four;
-            }
+        //    List<int> count = new List<int>();
+        //    foreach (var item in counts)
+        //        count.Add(item.Value);
 
-            //full house
-            for (int i = 0; i < count.Count; i++)
-            {
-                if (count[i] == 2)
-                    for (int j = i + 1; j < count.Count; j++)
-                        if (count[j] == 3)
-                            return HandType.FullHouse;
+        //    // 5 or 4 of kind
+        //    foreach (var item in count)
+        //    {
+        //        if (item == 5)
+        //            return HandType.Five;
+        //        if (item == 4)
+        //            return HandType.Four;
+        //    }
 
-                if (count[i] == 3)
-                    for (int j = i + 1; j < count.Count; j++)
-                        if (count[j] == 2)
-                            return HandType.FullHouse;
-            }
+        //    //full house
+        //    for (int i = 0; i < count.Count; i++)
+        //    {
+        //        if (count[i] == 2)
+        //            for (int j = i + 1; j < count.Count; j++)
+        //                if (count[j] == 3)
+        //                    return HandType.FullHouse;
 
-            //3 of kind
-            foreach (var item in count)
-            {
-                if (item == 3)
-                    return HandType.Three;
-            }
+        //        if (count[i] == 3)
+        //            for (int j = i + 1; j < count.Count; j++)
+        //                if (count[j] == 2)
+        //                    return HandType.FullHouse;
+        //    }
 
-            //two pair
-            for (int i = 0; i < count.Count; i++)
-            {
-                if (count[i] == 2)
-                    for (int j = i + 1; j < count.Count; j++)
-                        if (count[j] == 2)
-                            return HandType.TwoPair;
-            }
+        //    //3 of kind
+        //    foreach (var item in count)
+        //    {
+        //        if (item == 3)
+        //            return HandType.Three;
+        //    }
 
-            //one pair
-            for (int i = 0; i < count.Count; i++)
-            {
-                if (count[i] == 2)
-                    return HandType.OnePair;
-            }
+        //    //two pair
+        //    for (int i = 0; i < count.Count; i++)
+        //    {
+        //        if (count[i] == 2)
+        //            for (int j = i + 1; j < count.Count; j++)
+        //                if (count[j] == 2)
+        //                    return HandType.TwoPair;
+        //    }
 
-            //high card
-            return HandType.HighCard;
-        }
-        HandType GetHandTypePart2(string hand)
-        {
-            Dictionary<char, int> counts = new();
-            foreach (var item in hand)
-            {
-                if (!counts.ContainsKey(item))
-                    counts.Add(item, 0);
-                counts[item]++;
-            }
+        //    //one pair
+        //    for (int i = 0; i < count.Count; i++)
+        //    {
+        //        if (count[i] == 2)
+        //            return HandType.OnePair;
+        //    }
 
-            //Jacks are wild cards
-            int JackCount = 0;
-            if (counts.ContainsKey('J'))
-            {
-                JackCount = counts['J'];
-                counts.Remove('J');
-            }
+        //    //high card
+        //    return HandType.HighCard;
+        //}
 
-            List<int> count = new List<int>();
-            foreach (var item in counts)
-                count.Add(item.Value);
+        //HandType GetHandTypePart2(string hand)
+        //{
+        //    Dictionary<char, int> counts = new();
+        //    foreach (var item in hand)
+        //    {
+        //        if (!counts.ContainsKey(item))
+        //            counts.Add(item, 0);
+        //        counts[item]++;
+        //    }
 
-            if (JackCount == 5)
-                return HandType.Five;
+        //    //Jacks are wild cards
+        //    int JackCount = 0;
+        //    if (counts.ContainsKey('J'))
+        //    {
+        //        JackCount = counts['J'];
+        //        counts.Remove('J');
+        //    }
 
-            // 5 of kind : done
-            foreach (var item in count)
-            {
-                if (item == 5)
-                    return HandType.Five;
-                for (int jack = 1; jack <= JackCount; jack++)
-                {
-                    if (item + jack == 5)
-                        return HandType.Five;
-                }
-            }
+        //    List<int> count = new List<int>();
+        //    foreach (var item in counts)
+        //        count.Add(item.Value);
 
-            // 4 of kind : done
-            foreach (var item in count)
-            {
-                if (item == 4)
-                    return HandType.Four;
+        //    if (JackCount == 5)
+        //        return HandType.Five;
 
-                for (int jack = 1; jack <= JackCount; jack++)
-                {
-                    if (item + jack == 4)
-                        return HandType.Four;
-                }
-            }
+        //    // 5 of kind : done
+        //    foreach (var item in count)
+        //    {
+        //        if (item == 5)
+        //            return HandType.Five;
+        //        for (int jack = 1; jack <= JackCount; jack++)
+        //        {
+        //            if (item + jack == 5)
+        //                return HandType.Five;
+        //        }
+        //    }
 
-            //full house
-            for (int i = 0; i < count.Count; i++)
-            {
-                if (count[i] == 2)
-                    for (int j = i + 1; j < count.Count; j++)
-                        if (count[j] == 3)
-                            return HandType.FullHouse;
+        //    // 4 of kind : done
+        //    foreach (var item in count)
+        //    {
+        //        if (item == 4)
+        //            return HandType.Four;
 
-                if (count[i] == 3)
-                    for (int j = i + 1; j < count.Count; j++)
-                        if (count[j] == 2)
-                            return HandType.FullHouse;
+        //        for (int jack = 1; jack <= JackCount; jack++)
+        //        {
+        //            if (item + jack == 4)
+        //                return HandType.Four;
+        //        }
+        //    }
 
-                for (int jack = 1; jack <= JackCount; jack++)
-                {
-                    int remainJack = JackCount - jack;
+        //    //full house
+        //    for (int i = 0; i < count.Count; i++)
+        //    {
+        //        if (count[i] == 2)
+        //            for (int j = i + 1; j < count.Count; j++)
+        //                if (count[j] == 3)
+        //                    return HandType.FullHouse;
 
-                    if (count[i] + jack == 2)
-                        for (int j = i + 1; j < count.Count; j++)
-                        {
-                            if (count[j] == 3)
-                                return HandType.FullHouse;
+        //        if (count[i] == 3)
+        //            for (int j = i + 1; j < count.Count; j++)
+        //                if (count[j] == 2)
+        //                    return HandType.FullHouse;
 
-                            for (int k = 1; k <= remainJack; k++)
-                            {
-                                int remainJack2 = remainJack - k;
-                                if (count[j] + remainJack2 == 3)
-                                    return HandType.FullHouse;
-                            }
-                        }
+        //        for (int jack = 1; jack <= JackCount; jack++)
+        //        {
+        //            int remainJack = JackCount - jack;
 
-                    if (count[i] + jack == 3)
-                        for (int j = i + 1; j < count.Count; j++)
-                        {
-                            if (count[j] == 2)
-                                return HandType.FullHouse;
+        //            if (count[i] + jack == 2)
+        //                for (int j = i + 1; j < count.Count; j++)
+        //                {
+        //                    if (count[j] == 3)
+        //                        return HandType.FullHouse;
 
-                            for (int k = 1; k <= remainJack; k++)
-                            {
-                                int remainJack2 = remainJack - k;
-                                if (count[j] + remainJack2 == 2)
-                                    return HandType.FullHouse;
-                            }
-                        }
-                }
-            }
+        //                    for (int k = 1; k <= remainJack; k++)
+        //                    {
+        //                        int remainJack2 = remainJack - k;
+        //                        if (count[j] + remainJack2 == 3)
+        //                            return HandType.FullHouse;
+        //                    }
+        //                }
 
-            //3 of kind : done
-            foreach (var item in count)
-            {
-                if (item == 3)
-                    return HandType.Three;
+        //            if (count[i] + jack == 3)
+        //                for (int j = i + 1; j < count.Count; j++)
+        //                {
+        //                    if (count[j] == 2)
+        //                        return HandType.FullHouse;
 
-                for (int jack = 1; jack <= JackCount; jack++)
-                {
-                    if (item + jack == 3)
-                        return HandType.Three;
-                }
-            }
+        //                    for (int k = 1; k <= remainJack; k++)
+        //                    {
+        //                        int remainJack2 = remainJack - k;
+        //                        if (count[j] + remainJack2 == 2)
+        //                            return HandType.FullHouse;
+        //                    }
+        //                }
+        //        }
+        //    }
 
-            //two pair
-            for (int i = 0; i < count.Count; i++)
-            {
-                if (count[i] == 2)
-                    for (int j = i + 1; j < count.Count; j++)
-                        if (count[j] == 2)
-                            return HandType.TwoPair;
+        //    //3 of kind : done
+        //    foreach (var item in count)
+        //    {
+        //        if (item == 3)
+        //            return HandType.Three;
 
-                for (int jack = 1; jack <= count.Count; jack++)
-                {
-                    int remainJack = JackCount - jack;
-                    if (count[i] + jack == 2)
-                        for (int j = i + 1; j < count.Count; j++)
-                        {
-                            for (int k = 1; k <= remainJack; k++)
-                            {
-                                int remainJack2 = remainJack - k;
-                                if (count[j] + remainJack2 == 2)
-                                    return HandType.TwoPair;
-                            }
-                        }
-                }
-            }
+        //        for (int jack = 1; jack <= JackCount; jack++)
+        //        {
+        //            if (item + jack == 3)
+        //                return HandType.Three;
+        //        }
+        //    }
 
-            //one pair
-            for (int i = 0; i < count.Count; i++)
-            {
-                if (count[i] == 2)
-                    return HandType.OnePair;
+        //    //two pair
+        //    for (int i = 0; i < count.Count; i++)
+        //    {
+        //        if (count[i] == 2)
+        //            for (int j = i + 1; j < count.Count; j++)
+        //                if (count[j] == 2)
+        //                    return HandType.TwoPair;
 
-                for (int jack = 1; jack <= JackCount; jack++)
-                {
-                    int remainJack = JackCount - jack;
-                    if (count[i] + jack == 2)
-                        return HandType.OnePair;
-                }
-            }
+        //        for (int jack = 1; jack <= count.Count; jack++)
+        //        {
+        //            int remainJack = JackCount - jack;
+        //            if (count[i] + jack == 2)
+        //                for (int j = i + 1; j < count.Count; j++)
+        //                {
+        //                    for (int k = 1; k <= remainJack; k++)
+        //                    {
+        //                        int remainJack2 = remainJack - k;
+        //                        if (count[j] + remainJack2 == 2)
+        //                            return HandType.TwoPair;
+        //                    }
+        //                }
+        //        }
+        //    }
 
-            //high card
-            return HandType.HighCard;
-        }
+        //    //one pair
+        //    for (int i = 0; i < count.Count; i++)
+        //    {
+        //        if (count[i] == 2)
+        //            return HandType.OnePair;
+
+        //        for (int jack = 1; jack <= JackCount; jack++)
+        //        {
+        //            int remainJack = JackCount - jack;
+        //            if (count[i] + jack == 2)
+        //                return HandType.OnePair;
+        //        }
+        //    }
+
+        //    //high card
+        //    return HandType.HighCard;
+        //}
     }
 }
