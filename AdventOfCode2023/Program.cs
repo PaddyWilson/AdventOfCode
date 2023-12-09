@@ -13,7 +13,7 @@ List<BaseDay> days = new List<BaseDay>() {
     new Day6(),
     new Day7(),
     new Day8(),
-    //new Day9(),
+    new Day9(),
     //new Day10(),
     //new Day11(),
     //new Day12(),
@@ -142,6 +142,12 @@ List<BaseDay> days = new List<BaseDay>() {
         "22Z = (22B, 22B)",
         "XXX = (XXX, XXX)",
          }, "", "6");
+
+    days[8].AddTestInput(new string[] {
+        "0 3 6 9 12 15",
+        "1 3 6 10 15 21",
+        "10 13 16 21 30 45",
+         }, "114", "2");
 
     //days[2].AddTestInput(new string[] { "A Y", "B X", "C Z" }, "15", "12");
     //days[3].AddTestInputFromFile("Day3test.txt", "157", "70");
