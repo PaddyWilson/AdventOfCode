@@ -14,7 +14,7 @@ List<BaseDay> days = new List<BaseDay>() {
     new Day7(),
     new Day8(),
     new Day9(),
-    //new Day10(),
+    new Day10(),
     //new Day11(),
     //new Day12(),
 	//new Day13(),
@@ -148,6 +148,47 @@ List<BaseDay> days = new List<BaseDay>() {
         "1 3 6 10 15 21",
         "10 13 16 21 30 45",
          }, "114", "2");
+
+    days[9].AddTestInput(new string[] {
+        ".....",
+        ".S-7.",
+        ".|.|.",
+        ".L-J.",
+        ".....",
+         }, "4", "");
+
+    days[9].AddTestInput(new string[] {
+        "..F7.",
+        ".FJ|.",
+        "SJ.L7",
+        "|F--J",
+        "LJ...",
+         }, "8", "");
+
+    days[9].AddTestInput(new string[] {
+        "...........",
+        ".S-------7.",
+        ".|F-----7|.",
+        ".||.....||.",
+        ".||.....||.",
+        ".|L-7.F-J|.",
+        ".|..|.|..|.",
+        ".L--J.L--J.",
+        "...........",
+         }, "", "4");
+
+    days[9].AddTestInput(new string[] {
+        ".F----7F7F7F7F-7....",
+        ".|F--7||||||||FJ....",
+        ".||.FJ||||||||L7....",
+        "FJL7L7LJLJ||LJ.L-7..",
+        "L--J.L7...LJS7F-7L7.",
+        "....F-J..F7FJ|L7L7L7",
+        "....L7.F7||L7|.L7L7|",
+        ".....|FJLJ|FJ|F7|.LJ",
+        "....FJL-7.||.||||...",
+        "....L---J.LJ.LJLJ...",
+         }, "", "8");
 
     //days[2].AddTestInput(new string[] { "A Y", "B X", "C Z" }, "15", "12");
     //days[3].AddTestInputFromFile("Day3test.txt", "157", "70");
