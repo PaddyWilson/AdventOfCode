@@ -221,7 +221,7 @@ namespace AOC
 				//char currentChar = map[cur.X, cur.Y];
 
 				//find lowest distance
-				int dis = -1;
+				//int dis = -1;
 
 				char curChar = map[current.X, current.Y];
 				char pastchar = map[startPoint.X, startPoint.Y];

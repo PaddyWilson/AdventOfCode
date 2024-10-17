@@ -33,9 +33,6 @@ namespace AOC
 			timer.Start();
 			string output = Solution1(Input);
 			timer.Stop();
-
-			if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
-    			Console.ForegroundColor = ConsoleColor.Black;
 			
 			if ((output == Answer1))
 				Console.BackgroundColor = ConsoleColor.DarkGreen;
@@ -58,9 +55,6 @@ namespace AOC
 			timer.Start();
 			string output = Solution1(input);
 			timer.Stop();
-
-			if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
-    			Console.ForegroundColor = ConsoleColor.Black;
 			
 			if ((output == answer))
 				Console.BackgroundColor = ConsoleColor.DarkBlue;
@@ -84,16 +78,13 @@ namespace AOC
 			timer.Start();
 			string output = Solution2(Input);
 			timer.Stop();
-
-			if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
-    			Console.ForegroundColor = ConsoleColor.Black;
 			
 			if ((output == Answer2))
 				Console.BackgroundColor = ConsoleColor.DarkGreen;
 			else
 				Console.BackgroundColor = ConsoleColor.Red;
 
-			Console.Write("Answer 2:{1,16} | Expected:{4,16} | Correct:{2,6} | Run Time:{3,9}", Day, output, (output == Answer2), timer.Elapsed, Answer2, Year);
+            Console.Write("Answer 2:{1,16} | Expected:{4,16} | Correct:{2,6} | Run Time:{3,9}", Day, output, (output == Answer2), timer.Elapsed, Answer2, Year);
 			Console.ResetColor();
 			Console.WriteLine();
 		}
@@ -109,9 +100,6 @@ namespace AOC
 			timer.Start();
 			string output = Solution2(input);
 			timer.Stop();
-
-			if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
-    			Console.ForegroundColor = ConsoleColor.Black;
 			
 			if ((output == answer))
 				Console.BackgroundColor = ConsoleColor.DarkBlue;
@@ -167,11 +155,6 @@ namespace AOC
 			}
 
 			string[] temp = null;
-
-
-			//Path path;
-			
-
 			if (File.Exists(InputDir + input))
 			{
 				temp = File.ReadAllLines(InputDir + input);

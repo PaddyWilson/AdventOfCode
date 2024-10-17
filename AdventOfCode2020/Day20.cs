@@ -195,7 +195,7 @@ namespace AdventOfCode2020
 				" #  #  #  #  #  #   "
 			};
 
-			int monSegments = 15;//the amount of # chars in monster
+			//int monSegments = 15;//the amount of # chars in monster
 			int monLength = seaMonster[0].Length;
 			int monHeight = seaMonster.Length;
 
