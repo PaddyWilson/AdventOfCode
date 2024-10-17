@@ -33,10 +33,10 @@ namespace AOC
 		{
 			List<int> jugs = Parse(input);
 
-			int maxEggnog = 150;
+			//int maxEggnog = 150;
 			//TEST INPUT MAX = 25
-			if (input.Length < 10)
-				maxEggnog = 25;
+			//if (input.Length < 10)
+				//maxEggnog = 25;
 
 			//Already have the dtaa from Solution1()
 			//List<List<(char, int)>> jugCombos = GetCombos(jugs, maxEggnog);

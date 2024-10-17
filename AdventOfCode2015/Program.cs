@@ -51,7 +51,7 @@ namespace AdventOfCode2015
 					"London to Dublin = 464",
 					"London to Belfast = 518",
 					"Dublin to Belfast = 141"}, "605", "982");
-				days[10].AddTestInputFromFile("day10test.txt", "312211", "");
+				days[10].AddTestInputFromFile("Day10test.txt", "312211", "");
 
 				days[11].AddTestInput(new string[] { "abcdefgh" }, "abcdffaa", "");
 				days[11].AddTestInput(new string[] { "ghijklmn" }, "ghjaabcc", "");

@@ -49,8 +49,8 @@ namespace AdventOfCode2019
 
                 //day 6
                 {
-                    days[6].AddTestInputFromFile("Day6-1 test.txt", "42", "");
-                    days[6].AddTestInputFromFile("Day6-2 test.txt", "", "4");
+                    days[6].AddTestInputFromFile("day6-1 test.txt", "42", "");
+                    days[6].AddTestInputFromFile("day6-2 test.txt", "", "4");
                 }
             }
 
