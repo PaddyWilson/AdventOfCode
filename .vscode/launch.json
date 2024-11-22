@@ -11,9 +11,9 @@
             "request": "launch",
             "preLaunchTask": "build",
             // If you have changed target frameworks, make sure to update the program path.
-            "program": "${workspaceFolder}/AdventOfCode2015/bin/Debug/net6.0/AdventOfCode2015.dll",
+            "program": "${workspaceFolder}/AdventOfCode2015/bin/Debug/net8.0/AdventOfCode2015.dll",
             "args": [],
-            "cwd": "${workspaceFolder}/AdventOfCode2015/bin/Debug/net6.0/",
+            "cwd": "${workspaceFolder}/AdventOfCode2015/bin/Debug/net8.0/",
             // For more information about the 'console' field, see https://aka.ms/VSCode-CS-LaunchJson-Console
             "console": "internalConsole",
             "stopAtEntry": false
@@ -27,9 +27,9 @@
             "request": "launch",
             "preLaunchTask": "build",
             // If you have changed target frameworks, make sure to update the program path.
-            "program": "${workspaceFolder}/AdventOfCode2019/bin/Debug/net6.0/AdventOfCode2019.dll",
+            "program": "${workspaceFolder}/AdventOfCode2019/bin/Debug/net8.0/AdventOfCode2019.dll",
             "args": [],
-            "cwd": "${workspaceFolder}/AdventOfCode2019/bin/Debug/net6.0/",
+            "cwd": "${workspaceFolder}/AdventOfCode2019/bin/Debug/net8.0/",
             // For more information about the 'console' field, see https://aka.ms/VSCode-CS-LaunchJson-Console
             "console": "internalConsole",
             "stopAtEntry": false
@@ -43,9 +43,9 @@
             "request": "launch",
             "preLaunchTask": "build",
             // If you have changed target frameworks, make sure to update the program path.
-            "program": "${workspaceFolder}/AdventOfCode2020/bin/Debug/net6.0/AdventOfCode2020.dll",
+            "program": "${workspaceFolder}/AdventOfCode2020/bin/Debug/net8.0/AdventOfCode2020.dll",
             "args": [],
-            "cwd": "${workspaceFolder}/AdventOfCode2020/bin/Debug/net6.0/",
+            "cwd": "${workspaceFolder}/AdventOfCode2020/bin/Debug/net8.0/",
             // For more information about the 'console' field, see https://aka.ms/VSCode-CS-LaunchJson-Console
             "console": "internalConsole",
             "stopAtEntry": false
@@ -59,9 +59,9 @@
             "request": "launch",
             "preLaunchTask": "build",
             // If you have changed target frameworks, make sure to update the program path.
-            "program": "${workspaceFolder}/AdventOfCode2021/bin/Debug/net6.0/AdventOfCode2021.dll",
+            "program": "${workspaceFolder}/AdventOfCode2021/bin/Debug/net8.0/AdventOfCode2021.dll",
             "args": [],
-            "cwd": "${workspaceFolder}/AdventOfCode2021/bin/Debug/net6.0/",
+            "cwd": "${workspaceFolder}/AdventOfCode2021/bin/Debug/net8.0/",
             // For more information about the 'console' field, see https://aka.ms/VSCode-CS-LaunchJson-Console
             "console": "internalConsole",
             "stopAtEntry": false
@@ -72,9 +72,9 @@
             "request": "launch",
             "preLaunchTask": "build",
             // If you have changed target frameworks, make sure to update the program path.
-            "program": "${workspaceFolder}/AdventOfCode2022/bin/Debug/net6.0/AdventOfCode2022.dll",
+            "program": "${workspaceFolder}/AdventOfCode2022/bin/Debug/net8.0/AdventOfCode2022.dll",
             "args": [],
-            "cwd": "${workspaceFolder}/AdventOfCode2022/bin/Debug/net6.0/",
+            "cwd": "${workspaceFolder}/AdventOfCode2022/bin/Debug/net8.0/",
             // For more information about the 'console' field, see https://aka.ms/VSCode-CS-LaunchJson-Console
             "console": "internalConsole",
             "stopAtEntry": false
@@ -85,11 +85,11 @@
             "request": "launch",
             "preLaunchTask": "build",
             // If you have changed target frameworks, make sure to update the program path.
-            "program": "${workspaceFolder}/AdventOfCode2023/bin/Debug/net6.0/AdventOfCode2023.dll",
+            "program": "${workspaceFolder}/AdventOfCode2023/bin/Debug/net8.0/AdventOfCode2023.dll",
             "args": [],
-            "cwd": "${workspaceFolder}/AdventOfCode2023/bin/Debug/net6.0/",
+            "cwd": "${workspaceFolder}/AdventOfCode2023/bin/Debug/net8.0/",
             // For more information about the 'console' field, see https://aka.ms/VSCode-CS-LaunchJson-Console
-            "console": "internalConsole",
+            "console": "integratedTerminal",
             "stopAtEntry": false
         },
         {

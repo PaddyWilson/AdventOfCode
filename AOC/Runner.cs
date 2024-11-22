@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AOC
 {
@@ -18,7 +15,7 @@ namespace AOC
             Assembly ass = Assembly.GetExecutingAssembly();
             //load from other assembly
             if (assembly != null)
-                ass = Assembly.LoadFrom(assembly.GetName().Name);
+                ass = Assembly.LoadFile(assembly.Location);
             Console.WriteLine("Loading from {0}", ass.GetName().Name);
 
             //get all classes with baseday
