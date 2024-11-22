@@ -193,7 +193,7 @@ namespace AdventOfCode2023
 
             //Queue<(int, int, OutsideDirection)> nextPoint = new();
 
-            (int, int) previousPoint;
+            //(int, int) previousPoint;
             Queue<(int, int)> nextPoint = new();
             //just assume left is outside
             nextPoint.Enqueue((startPosition.Item1, startPosition.Item2));

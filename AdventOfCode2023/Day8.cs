@@ -60,7 +60,7 @@ namespace AdventOfCode2023
             //about 30 sec
             return Part2Optimized(direction, map).ToString();
             //about 403 hours by my calculation
-            return Part2Bruteforce(direction, map).ToString();
+            //return Part2Bruteforce(direction, map).ToString();
         }
 
         ulong Part2Optimized(char[] direction, Dictionary<string, (string, string)> map)

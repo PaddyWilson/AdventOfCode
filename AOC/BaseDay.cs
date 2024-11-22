@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.Runtime.InteropServices;
 using System.Text;
 
 namespace AOC
@@ -21,6 +22,9 @@ namespace AOC
 
 		public void RunSolution1()
 		{
+			if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
+    			Console.ForegroundColor = ConsoleColor.White;
+
 			Console.Write("{1} Day {0,2} ", Day, Year);
 
 			Stopwatch timer = new Stopwatch();
@@ -29,7 +33,7 @@ namespace AOC
 			timer.Start();
 			string output = Solution1(Input);
 			timer.Stop();
-
+			
 			if ((output == Answer1))
 				Console.BackgroundColor = ConsoleColor.DarkGreen;
 			else
@@ -42,13 +46,16 @@ namespace AOC
 
 		public void RunTestSolution1(string[] input, string answer)
 		{
+			if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
+    			Console.ForegroundColor = ConsoleColor.White;
+			
 			Console.Write("{1} Day {0,2} ", Day, Year);
 
 			Stopwatch timer = new Stopwatch();
 			timer.Start();
 			string output = Solution1(input);
 			timer.Stop();
-
+			
 			if ((output == answer))
 				Console.BackgroundColor = ConsoleColor.DarkBlue;
 			else
@@ -61,6 +68,9 @@ namespace AOC
 
 		public void RunSolution2()
 		{
+			if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
+    			Console.ForegroundColor = ConsoleColor.White;
+			
 			Console.Write("{1} Day {0,2} ", Day, Year);
 
 			Stopwatch timer = new Stopwatch();
@@ -68,26 +78,29 @@ namespace AOC
 			timer.Start();
 			string output = Solution2(Input);
 			timer.Stop();
-
+			
 			if ((output == Answer2))
 				Console.BackgroundColor = ConsoleColor.DarkGreen;
 			else
 				Console.BackgroundColor = ConsoleColor.Red;
 
-			Console.Write("Answer 2:{1,16} | Expected:{4,16} | Correct:{2,6} | Run Time:{3,9}", Day, output, (output == Answer2), timer.Elapsed, Answer2, Year);
+            Console.Write("Answer 2:{1,16} | Expected:{4,16} | Correct:{2,6} | Run Time:{3,9}", Day, output, (output == Answer2), timer.Elapsed, Answer2, Year);
 			Console.ResetColor();
 			Console.WriteLine();
 		}
 
 		public void RunTestSolution2(string[] input, string answer)
 		{
+			if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
+    			Console.ForegroundColor = ConsoleColor.White;
+			
 			Console.Write("{1} Day {0,2} ", Day, Year);
 
 			Stopwatch timer = new Stopwatch();
 			timer.Start();
 			string output = Solution2(input);
 			timer.Stop();
-
+			
 			if ((output == answer))
 				Console.BackgroundColor = ConsoleColor.DarkBlue;
 			else
@@ -162,14 +175,13 @@ namespace AOC
 			}
 
 			string[] temp = null;
-
 			if (File.Exists(InputDir + input))
 			{
 				temp = File.ReadAllLines(InputDir + input);
 			}
-			else if (File.Exists(InputDir + input.ToLower()))
+			else if (File.Exists(InputDir + input))
 			{
-				temp = File.ReadAllLines(InputDir + input.ToLower());
+				temp = File.ReadAllLines(InputDir + input);
 			}
 			else
 			{

@@ -13,7 +13,7 @@ namespace AdventOfCode2019
 		public List<long> input;
 		long inputCount = 0;
 		public List<long> output;
-		long outputCount = 0;
+		//long outputCount = 0;
 
 		bool running = false;
 		bool isPaused = false;

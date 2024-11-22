@@ -4,7 +4,7 @@ BaseDay.Year = "2022";
 BaseDay.InputDir = Path.Combine(Directory.GetCurrentDirectory(), "Input", BaseDay.Year + Path.DirectorySeparatorChar.ToString());
 
 List<BaseDay> days = new List<BaseDay>() {
-	new Day6(),
+	new Day0(),
 	new Day1(),
 	new Day2(),
 	new Day3(),
@@ -43,23 +43,23 @@ List<BaseDay> days = new List<BaseDay>() {
 	days[5].AddTestInputFromFile("aoc_2022_day05_large_input.txt", "GATHERING", "DEVSCHUUR");
 	//days[5].AddTestInputFromFile("aoc_2022_day05_large_input-2.txt", "KERSTBOOM", "HENKLEEFT");
 
-	days[7].AddTestInputFromFile("day7test.txt", "95437", "24933642");
+	days[7].AddTestInputFromFile("Day7test.txt", "95437", "24933642");
 	//large test file , errors with a stack overflow 
 	//days[7].AddTestInputFromFile("aoc_2022_day07_deep.txt", "0", "0");
 
-	days[8].AddTestInputFromFile("day8test.txt", "21", "8");
-	days[10].AddTestInputFromFile("day10test.txt", "13140", "");
-	days[11].AddTestInputFromFile("day11test.txt", "10605", "2713310158");
-	days[12].AddTestInputFromFile("day12test.txt", "31", "29");
+	days[8].AddTestInputFromFile("Day8test.txt", "21", "8");
+	days[10].AddTestInputFromFile("Day10test.txt", "13140", "");
+	days[11].AddTestInputFromFile("Day11test.txt", "10605", "2713310158");
+	days[12].AddTestInputFromFile("Day12test.txt", "31", "29");
 }
 
 ////run
 int day = days.Count - 1;
 Console.WriteLine("Running");
-days[day].RunAllSolution1Tests();
-days[day].RunSolution1();
-days[day].RunAllSolution2Tests();
-days[day].RunSolution2();
+//days[day].RunAllSolution1Tests();
+//days[day].RunSolution1();
+//days[day].RunAllSolution2Tests();
+//days[day].RunSolution2();
 
 ////run all
 Console.WriteLine("Running All");
