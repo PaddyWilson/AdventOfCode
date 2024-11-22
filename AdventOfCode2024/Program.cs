@@ -9,32 +9,32 @@ Runner days = new Runner(Assembly.GetExecutingAssembly());
 
 //tests
 {
-    days[0].AddTestInput(new string[] {
-        "ABBAC" }, "5", "");
-    days[0].AddTestInput(new string[] {
-        "AxBCDDCAxD" }, "", "28");
+    // days[0].AddTestInput(new string[] {
+    //     "ABBAC" }, "5", "");
+    // days[0].AddTestInput(new string[] {
+    //     "AxBCDDCAxD" }, "", "28");
 
-    days[0].AddTestInputFromFile("everybody_codes_e2024_q01_p1.txt", "1437", "");
-    days[0].AddTestInputFromFile("everybody_codes_e2024_q01_p2.txt", "", "5669");
-    days[0].AddTestInputFromFile("everybody_codes_e2024_q01_p3.txt", "", "5669");
+    // days[0].AddTestInputFromFile("everybody_codes_e2024_q01_p1.txt", "1437", "");
+    // days[0].AddTestInputFromFile("everybody_codes_e2024_q01_p2.txt", "", "5669");
+    // days[0].AddTestInputFromFile("everybody_codes_e2024_q01_p3.txt", "", "5669");
 
-    days[1].AddTestInput(new string[] {
-        "WORDS:THE,OWE,MES,ROD,HER",
-        "",
-        "AWAKEN THE POWER ADORNED WITH THE FLAMES BRIGHT IRE"}, "4", "");
+    // days[1].AddTestInput(new string[] {
+    //     "WORDS:THE,OWE,MES,ROD,HER",
+    //     "",
+    //     "AWAKEN THE POWER ADORNED WITH THE FLAMES BRIGHT IRE"}, "4", "");
 
-    days[1].AddTestInput(new string[] {
-        "WORDS:THE,OWE,MES,ROD,HER",
-        "",
-        "AWAKEN THE POWE ADORNED WITH THE FLAMES BRIGHT IRE",
-        "THE FLAME SHIELDED THE HEART OF THE KINGS",
-        "POWE PO WER P OWE R",
-        "THERE IS THE END",
-        ""}, "", "37");
+    // days[1].AddTestInput(new string[] {
+    //     "WORDS:THE,OWE,MES,ROD,HER",
+    //     "",
+    //     "AWAKEN THE POWE ADORNED WITH THE FLAMES BRIGHT IRE",
+    //     "THE FLAME SHIELDED THE HEART OF THE KINGS",
+    //     "POWE PO WER P OWE R",
+    //     "THERE IS THE END",
+    //     ""}, "", "37");
 
-    days[1].AddTestInputFromFile("everybody_codes_e2024_q02_p1.txt", "34", "");
-    days[1].AddTestInputFromFile("everybody_codes_e2024_q02_p2.txt", "", "5165");
-    days[1].AddTestInputFromFile("everybody_codes_e2024_q02_p3.txt", "", "1");
+    // days[1].AddTestInputFromFile("everybody_codes_e2024_q02_p1.txt", "34", "");
+    // days[1].AddTestInputFromFile("everybody_codes_e2024_q02_p2.txt", "", "5165");
+    // days[1].AddTestInputFromFile("everybody_codes_e2024_q02_p3.txt", "", "1");
 
     //days[2].AddTestInput(new string[] { "A Y", "B X", "C Z" }, "15", "12");
     //days[3].AddTestInputFromFile("Day3test.txt", "157", "70");
@@ -56,7 +56,7 @@ Runner days = new Runner(Assembly.GetExecutingAssembly());
 }
 
 ////run
-Console.WriteLine("Running");
+Console.WriteLine("Running Newest");
 days.RunLatest();
 
 ////run all

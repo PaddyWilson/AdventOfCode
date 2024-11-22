@@ -42,6 +42,12 @@ namespace AOC
 
         public void RunAll()
         {
+            if(days.Count == 0)
+            {
+                Console.WriteLine("No Days To run");
+                return;
+            }
+
             foreach (var item in days)
             {
                 item.RunAllSolution1Tests();
@@ -52,7 +58,7 @@ namespace AOC
         }
 
         public void RunDay(int day)
-        {
+        { 
             days[day].RunAllSolution1Tests();
             days[day].RunSolution1();
             days[day].RunAllSolution2Tests();
@@ -61,6 +67,12 @@ namespace AOC
 
         public void RunLatest()
         {
+            if(days.Count == 0)
+            {
+                Console.WriteLine("No Days To run");
+                return;
+            }
+
             int day = days.Count - 1;
             days[day].RunAllSolution1Tests();
             days[day].RunSolution1();
@@ -75,8 +87,24 @@ namespace AOC
 
         public BaseDay this[int index] 
         {
-            get { return days[index]; }
-            set { days[index] = value; }
+            get {
+                try {
+                    return days[index]; 
+                }
+                catch (System.Exception e) {
+                    Console.WriteLine(e.Message);
+                    throw;
+                }
+            }
+            set { 
+                try {
+                        days[index] = value; 
+                }
+                catch (System.Exception e) {
+                    Console.WriteLine(e.Message);
+                    throw;
+                }
+            }
         }
     }
 }

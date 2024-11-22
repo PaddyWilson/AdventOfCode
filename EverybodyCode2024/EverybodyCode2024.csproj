@@ -14,5 +14,9 @@
 	<Target Name="PostBuild" AfterTargets="PostBuildEvent">
 		<Exec Command="XCOPY &quot;$(SolutionDir)Input&quot; &quot;$(TargetDir)Input&quot; /s /i /y" />
 	</Target>
+	
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent" Condition=" '$(OS)' == 'UNIX'">
+		<Exec Command="cp -r &quot;$(SolutionDir)Input&quot; &quot;$(TargetDir)Input&quot;" />
+	</Target>
 
 </Project>
