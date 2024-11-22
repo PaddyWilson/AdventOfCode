@@ -59,8 +59,6 @@ namespace AdventOfCode2023
 
             long yOffset = 0;
 
-            Console.WriteLine();
-
             for (int y = 0; y < map[0].Count; y++)
             {
                 //x test

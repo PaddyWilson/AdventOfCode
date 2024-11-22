@@ -1,36 +1,11 @@
 ﻿using AdventOfCode2023;
 using AOC;
+using System.Reflection;
 
 BaseDay.Year = "2023";
 BaseDay.InputDir = Path.Combine(Directory.GetCurrentDirectory(), "Input", BaseDay.Year + Path.DirectorySeparatorChar.ToString());
 
-List<BaseDay> days = new List<BaseDay>() {
-    new Day1(),
-    new Day2(),
-    new Day3(),
-    new Day4(),
-    new Day5(),
-    new Day6(),
-    new Day7(),
-    new Day8(),
-    new Day9(),
-    new Day10(),
-    new Day11(),
-    //new Day12(),
-	//new Day13(),
-	//new Day14(),
-	//new Day15(),
-	//new Day16(),
-	//new Day17(),
-	//new Day18(),
-	//new Day19(),
-	//new Day20(),
-	//new Day21(),
-	//new Day22(),
-	//new Day23(),
-	//new Day24(),
-	//new Day25(),
-};
+Runner days = new Runner(Assembly.GetExecutingAssembly());
 
 //tests
 {
@@ -87,7 +62,7 @@ List<BaseDay> days = new List<BaseDay>() {
         "KK677 28",
         "KTJJT 220",
         "QQQJA 483",
-         }, "6440", "5905"); 
+         }, "6440", "5905");
     days[6].AddTestInput(new string[] {
         "2345A 1",
         "Q2KJJ 13",
@@ -223,22 +198,13 @@ List<BaseDay> days = new List<BaseDay>() {
 }
 
 ////run
-int day = days.Count - 1;
+//int day = days.Count - 1;
 Console.WriteLine("Running");
-days[day].RunAllSolution1Tests();
-days[day].RunSolution1();
-days[day].RunAllSolution2Tests();
-days[day].RunSolution2();
+days.RunLatest();
 
 ////run all
 Console.WriteLine("Running All");
-foreach (var item in days)
-{
-    item.RunAllSolution1Tests();
-    item.RunSolution1();
-    item.RunAllSolution2Tests();
-    item.RunSolution2();
-}
+days.RunAll();
 
 //windows closes the console window, linux does not
 //keep open on windows

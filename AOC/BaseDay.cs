@@ -8,7 +8,7 @@ namespace AOC
 {
 	public abstract class BaseDay
 	{
-		protected virtual string Day { get; set; }
+		public virtual string Day { get; set; }
 		public static string Year { get; set; }
 		public static string InputDir { get; set; }
 		protected virtual string Answer1 { get; set; }
@@ -118,7 +118,27 @@ namespace AOC
 			return output;
 		}
 
-		public void AddTestInput(string[] input, string answer1, string answer2)
+        protected string[] ReadInput(string filename)
+        {
+            string[] output = null;
+            //windows does not care about caps but linux does
+            if (File.Exists(InputDir + filename))
+            {
+                output = File.ReadAllLines(InputDir + filename);
+            }
+            else if (File.Exists(InputDir + filename))
+            {
+                output = File.ReadAllLines(InputDir + filename);
+            }
+            else
+            {
+                throw new InvalidDataException("Cant find file \"" + InputDir + filename + "\"");
+            }
+            Input = output;
+            return output;
+        }
+
+        public void AddTestInput(string[] input, string answer1, string answer2)
 		{
 			if (TestInput == null)
 			{
