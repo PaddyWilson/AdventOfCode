@@ -1,6 +1,7 @@
 ﻿using AOC;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Numerics;
 using System.Text;
@@ -16,7 +17,7 @@ namespace EverybodyCode2024
             Day = "2";
             Answer1 = "34";
             Answer2 = "5165";
-            Answer3 = "-1";
+            Answer3 = "12076";
         }
 
         protected override string Solution1(string[] input)
@@ -59,7 +60,7 @@ namespace EverybodyCode2024
                     }
 
                     foreach (var c in letterCount)
-                        if(c)
+                        if (c)
                             tcount++;
                 }
                 count += tcount;
@@ -69,7 +70,71 @@ namespace EverybodyCode2024
 
         protected override string Solution3(string[] input)
         {
-           return "-1";
+            List<string> runes = input[0].Split(':')[1].Split(',').ToList();
+
+            int sizeX = input.Length - 2;
+            int sizeY = input[2].Length;
+
+            bool[,] visited = new bool[sizeX, sizeY];
+            char[,] text = new char[sizeX, sizeY];
+            for (int x = 2; x < input.Length; x++)
+                for (int y = 0; y < sizeY; y++)
+                    text[x - 2, y] = input[x][y];
+
+            //loop 4 times for 4 rotations
+            for (int rotation = 0; rotation < 4; rotation++)
+            {
+                for (int x = 0; x < sizeX; x++)
+                {
+                    for (int y = 0; y < sizeY; y++)
+                    {
+                        foreach (string rune in runes)
+                        {
+                            //rune to big to match with anything
+                            if (rune.Length > sizeY)
+                                continue;
+
+                            int match = 0;
+                            for (int i = 0; i < rune.Length; i++)
+                            {
+                                int tY = y + i;
+                                //loop around only on the left and right of original rotation
+                                if (tY >= sizeY && rotation % 2 == 0)
+                                    tY -= sizeY;
+
+                                //oob of array or letter does not match
+                                if (tY >= sizeY || text[x, tY] != rune[i])
+                                    break;
+                                match++;
+                            }
+                            // found match
+                            if (match == rune.Length)
+                            {
+                                for (int i = 0; i < rune.Length; i++)
+                                {
+                                    int tY = y + i;
+                                    if (tY >= sizeY)
+                                        tY -= sizeY;
+                                    visited[x, tY] = true;
+                                }
+                            }
+                        }
+                    }
+                }
+                visited = Helpers.Rotate(visited, sizeX, sizeY);
+                text = Helpers.Rotate(text, sizeX, sizeY);
+
+                int tempX = sizeX;
+                sizeX = sizeY;
+                sizeY = tempX;
+            }
+
+            int count = 0;
+            for (int x = 0; x < sizeX; x++)
+                for (int y = 0; y < sizeY; y++)
+                    if (visited[x, y])
+                        count++;
+            return count.ToString();
         }
 
         private int CountRunes(string word, string rune)
@@ -107,8 +172,8 @@ namespace EverybodyCode2024
                         else if (word[i + j] != rune[j])
                             break;
                         else if (j == rune.Length - 1)
-                            
-                            for(int k = 0; k < rune.Length; k++)
+
+                            for (int k = 0; k < rune.Length; k++)
                                 count[i + k] = true;
                     }
                 }

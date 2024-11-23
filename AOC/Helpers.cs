@@ -51,6 +51,7 @@ namespace AOC
 		}
 		public static void PrintMatrix<T>(T[,] arr, int x, int y, string delimiter = " ")
 		{
+			Console.WriteLine();
 			for (int i = 0; i < x; i++)
 			{
 				for (int j = 0; j < y; j++)
@@ -128,6 +129,38 @@ namespace AOC
 			}
 
 			return output;
+		}
+
+		public static T[,] Rotate<T>(T[,] tile, int sizeX, int sizeY)
+		{
+			T[,] temp = new T[sizeY,sizeX]; // number of columns
+			var i=0;
+
+			for(i=0;i<sizeX;i++){
+				
+				for(int j = 0; j<sizeY;j++){
+
+					temp[j,i]= tile[i,sizeY-1-j];
+				}
+			}
+
+			return temp;
+
+
+			// T[,] output = new T[sizeX, sizeY];
+
+			// for (int i = 0; i < sizeX / 2; i++)
+			// {
+			// 	for (int j = 0; j < sizeY - i - 1; j++)
+			// 	{
+			// 		T temp = tile[i, j];
+			// 		output[i, j] = tile[sizeX - 1 - j, i];
+			// 		output[sizeX - 1 - j, i] = tile[sizeX - 1 - i, sizeY - 1 - j];
+			// 		output[sizeX - 1 - i, sizeY - 1 - j] = tile[j, sizeY - 1 - i];
+			// 		output[j, sizeY - 1 - i] = temp;
+			// 	}
+			// }
+			// return output;
 		}
 
 		public static T[,] FlipX<T>(T[,] tile, int size)
