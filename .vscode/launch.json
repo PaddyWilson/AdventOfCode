@@ -15,7 +15,7 @@
             "args": [],
             "cwd": "${workspaceFolder}/AdventOfCode2015/bin/Debug/net8.0/",
             // For more information about the 'console' field, see https://aka.ms/VSCode-CS-LaunchJson-Console
-            "console": "internalConsole",
+            "console": "integratedTerminal",
             "stopAtEntry": false
         },
         {
@@ -31,7 +31,7 @@
             "args": [],
             "cwd": "${workspaceFolder}/AdventOfCode2019/bin/Debug/net8.0/",
             // For more information about the 'console' field, see https://aka.ms/VSCode-CS-LaunchJson-Console
-            "console": "internalConsole",
+            "console": "integratedTerminal",
             "stopAtEntry": false
         },
         {
@@ -47,7 +47,7 @@
             "args": [],
             "cwd": "${workspaceFolder}/AdventOfCode2020/bin/Debug/net8.0/",
             // For more information about the 'console' field, see https://aka.ms/VSCode-CS-LaunchJson-Console
-            "console": "internalConsole",
+            "console": "integratedTerminal",
             "stopAtEntry": false
         },
         {
@@ -63,7 +63,7 @@
             "args": [],
             "cwd": "${workspaceFolder}/AdventOfCode2021/bin/Debug/net8.0/",
             // For more information about the 'console' field, see https://aka.ms/VSCode-CS-LaunchJson-Console
-            "console": "internalConsole",
+            "console": "integratedTerminal",
             "stopAtEntry": false
         },
         {
@@ -76,7 +76,7 @@
             "args": [],
             "cwd": "${workspaceFolder}/AdventOfCode2022/bin/Debug/net8.0/",
             // For more information about the 'console' field, see https://aka.ms/VSCode-CS-LaunchJson-Console
-            "console": "internalConsole",
+            "console": "integratedTerminal",
             "stopAtEntry": false
         },
         {
@@ -106,7 +106,7 @@
             "stopAtEntry": false
         },        
         {
-            "name": "Evervybody Codes 2024",
+            "name": "Everybody Codes 2024",
             "type": "coreclr",
             "request": "launch",
             "preLaunchTask": "build",

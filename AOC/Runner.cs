@@ -8,7 +8,6 @@ namespace AOC
     public class Runner
     {
         protected List<BaseDay> days = new List<BaseDay>();
-
         public Runner(Assembly assembly = null)
         {
             //load from this assembly
@@ -47,19 +46,13 @@ namespace AOC
 
             foreach (var item in days)
             {
-                item.RunAllSolution1Tests();
-                item.RunSolution1();
-                item.RunAllSolution2Tests();
-                item.RunSolution2();
+                item.RunAll();
             }
         }
 
         public void RunDay(int day)
         { 
-            days[day].RunAllSolution1Tests();
-            days[day].RunSolution1();
-            days[day].RunAllSolution2Tests();
-            days[day].RunSolution2();
+            days[day].RunAll();
         }
 
         public void RunLatest()
@@ -71,10 +64,7 @@ namespace AOC
             }
 
             int day = days.Count - 1;
-            days[day].RunAllSolution1Tests();
-            days[day].RunSolution1();
-            days[day].RunAllSolution2Tests();
-            days[day].RunSolution2();
+            days[day].RunAll();
         }
 
         public BaseDay GetDay(int day)

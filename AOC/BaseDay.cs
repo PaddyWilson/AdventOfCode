@@ -17,11 +17,19 @@ namespace AOC
 		protected virtual string Answer2 { get; set; }
 		protected virtual string[] Input { get; set; }
 
-		protected virtual List<string[]> TestInput { get; private set; }
-		protected virtual List<string> TestInputAnswers1 { get; private set; }
-		protected virtual List<string> TestInputAnswers2 { get; private set; }
+		protected virtual List<string[]> TestInput { get; set; }
+		protected virtual List<string> TestInputAnswers1 { get; set; }
+		protected virtual List<string> TestInputAnswers2 { get; set; }
 
-		protected virtual void RunSolution(int solution, Func<string[], string> func, string answer)
+		public virtual void RunAll()
+		{
+			RunAllSolution1Tests();
+            RunSolution1();
+            RunAllSolution2Tests();
+            RunSolution2();
+		}
+
+		protected void RunSolution(int solution, Func<string[], string> func, string answer, string[] input)
 		{
 			if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
     			Console.ForegroundColor = ConsoleColor.White;
@@ -29,11 +37,11 @@ namespace AOC
 			Console.Write("{1} Day {0,2} ", Day, Year);
 
 			Stopwatch timer = new Stopwatch();
-			ReadInput();
+			//ReadInput();
 
 			string output = "";
 			timer.Start();
-			output = func(Input);
+			output = func(input);
 			timer.Stop();
 
 			if (output == answer)
@@ -48,15 +56,15 @@ namespace AOC
 
 		public virtual void RunSolution1()
 		{
-			RunSolution(1, Solution1, Answer1);
+			RunSolution(1, Solution1, Answer1, ReadInput());
 		}
 
 		public virtual void RunSolution2()
 		{
-			RunSolution(2, Solution2, Answer2);
+			RunSolution(2, Solution2, Answer2, ReadInput());
 		}
 
-		protected virtual void RunSolutionTest(int solution,  Func<string[], string> func, string[] input, string answer)
+		protected void RunSolutionTest(int solution,  Func<string[], string> func, string[] input, string answer)
 		{
 			if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
     			Console.ForegroundColor = ConsoleColor.White;
@@ -75,7 +83,7 @@ namespace AOC
 			else
 				Console.BackgroundColor = ConsoleColor.DarkRed;
 
-			Console.Write("Answer {0,1}:{1,16} | Expected:{2,16} | Correct:{3,6} | Run Time:{4,9}", solution, output, answer, (output == answer), timer.Elapsed);
+			Console.Write("Answer {0,1}:{1,16} | Expected:{2,16} | Correct:{3,6} | Run Time:{4,9} TEST", solution, output, answer, (output == answer), timer.Elapsed);
 			Console.ResetColor();
 			Console.WriteLine();
 		}
@@ -115,7 +123,7 @@ namespace AOC
             return output;
         }
 
-        public virtual void AddTestInput(string[] input, string answer1, string answer2)
+        public virtual void AddTestInput(string[] input, params string[] answers)
 		{
 			if (TestInput == null)
 			{
@@ -125,13 +133,16 @@ namespace AOC
 			}
 
 			TestInput.Add(input);
-			TestInputAnswers1.Add(answer1);
-			TestInputAnswers2.Add(answer2);
+			TestInputAnswers1.Add(answers[0]);
+			if(answers.Length > 1)
+				TestInputAnswers2.Add(answers[1]);
+			else
+				TestInputAnswers2.Add("");
 		}
 
-		public virtual void AddTestInputFromFile(string filename, string answer1, string answer2)
+		public virtual void AddTestInputFromFile(string filename, params string[] answers)
 		{
-			AddTestInput(ReadInput(filename), answer1, answer2);
+			AddTestInput(ReadInput(filename), answers);
 		}
 
 		public virtual void RunAllTests()
@@ -158,7 +169,6 @@ namespace AOC
 		{
 			RunAllSolutionTests(TestInput, TestInputAnswers2, RunTestSolution2);
 		}
-
 		protected abstract string Solution1(string[] input);
 		protected abstract string Solution2(string[] input);
 	}

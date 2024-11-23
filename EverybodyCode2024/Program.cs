@@ -11,50 +11,41 @@ Runner days = new Runner(Assembly.GetExecutingAssembly());
 
 //tests
 {
-    days[0].AddTestInput(new string[] {
-        "ABBAC" }, "5", "");
-    days[0].AddTestInput(new string[] {
-        "AxBCDDCAxD" }, "", "28");
+    days[0].AddTestInput(["ABBAC"], "5");
+    days[0].AddTestInput(["AxBCDDCAxD"], "", "28");
+    days[0].AddTestInput(["xBxAAABCDxCC"], "", "", "30");
 
-    days[0].AddTestInputFromFile("everybody_codes_e2024_q01_p1.txt", "1437", "");
-    days[0].AddTestInputFromFile("everybody_codes_e2024_q01_p2.txt", "", "5669");
-    days[0].AddTestInputFromFile("everybody_codes_e2024_q01_p3.txt", "", "5669");
-
-    days[1].AddTestInput(new string[] {
-        "WORDS:THE,OWE,MES,ROD,HER",
+    days[1].AddTestInput(["WORDS:THE,OWE,MES,ROD,HER",
         "",
-        "AWAKEN THE POWER ADORNED WITH THE FLAMES BRIGHT IRE"}, "4", "");
-
-    days[1].AddTestInput(new string[] {
-        "WORDS:THE,OWE,MES,ROD,HER",
+        "AWAKEN THE POWER ADORNED WITH THE FLAMES BRIGHT IRE"], "4");
+    days[1].AddTestInput([
+        "WORDS:THE,OWE,MES,ROD,HER,QAQ",
         "",
         "AWAKEN THE POWE ADORNED WITH THE FLAMES BRIGHT IRE",
         "THE FLAME SHIELDED THE HEART OF THE KINGS",
         "POWE PO WER P OWE R",
         "THERE IS THE END",
-        ""}, "", "37");
+        "QAQAQ"
+        ], "", "42");
 
-    days[1].AddTestInputFromFile("everybody_codes_e2024_q02_p1.txt", "34", "");
-    days[1].AddTestInputFromFile("everybody_codes_e2024_q02_p2.txt", "", "5165");
-    days[1].AddTestInputFromFile("everybody_codes_e2024_q02_p3.txt", "", "1");
+    days[1].AddTestInput([
+        "WORDS:THE,OWE,MES,ROD,RODEO",
+        "",
+        "HELWORLT",
+        "ENIGWDXL",
+        "TRODEOAL"
+        ], "", "", "10");
 
-    //days[2].AddTestInput(new string[] { "A Y", "B X", "C Z" }, "15", "12");
-    //days[3].AddTestInputFromFile("Day3test.txt", "157", "70");
-    //days[4].AddTestInputFromFile("Day4test.txt", "2", "4");
 
-    ////test very large community made input files for day 5
-    //days[5].AddTestInputFromFile("aoc_2022_day05_message.txt", "CHRISTMAS", "GREETINGS");
-    //days[5].AddTestInputFromFile("aoc_2022_day05_large_input.txt", "GATHERING", "DEVSCHUUR");
-    ////days[5].AddTestInputFromFile("aoc_2022_day05_large_input-2.txt", "KERSTBOOM", "HENKLEEFT");
-
-    //days[7].AddTestInputFromFile("day7test.txt", "95437", "24933642");
-    ////large test file , errors with a stack overflow 
-    ////days[7].AddTestInputFromFile("aoc_2022_day07_deep.txt", "0", "0");
-
-    //days[8].AddTestInputFromFile("day8test.txt", "21", "8");
-    //days[10].AddTestInputFromFile("day10test.txt", "13140", "");
-    //days[11].AddTestInputFromFile("day11test.txt", "10605", "2713310158");
-    //days[12].AddTestInputFromFile("day12test.txt", "31", "29");
+    // days[1].AddTestInput([
+    //     "",
+    //     "",
+    //     "",
+    //     "",
+    //     "",
+    //     "",
+    //     ""
+    //     ], "", "", "");
 }
 
 ////run

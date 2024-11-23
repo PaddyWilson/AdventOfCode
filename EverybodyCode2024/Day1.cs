@@ -9,19 +9,18 @@ using System.Threading.Tasks;
 namespace EverybodyCode2024
 {
     //the basic layout of for a new Day
-    public class Day1 : BaseDay
+    public class Day1 : BaseDayEC
     {
         public Day1()
         {
             Day = "1";
             Answer1 = "1437";
             Answer2 = "5669";
+            Answer3 = "28073";
         }
 
         protected override string Solution1(string[] input)
         {
-            //input = ReadInput("everybody_codes_e2024_q01_p1.txt");
-
             int count = 0;
             foreach (var item in input[0]) 
             {
@@ -38,10 +37,7 @@ namespace EverybodyCode2024
 
         protected override string Solution2(string[] input)
         {
-            //input = ReadInput("everybody_codes_e2024_q01_p2.txt");
-
             int count = 0;
-
             for (int i = 0; i < input[0].Length; i += 2) 
             {
                 char mon1 = input[0][i];
@@ -54,6 +50,39 @@ namespace EverybodyCode2024
                     tcount += 0;
                 else 
                     tcount += 2;
+                count += tcount;
+            }
+
+            return count.ToString();
+        }
+
+        protected override string Solution3(string[] input)
+        {
+            int count = 0;
+            for (int i = 0; i < input[0].Length; i += 3) 
+            {
+                char[] mons = new char[3];
+                mons[0] = input[0][i];
+                mons[1] = input[0][i + 1];
+                mons[2] = input[0][i + 2];
+
+                int tcount = GetPotionCount(mons[0]);
+                tcount += GetPotionCount(mons[1]);
+                tcount += GetPotionCount(mons[2]);
+
+                int x = mons.Count(m => m == 'x');
+                if(x == 0)
+                {
+                    tcount+=6;
+                }
+                else if (x == 1)
+                {
+                    tcount+=2;
+                }
+                else if (x == 2)
+                {
+                    tcount+=0;
+                }
                 count += tcount;
             }
 

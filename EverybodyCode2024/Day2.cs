@@ -9,19 +9,18 @@ using System.Threading.Tasks;
 namespace EverybodyCode2024
 {
     //the basic layout of for a new Day
-    public class Day2 : BaseDay
+    public class Day2 : BaseDayEC
     {
         public Day2()
         {
             Day = "2";
             Answer1 = "34";
-            Answer2 = "";
+            Answer2 = "5165";
+            Answer3 = "-1";
         }
 
         protected override string Solution1(string[] input)
         {
-            //input = ReadInput("everybody_codes_e2024_q02_p1.txt");
-
             List<string> runes = input[0].Split(':')[1].Split(',').ToList();
             List<string> words = input[2].Replace(",", "").Replace(".", "").Split(' ').ToList();
 
@@ -38,8 +37,6 @@ namespace EverybodyCode2024
 
         protected override string Solution2(string[] input)
         {
-            //input = ReadInput("everybody_codes_e2024_q02_p3.txt");
-
             List<string> runes = input[0].Split(':')[1].Split(',').ToList();
 
             int count = 0;
@@ -68,6 +65,11 @@ namespace EverybodyCode2024
                 count += tcount;
             }
             return count.ToString();
+        }
+
+        protected override string Solution3(string[] input)
+        {
+           return "-1";
         }
 
         private int CountRunes(string word, string rune)
