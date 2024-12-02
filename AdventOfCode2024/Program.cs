@@ -18,6 +18,15 @@ Runner days = new Runner(Assembly.GetExecutingAssembly());
         "3   3"
         }, "11", "31");
 
+    days[1].AddTestInput(new string[] {
+        "7 6 4 2 1",
+        "1 2 7 8 9",
+        "9 7 6 2 1",
+        "1 3 2 4 5",
+        "8 6 4 4 1",
+        "1 3 6 7 9"
+        }, "2", "4");
+
     // days[0].AddTestInputFromFile("everybody_codes_e2024_q01_p1.txt", "1437", "");
     // days[0].AddTestInputFromFile("everybody_codes_e2024_q01_p2.txt", "", "5669");
     // days[0].AddTestInputFromFile("everybody_codes_e2024_q01_p3.txt", "", "5669");
@@ -26,6 +35,8 @@ Runner days = new Runner(Assembly.GetExecutingAssembly());
 ////run
 Console.WriteLine("Running Newest");
 days.RunLatest();
+
+Console.ReadKey();
 
 ////run all
 Console.WriteLine("Running All");
