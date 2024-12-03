@@ -27,6 +27,15 @@ Runner days = new Runner(Assembly.GetExecutingAssembly());
         "1 3 6 7 9"
         }, "2", "4");
 
+    days[2].AddTestInput(new string[] {
+        "xmul(2,4)%&mul[3,7]!@^do_not_mul(5,5)+mul(32,64]then(mul(11,8)mul(8,5))"
+        }, "161", "");
+
+    days[2].AddTestInput(new string[] {
+        "xmul(2,4)&mul[3,7]!^don't()_mul(5,5)+mul(32,64](mul(11,8)undo()?mul(8,5))"
+        }, "", "48");
+
+
     // days[0].AddTestInputFromFile("everybody_codes_e2024_q01_p1.txt", "1437", "");
     // days[0].AddTestInputFromFile("everybody_codes_e2024_q01_p2.txt", "", "5669");
     // days[0].AddTestInputFromFile("everybody_codes_e2024_q01_p3.txt", "", "5669");
