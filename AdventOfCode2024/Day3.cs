@@ -32,8 +32,8 @@ namespace AdventOfCode2024
                 int t = rMatches.Count;
                 foreach (var item in rMatches)
                 {
-                    var numbers = item.ToString().Replace("mul(", "").Replace(")", "").Split(",");
-                    output += int.Parse(numbers[0]) * int.Parse(numbers[1]);
+                    var numbers = item.ToString().ExtractInts();
+                    output += numbers[0] * numbers[1];
                 }
             }
             return output.ToString();
@@ -55,19 +55,15 @@ namespace AdventOfCode2024
                     if (item.ToString().Contains("do()"))
                     {
                         compute = true;
-                        continue;
                     }
-
-                    if (item.ToString().Contains("don't()"))
+                    else if (item.ToString().Contains("don't()"))
                     {
                         compute = false;
-                        continue;
                     }
-
-                    if (compute)
+                    else if (item.ToString().Contains("mul") && compute)
                     {
-                        var numbers = item.ToString().Replace("mul(", "").Replace(")", "").Split(",");
-                        output += int.Parse(numbers[0]) * int.Parse(numbers[1]);
+                        var numbers = item.ToString().ExtractInts();
+                        output += numbers[0] * numbers[1];
                     }
                 }
             }
