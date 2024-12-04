@@ -42,6 +42,7 @@ namespace AOC
 
 		public static void PrintMatrix<T>(T[,] arr, string delimiter = " ", int padding = 0)
 		{
+			Console.Write("\n");
 			for (int i = 0; i < arr.GetLength(0); i++)
 			{
 				for (int j = 0; j < arr.GetLength(1); j++)
@@ -133,16 +134,32 @@ namespace AOC
 			return output;
 		}
 
+		public static T[,] Rotate<T>(T[,] tile)
+		{
+			T[,] temp = new T[tile.GetLength(1), tile.GetLength(0)]; // number of columns
+			var i = 0;
+
+			for (i = 0; i < tile.GetLength(0); i++)
+			{
+				for (int j = 0; j < tile.GetLength(1); j++)
+				{
+					temp[j, i] = tile[i, tile.GetLength(1) - 1 - j];
+				}
+			}
+
+			return temp;
+		}
+
 		public static T[,] Rotate<T>(T[,] tile, int sizeX, int sizeY)
 		{
-			T[,] temp = new T[sizeY,sizeX]; // number of columns
-			var i=0;
+			T[,] temp = new T[sizeY, sizeX]; // number of columns
+			var i = 0;
 
-			for(i=0;i<sizeX;i++){
-				
-				for(int j = 0; j<sizeY;j++){
-
-					temp[j,i]= tile[i,sizeY-1-j];
+			for (i = 0; i < sizeX; i++)
+			{
+				for (int j = 0; j < sizeY; j++)
+				{
+					temp[j, i] = tile[i, sizeY - 1 - j];
 				}
 			}
 

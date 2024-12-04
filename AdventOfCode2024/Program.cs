@@ -35,7 +35,39 @@ Runner days = new Runner(Assembly.GetExecutingAssembly());
         "xmul(2,4)&mul[3,7]!^don't()_mul(5,5)+mul(32,64](mul(11,8)undo()?mul(8,5))"
         }, "", "48");
 
+days[3].AddTestInput(new string[] {
+        "..X...",
+        ".SAMX.",
+        ".A..A.",
+        "XMAS.S",
+        ".X...."
+        }, "4", "");
 
+days[3].AddTestInput(new string[] {
+        "MMMSXXMASM",
+        "MSAMXMSMSA",
+        "AMXSXMAAMM",
+        "MSAMASMSMX",
+        "XMASAMXAMM",
+        "XXAMMXXAMA",
+        "SMSMSASXSS",
+        "SAXAMASAAA",
+        "MAMMMXMMMM",
+        "MXMXAXMASX"
+        }, "18", "");
+        
+        days[3].AddTestInput(new string[] {
+        ".M.S......",
+        "..A..MSMS.",
+        ".M.S.MAA..",
+        "..A.ASMSM.",
+        ".M.S.M....",
+        "..........",
+        "S.S.S.S.S.",
+        ".A.A.A.A..",
+        "M.M.M.M.M.",
+        ".........."
+        }, "", "9");
     // days[0].AddTestInputFromFile("everybody_codes_e2024_q01_p1.txt", "1437", "");
     // days[0].AddTestInputFromFile("everybody_codes_e2024_q01_p2.txt", "", "5669");
     // days[0].AddTestInputFromFile("everybody_codes_e2024_q01_p3.txt", "", "5669");
@@ -45,7 +77,7 @@ Runner days = new Runner(Assembly.GetExecutingAssembly());
 Console.WriteLine("Running Newest");
 days.RunLatest();
 
-Console.ReadKey();
+//Console.ReadKey();
 
 ////run all
 Console.WriteLine("Running All");

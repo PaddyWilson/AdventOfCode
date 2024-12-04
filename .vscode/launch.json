@@ -102,7 +102,7 @@
             "args": [],
             "cwd": "${workspaceFolder}/AdventOfCode2024/bin/Debug/net8.0/",
             // For more information about the 'console' field, see https://aka.ms/VSCode-CS-LaunchJson-Console
-            "console": "integratedTerminal",
+            "console": "internalConsole",
             "stopAtEntry": false
         },        
         {
