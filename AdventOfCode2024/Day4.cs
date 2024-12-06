@@ -25,16 +25,7 @@ namespace AdventOfCode2024
             int padding = 6;
             int xSize = input.Length + padding;
             int ySize = input[0].Length + padding;
-
-            char[,] wordsearch = new char[xSize, ySize];
-
-            for (int x = padding / 2; x < xSize - (padding / 2); x++)
-            {
-                for (int y = padding / 2; y < ySize - (padding / 2); y++)
-                {
-                    wordsearch[x, y] = input[x - (padding / 2)][y - (padding / 2)];
-                }
-            }
+            char[,] wordsearch = Parse(input, padding, xSize, ySize);
 
             //Helpers.PrintMatrix(wordsearch);
 
@@ -68,16 +59,7 @@ namespace AdventOfCode2024
             int padding = 2;
             int xSize = input.Length + padding;
             int ySize = input[0].Length + padding;
-
-            char[,] wordsearch = new char[xSize, ySize];
-
-            for (int x = padding / 2; x < xSize - (padding / 2); x++)
-            {
-                for (int y = padding / 2; y < ySize - (padding / 2); y++)
-                {
-                    wordsearch[x, y] = input[x - (padding / 2)][y - (padding / 2)];
-                }
-            }
+            char[,] wordsearch = Parse(input, padding, xSize, ySize);
 
             int output = 0;
             for (int x = padding / 2; x < xSize - (padding / 2); x++)
@@ -110,6 +92,21 @@ namespace AdventOfCode2024
                 }
             }
             return output.ToString();
+        }
+
+        private static char[,] Parse(string[] input, int padding, int xSize, int ySize)
+        {
+            char[,] wordsearch = new char[xSize, ySize];
+
+            for (int x = padding / 2; x < xSize - (padding / 2); x++)
+            {
+                for (int y = padding / 2; y < ySize - (padding / 2); y++)
+                {
+                    wordsearch[x, y] = input[x - (padding / 2)][y - (padding / 2)];
+                }
+            }
+
+            return wordsearch;
         }
     }
 }

@@ -35,7 +35,7 @@ Runner days = new Runner(Assembly.GetExecutingAssembly());
         "xmul(2,4)&mul[3,7]!^don't()_mul(5,5)+mul(32,64](mul(11,8)undo()?mul(8,5))"
         }, "", "48");
 
-days[3].AddTestInput(new string[] {
+    days[3].AddTestInput(new string[] {
         "..X...",
         ".SAMX.",
         ".A..A.",
@@ -43,7 +43,7 @@ days[3].AddTestInput(new string[] {
         ".X...."
         }, "4", "");
 
-days[3].AddTestInput(new string[] {
+    days[3].AddTestInput(new string[] {
         "MMMSXXMASM",
         "MSAMXMSMSA",
         "AMXSXMAAMM",
@@ -55,8 +55,8 @@ days[3].AddTestInput(new string[] {
         "MAMMMXMMMM",
         "MXMXAXMASX"
         }, "18", "");
-        
-        days[3].AddTestInput(new string[] {
+
+    days[3].AddTestInput(new string[] {
         ".M.S......",
         "..A..MSMS.",
         ".M.S.MAA..",
@@ -68,6 +68,52 @@ days[3].AddTestInput(new string[] {
         "M.M.M.M.M.",
         ".........."
         }, "", "9");
+
+
+    days[4].AddTestInput(new string[] {
+        "47|53",
+        "97|13",
+        "97|61",
+        "97|47",
+        "75|29",
+        "61|13",
+        "75|53",
+        "29|13",
+        "97|29",
+        "53|29",
+        "61|53",
+        "97|53",
+        "61|29",
+        "47|13",
+        "75|47",
+        "97|75",
+        "47|61",
+        "75|61",
+        "47|29",
+        "75|13",
+        "53|13",
+        "",
+        "75,47,61,53,29",
+        "97,61,53,29,13",
+        "75,29,13",
+        "75,97,47,61,53",
+        "61,13,29",
+        "97,13,75,29,47"
+        }, "143", "123");
+
+
+    days[5].AddTestInput(new string[] {
+        "....#.....",
+        ".........#",
+        "..........",
+        "..#.......",
+        ".......#..",
+        "..........",
+        ".#..^.....",
+        "........#.",
+        "#.........",
+        "......#..."
+        }, "41", "6");
     // days[0].AddTestInputFromFile("everybody_codes_e2024_q01_p1.txt", "1437", "");
     // days[0].AddTestInputFromFile("everybody_codes_e2024_q01_p2.txt", "", "5669");
     // days[0].AddTestInputFromFile("everybody_codes_e2024_q01_p3.txt", "", "5669");
