@@ -114,6 +114,18 @@ Runner days = new Runner(Assembly.GetExecutingAssembly());
         "#.........",
         "......#..."
         }, "41", "6");
+
+    days[6].AddTestInput(new string[] {
+        "190: 10 19",
+        "3267: 81 40 27",
+        "83: 17 5",
+        "156: 15 6",
+        "7290: 6 8 6 15",
+        "161011: 16 10 13",
+        "192: 17 8 14",
+        "21037: 9 7 18 13",
+        "292: 11 6 16 20"
+        }, "3749", "11387");
     // days[0].AddTestInputFromFile("everybody_codes_e2024_q01_p1.txt", "1437", "");
     // days[0].AddTestInputFromFile("everybody_codes_e2024_q01_p2.txt", "", "5669");
     // days[0].AddTestInputFromFile("everybody_codes_e2024_q01_p3.txt", "", "5669");

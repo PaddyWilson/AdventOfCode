@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.IO;
 using System.Linq;
+using System.Numerics;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -51,6 +52,20 @@ namespace AOC
         {
             List<long> output = new List<long>();
             extNumber.Matches(text).ToList().ForEach(f => output.Add(long.Parse(f.ToString())));
+            return output;
+        }
+
+        public static List<ulong> ExtractULong(this string text)
+        {
+            List<ulong> output = new List<ulong>();
+            extNumber.Matches(text).ToList().ForEach(f => output.Add(ulong.Parse(f.ToString())));
+            return output;
+        }
+
+         public static List<BigInteger> ExtractBigInteger(this string text)
+        {
+            List<BigInteger> output = new List<BigInteger>();
+            extNumber.Matches(text).ToList().ForEach(f => output.Add(BigInteger.Parse(f.ToString())));
             return output;
         }
 
