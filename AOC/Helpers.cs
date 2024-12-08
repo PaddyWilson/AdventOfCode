@@ -2,7 +2,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 
 namespace AOC
@@ -128,6 +130,46 @@ namespace AOC
 					output[size - 1 - j, i] = tile[size - 1 - i, size - 1 - j];
 					output[size - 1 - i, size - 1 - j] = tile[j, size - 1 - i];
 					output[j, size - 1 - i] = temp;
+				}
+			}
+
+			return output;
+		}
+
+		/// <summary>
+		/// Parse input to array
+		/// </summary>
+		/// <param name="input"></param>
+		/// <param name="map"></param>
+		/// <returns>Returns Point with max size</returns>
+		public static Point ParseInputToArray(string[] input, out char[,] map)
+		{
+			int xSize = input.Length;
+			int ySize = input[0].Length;
+			map = new char[xSize, ySize];
+			for (int x = 0; x < xSize; x++)
+				for (int y = 0; y < ySize; y++)
+					map[x, y] = input[x][y];
+			return new Point(xSize, ySize);
+		}
+
+		/// <summary>
+		/// gets a count of values that match in an array
+		/// </summary>
+		/// <typeparam name="T"></typeparam>
+		/// <param name="tile"></param>
+		/// <returns>Dictionary of items with a count in the value</returns>
+		public static Dictionary<T, int> GetCountOfMatchs<T>(T[,] tile)
+		{
+			var output = new Dictionary<T, int>();
+
+			for (int i = 0; i < tile.GetLength(0); i++)
+			{
+				for (int j = 0; j < tile.GetLength(1); j++)
+				{
+					if (!output.ContainsKey(tile[i, j]))
+						output.Add(tile[i, j], 0);
+						output[tile[i,j]]+=1;
 				}
 			}
 
